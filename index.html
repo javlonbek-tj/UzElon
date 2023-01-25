@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Responsive Grocery Website Design Tutorial</title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- header section starts  -->
+    <div class="first__header">
+      <div class="d-flex justify-content-between container-lg">
+        <a href="https://payme.uz/@tjdeveloper" class="text-white fs-5"><i class="fa-solid fa-dollar-sign"></i> Donate</a>
+        <div class="d-flex fs-5">
+          <div class="d-flex" id="signUp">
+            <a href="login.html" class="text-white pe-2">Kirish |</a>
+          <a href="signup.html" class="text-white pe-3">Ro'yxatdan o'tish</a>
+          </div>
+          <a><i class="fa-solid fa-phone text-light"> +998 90 004 81 14</i></a>
+        </div>
+      </div>
+    </div>
+    <header class="header">
+      <div class="d-flex align-items-center justify-content-between container-lg">
+        <a href="#" class="header_logo"> UzElon </a>
+
+        <nav class="header_navbar">
+          <div class="input__icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder=" Qidirish..." />
+          </div>
+        </nav>
+
+        <div id="icons" class="icons">
+          <a href="add-product.html">Add product</a>
+        </div>
+
+      </div>
+    </header>
+    <header class="mobile__footer">
+      <div class="d-flex justify-content-around">
+        <a href="#" class="pt-3 mt-3">
+          <i class="fa fa-house d-flex justify-content-center mb-2"></i>
+          <p>Home</p>
+        </a>
+        <a href="products.html" class="pt-3 mt-3">
+          <i class="fa fa-bars d-flex justify-content-center mb-2"></i>
+          <p>Categories</p>
+        </a>
+        <a href="add-product.html" class="pt-3 mt-3">
+          <i class="fa-solid fa-plus d-flex justify-content-center mb-2"></i>
+          <p>Add product</p>
+        </a>
+        <a href="signup.html" class="pt-3 mt-3">
+          <i class="fa fa-user d-flex justify-content-center mb-2"></i>
+          <p>Profile</p>
+        </a>
+      </div>
+    </header>
+
+    <!-- home section starts  -->
+    <div id="nav_carousel" class="carousel slide container-lg mt-5" data-bs-ride="carousel" data-bs-interval="2000">
+      <div class="carousel-inner">
+        <div class="carousel-item active data-bs-interval="2000"">
+          <img src="/image/apple-gcf6decaf6_1920.jpg" class="d-block w-100 h-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="/image/ecommerce-gd687d20d9_1280.jpg" class="d-block w-100 h-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="/image/shopping-4694470_1920 (1).jpg" class="d-block w-100 h-100" alt="..." />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#nav_carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#nav_carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <section class="home my-5" id="home">
+        <div class="home_categories d-flex justify-content-evenly">
+          <div class="me-5"><a href="#"><i class="fa-sharp fa-solid fa-house-chimney"> <span>Uy-joy</span></i></a></div>
+          <div class="me-5"><a href="#"><i class="fa-sharp fa-solid fa-car"> <span>Avto</span></i></a></div>
+          <div class="me-5"><a href="#"><i class="fa-sharp fa-solid fa-laptop"> <span>Elektronika</span></i></a></div>
+          <div><a href="#"><i class="fa-sharp fa-solid fa-person"> <span>Ish</span></i></a></div>
+        </div>
+    </section>
+
+    <!-- products section starts  -->
+
+    <section class="blogs container-lg" id="blogs">
+      <div class="top-products d-flex justify-content-between">
+        <h2>Top products</h2>
+        <a href="products.html" class="h4 text-info">All products <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="box-container">
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center">fresh and organic <br> vegitables and fruits</h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- custom js file link  -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

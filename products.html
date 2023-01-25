@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Responsive Grocery Website Design Tutorial</title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- header section starts  -->
+
+    <div class="first__header">
+      <div class="d-flex justify-content-between container-lg">
+        <a href="https://payme.uz/@tjdeveloper" class="text-white fs-5"><i class="fa-solid fa-dollar-sign"></i> Donate</a>
+        <div class="d-flex fs-5">
+          <div class="d-flex" id="signUp">
+            <a href="login.html" class="text-white pe-2">Kirish |</a>
+            <a href="signup.html" class="text-white pe-3">Ro'yxatdan o'tish</a>
+          </div>
+          <a><i class="fa-solid fa-phone text-light"> +998 90 004 81 14</i></a>
+        </div>
+      </div>
+    </div>
+    <header class="header">
+      <div class="d-flex align-items-center justify-content-between container-lg">
+        <a href="/" class="header_logo"> UzElon </a>
+
+        <nav class="header_navbar">
+          <div class="input__icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder=" Qidirish..." />
+          </div>
+        </nav>
+
+        <div id="icons" class="icons">
+          <a href="add-product.html">Add product</a>
+        </div>
+      </div>
+    </header>
+    <header class="mobile__footer">
+      <div class="d-flex justify-content-around">
+        <a href="/" class="pt-3 mt-3">
+          <i class="fa fa-house d-flex justify-content-center mb-2"></i>
+          <p>Home</p>
+        </a>
+        <a href="#" class="pt-3 mt-3">
+          <i class="fa fa-bars d-flex justify-content-center mb-2"></i>
+          <p>Categories</p>
+        </a>
+        <a href="add-product.html" class="pt-3 mt-3">
+          <i class="fa-solid fa-plus d-flex justify-content-center mb-2"></i>
+          <p>Add product</p>
+        </a>
+        <a href="signup.html" class="pt-3 mt-3">
+          <i class="fa fa-user d-flex justify-content-center mb-2"></i>
+          <p>Profile</p>
+        </a>
+      </div>
+    </header>
+
+    <!-- Filtering section starts here -->
+
+    <section class="filter fs-4 d-flex justify-content-center mx-auto">
+      <div class="filter_items">
+        <div class="filtering">
+          <select name="filtering" id="filtering">
+            <option value="">Category</option>
+            <option value="">Home</option>
+            <option value="">Restaurant</option>
+            <option value="">Hotel</option>
+            <option value="">Something</option>
+          </select>
+        </div>
+        <div class="filtering">
+          <input type="text" class="filtering-input" placeholder="min price" id="from" />
+        </div>
+        <div class="filtering">
+          <input type="text" class="filtering-input" placeholder="max price" id="to" />
+        </div>
+        <div class="filtering">
+          <select name="address" id="address">
+            <option value="">Address</option>
+            <option value="">Toshkent shahar</option>
+            <option value="">Toshkent viloyati</option>
+            <option value="">Andijon viloyati</option>
+            <option value="">Namangan viloyati</option>
+            <option value="">Farg'ona viloyati</option>
+            <option value="">Sirdaryo viloyati</option>
+            <option value="">Jizzax viloyati</option>
+            <option value="">Samarqand viloyati</option>
+            <option value="">Buxoro viloyati</option>
+            <option value="">Navoiy viloyati</option>
+            <option value="">Qashqadaryo viloyati</option>
+            <option value="">Surxondaryo viloyati</option>
+            <option value="">Xorazm viloyati</option>
+            <option value="">Qoraqalpog'iston</option>
+          </select>
+        </div>
+        <div class="filtering filtering_search">
+          <input type="text" placeholder="search" />
+        </div>
+        <div class="filtering">
+          <button type="submit">Izlash</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- products section starts  -->
+
+    <section class="blogs container-lg" id="blogs">
+      <div class="top-products d-flex justify-content-between">
+        <h2>Top products</h2>
+      </div>
+      <div class="box-container">
+        <div class="box">
+          <a href="product-detail.html"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+        <div class="box">
+          <a href="#"><img src="image/blog-2.jpg" alt="" /></a>
+          <div class="content p-3">
+            <div class="icons d-flex justify-content-between align-items-center pb-4 mb-3">
+              <a href="#"> Price: 15$</a>
+              <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
+            </div>
+            <h4 class="text-center py-2">
+              fresh and organic <br />
+              vegitables and fruits
+            </h4>
+          </div>
+          <div class="card_footer d-flex justify-content-between px-5 pt-2">
+            <h5><i class="fa-solid fa-eye fs-5"></i> 15 seen</h5>
+            <i class="fa-regular fa-heart fs-4"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- custom js file link  -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
