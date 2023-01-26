@@ -16,7 +16,7 @@
       </div>
       <div class="col-md-6">
         <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
-        <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Cobalt sotiladi" />
+        <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Kvartira sotiladi" />
       </div>
       <div class="col-md-6">
         <label for="room" class="form-label">Xonalar soni</label>
@@ -73,8 +73,10 @@
         <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
         <input type="number" class="form-control fs-3" name="phoneNumber" />
       </div>
-      <input type="hidden" name="productType" value="flat">
-      <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
+      <div>
+        <input type="hidden" name="productType" value="flat">
+        <button type="button" class="btn btn-primary fs-4">Qo'shish</button>
+      </div>
     </form>
   </div>
   <%- include('../includes/end.ejs') %>

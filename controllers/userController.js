@@ -1,4 +1,6 @@
 const Flat = require('../models/home/flat.model');
+const House = require('../models/home/house.model');
+
 const getAddProduct = (req, res, next) => {
     res.render('user/add-product', {
        pageTitle: "Add product",
@@ -10,9 +12,15 @@ const getFlatCategory = (req, res, next) => {
        pageTitle: "Add product",
     });
 };
+const getHouseCategory = (req, res, next) => {
+    res.render('estate/house-category', {
+       pageTitle: "Add product",
+    });
+};
 
 const postAddProduct = (req, res, next) => {
     const productType = req.body.productType;
+    console.log(productType);
     if(productType === 'flat') {
         const flatHas = [];
         const {rentOrSell, shortInfo, rooms, floors, floor, area, flatCondition, address, price, phoneNumber} = req.body;
@@ -50,13 +58,39 @@ const postAddProduct = (req, res, next) => {
         }).catch(err => {
         console.log(err);
         });
-        return;
     }
-    res.redirect('/');
+    if(productType === 'house') {
+        const houseHas = [];
+        const {rentOrSell, shortInfo, rooms, area, houseCondition, address, price, phoneNumber} = req.body;
+        const {gas, electricity} = req.body;
+        if(gas) {
+            houseHas.push(gas);
+        }
+        if(electricity) {
+            houseHas.push(electricity);
+        }
+        const house = new House({
+            shortInfo: shortInfo,
+            rooms: rooms,
+            area: area,
+            houseCondition: houseCondition,
+            address: address,
+            price: price,
+            phoneNumber: phoneNumber,
+            houseHas: houseHas,
+            rentOrSell: rentOrSell
+        });
+        house.save().then(() => {
+            res.redirect('/');
+        }).catch(err => {
+        console.log(err);
+        });
+    }
 };
 
 module.exports = {
     getAddProduct,
     getFlatCategory,
-    postAddProduct
+    postAddProduct,
+    getHouseCategory
 };

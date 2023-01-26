@@ -9,8 +9,7 @@ const houseSchema = new Schema({
   rooms: {
     type: Number,
     required: true,
-    min: 1,
-    max: 10,
+    min: 1
   },
   area: {
     type: Number,
@@ -32,6 +31,8 @@ const houseSchema = new Schema({
     type: Number,
     required: true,
   },
+  houseHas: [String],
+  rentOrSell: String
 });
 
 module.exports = model('House', houseSchema);
