@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const buildingSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30,
+  },
   rooms: {
     type: Number,
     required: true,
@@ -21,6 +26,8 @@ const buildingSchema = new Schema({
     type: Number,
     required: true,
   },
+  rentOrSell: String,
+  buildingHas: [],
 });
 
 module.exports = model('Building', buildingSchema);

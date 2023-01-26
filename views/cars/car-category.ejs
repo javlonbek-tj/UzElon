@@ -1,0 +1,81 @@
+<%- include('../includes/head.ejs') %>
+<div class="flat_adding mtt">
+  <form class="row g-3 fs-4" action="/add-product" method="POST">
+    <div class="my-5 adding_file">
+      <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
+      <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
+      <input type="file" id="img" class="d-none" multiple />
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+      <label class="form-check-label" for="flexRadioDefault1"> Arendaga </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
+      <label class="form-check-label" for="flexRadioDefault2"> Sotiladi </label>
+    </div>
+    <div class="col-md-6">
+      <label for="room" class="form-label">Modeli</label>
+      <input type="number" class="form-control fs-3" id="room" />
+    </div>
+    <div class="col-md-6">
+      <label for="floor" class="form-label">Transmissiya turi</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example">
+        <option value="1">Mexanika</option>
+        <option value="2">Avtomat</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="nthfloor" class="form-label">Yoqilg'i turi</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example">
+        <option value="1">Benzin</option>
+        <option value="2">Metan</option>
+        <option value="2">Propan</option>
+        <option value="2">Dizel</option>
+        <option value="2">Solyarka</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="nthfloor" class="form-label">Rangi</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example">
+        <option value="1">Oq</option>
+        <option value="2">Qora</option>
+        <option value="2">Sariq</option>
+        <option value="2">Ko'k</option>
+        <option value="2">Qizil</option>
+        <option value="2">Yashil</option>
+        <option value="2">Kumush rang</option>
+        <option value="2">Asfalt rang</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="condition_flat" class="form-label">Ishlab chiqarilgan yili</label>
+      <input type="text" class="form-control fs-3" id="condition_flat" />
+    </div>
+    <div class="col-md-6">
+      <label for="condition_flat" class="form-label">Yurgan kilometraji</label>
+      <input type="text" class="form-control fs-3" id="condition_flat" />
+    </div>
+    <div class="form-floating fs-4 mb-5">
+      <textarea
+        class="form-control fs-3"
+        placeholder="Leave a comment here"
+        id="floatingTextarea2"
+        style="height: 100px"
+      ></textarea>
+      <label for="floatingTextarea2">Manzilni kiriting</label>
+    </div>
+    <div class="col-md-6">
+      <label for="flatPrice" class="form-label">Narxi:</label>
+      <input type="number" class="form-control fs-3" id="flatPrice" />
+    </div>
+    <div class="col-md-6">
+      <label for="phone" class="form-label">Telefon raqamingizni kiriting</label>
+      <input type="number" class="form-control fs-3" id="phone" />
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary fs-4">Qo'shish</button>
+    </div>
+  </form>
+</div>
+<%- include('../includes/end.ejs') %>

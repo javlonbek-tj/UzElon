@@ -7,7 +7,7 @@
       <input type="file" id="img" class="d-none" multiple />
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="rentOrSell" id="flexRadioDefault1" value="Ijara" />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="flexRadioDefault1" value="Ijaraga" />
       <label class="form-check-label" for="flexRadioDefault1"> Ijaraga </label>
     </div>
     <div class="form-check">
@@ -16,29 +16,21 @@
     </div>
     <div class="col-md-6">
       <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
-      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Uy sotiladi" />
-    </div>
-    <div class="col-md-6">
-      <label for="room" class="form-label">Xonalar soni</label>
-      <input type="number" class="form-control fs-3" name="rooms" />
+      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Yer sotiladi" />
     </div>
     <div class="col-md-6">
       <label for="square" class="form-label">Maydoni (sotix)</label>
       <input type="number" class="form-control fs-3" name="area" step="0.01" />
     </div>
-    <div class="col-md-6">
-      <label for="condition_flat" class="form-label">Remont holati</label>
-      <input type="text" class="form-control fs-3" name="houseCondition" />
-    </div>
     <div>
-      <h4 class="mt-3">Hovli uyda mavjud</h4>
+      <h4 class="mt-3">Yer atrofida mavjud</h4>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="gas" value="Gaz" id="gas" />
+      <input class="form-check-input" name="gas" type="checkbox" value="Gaz" id="flexCheckDefault" />
       <label class="form-check-label" for="flexCheckDefault"> Gaz </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="electricity" value="Elektr" id="electricity" />
+      <input class="form-check-input" name="electricity" type="checkbox" value="Elektr" id="flexCheckChecked" />
       <label class="form-check-label" for="flexCheckChecked"> Elektr </label>
     </div>
     <div class="form-floating fs-4 mb-5">
@@ -54,7 +46,7 @@
       <input type="number" class="form-control fs-3" name="phoneNumber" />
     </div>
     <div>
-      <input type="hidden" name="productType" value="house" />
+      <input type="hidden" name="productType" value="land" />
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>
