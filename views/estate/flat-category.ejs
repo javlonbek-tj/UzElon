@@ -1,0 +1,80 @@
+<%- include('../includes/head.ejs') %>
+<div class="flat_adding mtt">
+    <form class="row g-3 fs-4" action="/add-product" method="POST">
+      <div class="my-5 adding_file">
+        <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
+        <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
+        <input type="file" id="img" class="d-none" multiple />
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Ijara" />
+        <label class="form-check-label" for="rentOrSell1"> Ijaraga </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell2" value="Sotiladi" checked />
+        <label class="form-check-label" for="rentOrSell2"> Sotiladi </label>
+      </div>
+      <div class="col-md-6">
+        <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
+        <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Cobalt sotiladi" />
+      </div>
+      <div class="col-md-6">
+        <label for="room" class="form-label">Xonalar soni</label>
+        <input type="number" class="form-control fs-3" name="rooms" />
+      </div>
+      <div class="col-md-6">
+        <label for="floor" class="form-label">Uy nechchi qavatlik</label>
+        <input type="number" class="form-control fs-3" name="floors" />
+      </div>
+      <div class="col-md-6">
+        <label for="nthfloor" class="form-label">Nechanchi qavat</label>
+        <input type="number" class="form-control fs-3" name="floor" />
+      </div>
+      <div class="col-md-6">
+        <label for="square" class="form-label">Kvartira umumiy maydoni</label>
+        <input type="number" class="form-control fs-3" id="square" step="0.01" name="area" />
+      </div>
+      <div class="col-md-6">
+        <label for="condition_flat" class="form-label">Kvartira remont holati</label>
+        <input type="text" class="form-control fs-3" id="condition_flat" name="flatCondition"/>
+      </div>
+      <div>
+        <h4 class="mt-3">Kvartirada mavjud</h4>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="airConditioning" value="Konditsioner" id="air-conditioning" />
+        <label class="form-check-label" for="flexCheckDefault"> Konditsioner </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="freeze" value="Muzlatgich" id="freeze" />
+        <label class="form-check-label" for="flexCheckChecked"> Muzlatgich </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="furniture" value="Mebel" id="furniture" />
+        <label class="form-check-label" for="flexCheckChecked"> Mebel </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="washing" value="Kir mashinasi" id="washing" />
+        <label class="form-check-label" for="flexCheckChecked"> Kir yuvish mashinasi </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="tv" value="Televizor" id="tv" checked />
+        <label class="form-check-label" for="flexCheckChecked"> Televizor </label>
+      </div>
+      <div class="form-floating fs-4 mb-5">
+        <textarea class="form-control fs-3" name="address" style="height: 70px"></textarea>
+        <label for="floatingTextarea2">Manzilni kiriting</label>
+      </div>
+      <div class="col-md-6">
+        <label for="flatPrice" class="form-label">Narxi:</label>
+        <input type="number" class="form-control fs-3" name="price" />
+      </div>
+      <div class="col-md-6">
+        <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
+        <input type="number" class="form-control fs-3" name="phoneNumber" />
+      </div>
+      <input type="hidden" name="productType" value="flat">
+      <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
+    </form>
+  </div>
+  <%- include('../includes/end.ejs') %>

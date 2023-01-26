@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const flatSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30
+  },
   rooms: {
     type: Number,
     required: true,
@@ -29,7 +34,7 @@ const flatSchema = new Schema({
   },
   address: {
     type: String,
-    required: true,
+    required: true
   },
   price: {
     type: Number,
@@ -39,6 +44,8 @@ const flatSchema = new Schema({
     type: Number,
     required: true,
   },
+  rentOrSell: String,
+  flatHas: []
 });
 
 module.exports = model('Flat', flatSchema);
