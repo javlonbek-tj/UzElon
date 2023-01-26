@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const houseSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30
+  },
   rooms: {
     type: Number,
     required: true,
