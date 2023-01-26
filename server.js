@@ -8,7 +8,7 @@ process.on('uncaughtException', err => {
 dotenv.config();
 const app = require('./app');
 
-const DB = process.env.MONGO_URL;
+const DB = process.env.MONGO_URI;
 
 mongoose.connect(DB).then(() => {
   console.log('DB connection succesful');

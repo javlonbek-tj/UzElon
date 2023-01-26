@@ -212,17 +212,26 @@ section {
   border-radius: 7px;
   border: 1px solid #fff;
 }
-.filtering_search input {
-  grid-column: 2fr;
+
+.filtering a {
+  padding: 1.6rem 2rem;
+  width: 60px;
+  border-radius: 7px;
+  border: 1px solid #fff;
 }
-.filtering button {
-  background: #fff;
+.filtering button,
+.filtering a {
+  background-color: #ddd;
   cursor: pointer;
 }
 .filtering input:hover,
-.filtering select:hover,
-.filtering button:hover {
+.filtering select:hover {
   border: 1px solid var(--black);
+}
+.filtering button:hover,
+.filtering a:hover {
+  background-color: #bbb;
+  color: #fff;
 }
 
 /* Product-deatil starts here */
@@ -389,8 +398,11 @@ section {
   .filtering input,
   .filtering select,
   .filtering button {
-    padding: 1.4rem 1.8rem;
+    padding: 1.4rem;
     width: 150px;
+  }
+  .filtering a {
+    padding: 1.4rem;
   }
   .carousel-inner .carousel-item {
     height: 320px;
@@ -419,8 +431,7 @@ section {
   .filtering input,
   .filtering select,
   .filtering button {
-    padding: 1.1rem 1.3rem;
-    width: 100px;
+    width: 110px;
   }
   #carouselExampleIndicators {
     height: 200px;
@@ -451,5 +462,15 @@ section {
 @media (max-width: 359px) {
   #blogs {
     width: 78%;
+  }
+  .filter_items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .filtering input,
+  .filtering select,
+  .filtering button {
+    width: 120px;
   }
 }
