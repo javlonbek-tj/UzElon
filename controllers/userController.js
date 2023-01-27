@@ -5,6 +5,9 @@ const Building = require('../models/home/e-building.model');
 const Car = require('../models/cars/car.model');
 const Track = require('../models/cars/track.model');
 const Moto = require('../models/cars/moto.model');
+const Resume = require('../models/jobs/resume.model');
+const HouseBuilding = require('../models/jobs/house-building.model');
+const Service = require('../models/jobs/service.model');
 
 const getAddProduct = (req, res, next) => {
   res.render('user/add-product', {
@@ -43,6 +46,21 @@ const getTrackCategory = (req, res, next) => {
 };
 const getMotoCategory = (req, res, next) => {
   res.render('cars/moto-category', {
+    pageTitle: 'Add product',
+  });
+};
+const getResumeCategory = (req, res, next) => {
+  res.render('jobs/resume-category', {
+    pageTitle: 'Add product',
+  });
+};
+const getHouseBuildCategory = (req, res, next) => {
+  res.render('jobs/house-building-category', {
+    pageTitle: 'Add product',
+  });
+};
+const getServiceCategory = (req, res, next) => {
+  res.render('jobs/service-category', {
     pageTitle: 'Add product',
   });
 };
@@ -243,6 +261,70 @@ const postAddProduct = (req, res, next) => {
         console.log(err);
       });
   }
+  if (productType === 'resume') {
+    const { shortInfo, educationType, gender, specialization, experience, birthday, address, salary, phoneNumber } =
+      req.body;
+    const resume = new Resume({
+      shortInfo,
+      educationType,
+      gender,
+      specialization,
+      experience,
+      birthday,
+      address,
+      salary,
+      phoneNumber,
+    });
+    resume
+      .save()
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  if (productType === 'houseBuild') {
+    const { shortInfo, serviceType, experience, numWorkers, workTime, address, phoneNumber } = req.body;
+    const houseBuilding = new HouseBuilding({
+      shortInfo,
+      serviceType,
+      experience,
+      numWorkers,
+      workTime,
+      address,
+      phoneNumber,
+    });
+    houseBuilding
+      .save()
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  if (productType === 'service') {
+    const { shortInfo, gender, serviceType, experience, birthday, address, price, phoneNumber } = req.body;
+    const service = new Service({
+      shortInfo,
+      gender,
+      serviceType,
+      experience,
+      birthday,
+      address,
+      price,
+      phoneNumber,
+    });
+    service
+      .save()
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 };
 
 module.exports = {
@@ -255,4 +337,7 @@ module.exports = {
   getCarCategory,
   getTrackCategory,
   getMotoCategory,
+  getResumeCategory,
+  getHouseBuildCategory,
+  getServiceCategory,
 };

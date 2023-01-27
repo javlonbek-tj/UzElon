@@ -1,7 +1,12 @@
 const { Schema, model } = require('mongoose');
 
-const educationSchema = new Schema({
-  educaiotnType: {
+const resumeSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30,
+  },
+  educationType: {
     type: String,
     required: true,
   },
@@ -35,4 +40,4 @@ const educationSchema = new Schema({
   },
 });
 
-module.exports = model('Education', educationSchema);
+module.exports = model('Resume', resumeSchema);

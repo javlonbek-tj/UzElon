@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
-const buildSchema = new Schema({
+const houseBuildSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30,
+  },
   serviceType: {
     type: String,
     required: true,
@@ -14,7 +19,7 @@ const buildSchema = new Schema({
     required: true,
   },
   workTime: {
-    type: Date,
+    type: String,
     required: true,
   },
   address: {
@@ -22,9 +27,9 @@ const buildSchema = new Schema({
     required: true,
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
 });
 
-module.exports = model('Build', buildSchema);
+module.exports = model('HouseBuilding', houseBuildSchema);

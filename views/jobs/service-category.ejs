@@ -1,0 +1,58 @@
+<%- include('../includes/head.ejs') %>
+<div class="flat_adding mtt">
+  <form class="row g-3 fs-4" action="/add-product" method="POST">
+    <div class="my-5 adding_file">
+      <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
+      <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
+      <input type="file" id="img" class="d-none" multiple />
+    </div>
+    <div class="col-md-6">
+      <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
+      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Magazin sotiladi" />
+    </div>
+    <div class="col-md-6">
+      <label for="floor" class="form-label">Jinsi</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="gender">
+        <option value="1">Erkak</option>
+        <option value="2">Ayol</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="floor" class="form-label">Xizmat ko'rsatish turi</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="serviceType">
+        <option value="Eshik-rom yasash">Eshik-rom yasash</option>
+        <option value="Elektrik">Elektrik</option>
+        <option value="Sartaroshlik">Sartaroshlik</option>
+        <option value="Svarshiklik">Svarshiklik</option>
+        <option value="Vet doktor">Vet doktor</option>
+        <option value="Buxgalterlik">Buxgalterlik</option>
+        <option value="Oshxona mebel yashash">Oshxona mebel yashash</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="condition_flat" class="form-label">Ish tajribangiz</label>
+      <input type="number" class="form-control fs-3" name="experience" />
+    </div>
+    <div class="col-md-6">
+      <label for="condition_flat" class="form-label">Tug'ilgan sana</label>
+      <input type="date" class="form-control fs-3" name="birthday" />
+    </div>
+    <div class="form-floating fs-4 mb-5">
+      <textarea class="form-control fs-3" name="address" style="height: 70px"></textarea>
+      <label for="floatingTextarea2">Manzilni kiriting</label>
+    </div>
+    <div class="col-md-6">
+      <label for="flatPrice" class="form-label">Maosh:</label>
+      <input type="text" class="form-control fs-3" name="price" />
+    </div>
+    <div class="col-md-6">
+      <label for="phone" class="form-label">Telefon raqamingizni kiriting</label>
+      <input type="text" class="form-control fs-3" name="phoneNumber" />
+    </div>
+    <div>
+      <input type="hidden" name="productType" value="service" />
+      <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
+    </div>
+  </form>
+</div>
+<%- include('../includes/end.ejs') %>

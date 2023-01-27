@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const serviceSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30,
+  },
   gender: {
     type: String,
     required: true,
@@ -21,7 +26,7 @@ const serviceSchema = new Schema({
     type: String,
     required: true,
   },
-  salary: {
+  price: {
     type: Number,
     required: true,
   },
