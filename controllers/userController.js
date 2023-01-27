@@ -64,6 +64,11 @@ const getServiceCategory = (req, res, next) => {
     pageTitle: 'Add product',
   });
 };
+const getPhoneCategory = (req, res, next) => {
+  res.render('electronics/phone', {
+    pageTitle: 'Add product',
+  });
+};
 
 const postAddProduct = (req, res, next) => {
   const productType = req.body.productType;
@@ -340,4 +345,5 @@ module.exports = {
   getResumeCategory,
   getHouseBuildCategory,
   getServiceCategory,
+  getPhoneCategory,
 };
