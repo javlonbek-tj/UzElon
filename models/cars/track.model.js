@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const trackSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30,
+  },
   model: {
     type: String,
     required: true,
@@ -10,7 +15,7 @@ const trackSchema = new Schema({
     required: true,
   },
   color: {
-    type: Number,
+    type: String,
     required: true,
   },
   year: {
@@ -33,6 +38,7 @@ const trackSchema = new Schema({
     type: Number,
     required: true,
   },
+  rentOrSell: String,
 });
 
 module.exports = model('Track', trackSchema);

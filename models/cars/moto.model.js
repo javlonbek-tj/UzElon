@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
-const mopedSchema = new Schema({
+const motoSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30,
+  },
   model: {
     type: String,
     required: true,
@@ -21,6 +26,7 @@ const mopedSchema = new Schema({
     type: Number,
     required: true,
   },
+  rentOrSell: String,
 });
 
-module.exports = model('Moped', mopedSchema);
+module.exports = model('Moto', motoSchema);

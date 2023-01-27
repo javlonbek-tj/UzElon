@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const carSchema = new Schema({
+  shortInfo: {
+    type: String,
+    required: true,
+    max: 30,
+  },
   model: {
     type: String,
     required: true,
@@ -14,7 +19,7 @@ const carSchema = new Schema({
     required: true,
   },
   color: {
-    type: Number,
+    type: String,
     required: true,
   },
   year: {
@@ -37,6 +42,7 @@ const carSchema = new Schema({
     type: Number,
     required: true,
   },
+  rentOrSell: String,
 });
 
-module.exports = model('Flat', carSchema);
+module.exports = model('Car', carSchema);

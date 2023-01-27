@@ -2,6 +2,9 @@ const Flat = require('../models/home/flat.model');
 const House = require('../models/home/house.model');
 const Land = require('../models/home/land.model');
 const Building = require('../models/home/e-building.model');
+const Car = require('../models/cars/car.model');
+const Track = require('../models/cars/track.model');
+const Moto = require('../models/cars/moto.model');
 
 const getAddProduct = (req, res, next) => {
   res.render('user/add-product', {
@@ -30,6 +33,16 @@ const getBuildingCategory = (req, res, next) => {
 };
 const getCarCategory = (req, res, next) => {
   res.render('cars/car-category', {
+    pageTitle: 'Add product',
+  });
+};
+const getTrackCategory = (req, res, next) => {
+  res.render('cars/track-category', {
+    pageTitle: 'Add product',
+  });
+};
+const getMotoCategory = (req, res, next) => {
+  res.render('cars/moto-category', {
     pageTitle: 'Add product',
   });
 };
@@ -162,6 +175,74 @@ const postAddProduct = (req, res, next) => {
         console.log(err);
       });
   }
+  if (productType === 'car') {
+    const { rentOrSell, shortInfo, model, transmission, fluel, color, year, kmRun, address, price, phoneNumber } =
+      req.body;
+    const car = new Car({
+      shortInfo,
+      model,
+      transmission,
+      fluel,
+      color,
+      year,
+      kmRun,
+      address,
+      price,
+      phoneNumber,
+      rentOrSell,
+    });
+    car
+      .save()
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  if (productType === 'track') {
+    const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, price, phoneNumber } = req.body;
+    const track = new Track({
+      shortInfo,
+      model,
+      fluel,
+      color,
+      year,
+      kmRun,
+      address,
+      price,
+      phoneNumber,
+      rentOrSell,
+    });
+    track
+      .save()
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  if (productType === 'moto') {
+    const { rentOrSell, shortInfo, model, motoCondition, address, price, phoneNumber } = req.body;
+    const moto = new Moto({
+      shortInfo,
+      model,
+      motoCondition,
+      address,
+      price,
+      phoneNumber,
+      rentOrSell,
+    });
+    moto
+      .save()
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 };
 
 module.exports = {
@@ -172,4 +253,6 @@ module.exports = {
   getLandCategory,
   getBuildingCategory,
   getCarCategory,
+  getTrackCategory,
+  getMotoCategory,
 };
