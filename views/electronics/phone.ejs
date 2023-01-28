@@ -1,0 +1,58 @@
+<%- include('../includes/head.ejs') %>
+<div class="product_adding mtt">
+  <form class="row g-3 fs-4" action="/add-product" method="POST">
+    <div class="my-5 adding_file">
+      <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
+      <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
+      <input type="file" id="img" class="d-none" multiple />
+    </div>
+    <div class="col-md-6">
+      <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
+      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="SamSung A22 sotiladi" />
+    </div>
+    <div class="col-md-6">
+      <label for="mark" class="form-label">Markasi</label>
+      <input type="text" class="form-control fs-3" name="mark" />
+    </div>
+    <div class="col-md-6">
+      <label for="model" class="form-label">Modeli</label>
+      <input type="text" class="form-control fs-3" name="model" />
+    </div>
+    <div class="col-md-6">
+      <label for="phoneCondition" class="form-label">Telefon holati</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="phoneCondition">
+        <option value="Ishlatilgan">Ishlatilgan</option>
+        <option value="Yangi">Yangi</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="memory" class="form-label">Doimiy xotira</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="memory">
+        <option value="16">16</option>
+        <option value="32">32</option>
+        <option value="64">64</option>
+        <option value="128">128</option>
+        <option value="256">256</option>
+        <option value="512">512</option>
+        <option value="1024">1024</option>
+      </select>
+    </div>
+    <div class="form-floating fs-4 mb-5">
+      <textarea class="form-control fs-3" name="address" style="height: 70px"></textarea>
+      <label for="address">Manzilni kiriting</label>
+    </div>
+    <div class="col-md-6">
+      <label for="price" class="form-label">Narxi:</label>
+      <input type="number" class="form-control fs-3" name="price" />
+    </div>
+    <div class="col-md-6">
+      <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
+      <input type="number" class="form-control fs-3" name="phoneNumber" />
+    </div>
+    <div>
+      <input type="hidden" name="productType" value="phone" />
+      <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
+    </div>
+  </form>
+</div>
+<%- include('../includes/end.ejs') %>

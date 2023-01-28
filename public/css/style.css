@@ -151,44 +151,44 @@ section {
 
 /* Card products starts here */
 
-.blogs .box-container {
+.cards .box-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
   gap: 1.5rem;
 }
 
-.blogs .box-container .box {
+.cards .box-container .box {
   overflow: hidden;
   border-radius: 0.8rem;
   box-shadow: var(--box-shadow);
   background: #fff;
 }
 
-.blogs .box-container .box img {
+.cards .box-container .box img {
   height: 20rem;
   width: 100%;
   object-fit: cover;
 }
 
-.blogs .box-container .box .content .icons {
+.cards .box-container .box .content .icons {
   border-bottom: var(--border);
 }
 
-.blogs .box-container .box .content .icons a {
+.cards .box-container .box .content .icons a {
   color: var(--light-color);
   font-size: 1.5rem;
 }
 
-.blogs .box-container .box .content .icons a:hover {
+.cards .box-container .box .content .icons a:hover {
   color: var(--black);
 }
 
-.blogs .box-container .box .content .icons a i {
+.cards .box-container .box .content .icons a i {
   color: var(--orange);
   padding-right: 0.5rem;
 }
 
-.blogs .box-container .box .content h3 {
+.cards .box-container .box .content h3 {
   color: var(--black);
   height: 3rem;
 }
@@ -278,7 +278,7 @@ section {
 .adding_file label {
   font-size: 1.8rem;
 }
-.flat_adding {
+.product_adding {
   max-width: 60%;
   margin: 20rem auto;
 }
@@ -352,10 +352,10 @@ section {
   #home {
     display: none;
   }
-  #blogs {
+  #cards {
     margin: 30px auto;
   }
-  .blogs .box-container {
+  .cards .box-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     gap: 1.5rem;
@@ -416,7 +416,7 @@ section {
   #carouselExampleIndicators {
     width: 90%;
   }
-  .blogs .box-container .box .content .icons a i {
+  .cards .box-container .box .content .icons a i {
     display: none;
   }
   .signup {
@@ -436,7 +436,7 @@ section {
   #carouselExampleIndicators {
     height: 200px;
   }
-  .blogs .box-container .box img {
+  .cards .box-container .box img {
     height: 18rem;
   }
   .carousel-inner .carousel-item img {
@@ -460,7 +460,7 @@ section {
   }
 }
 @media (max-width: 359px) {
-  #blogs {
+  #cards {
     width: 78%;
   }
   .filter_items {

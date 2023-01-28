@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const houseSchema = new Schema(
+const nonResidentialSchema = new Schema(
   {
     shortInfo: {
       type: String,
@@ -10,14 +10,9 @@ const houseSchema = new Schema(
     rooms: {
       type: Number,
       required: true,
-      min: 1,
     },
     area: {
       type: Number,
-      required: true,
-    },
-    houseCondition: {
-      type: String,
       required: true,
     },
     address: {
@@ -32,12 +27,12 @@ const houseSchema = new Schema(
       type: Number,
       required: true,
     },
-    houseHas: [String],
     rentOrSell: String,
+    buildingHas: [],
   },
   {
     timestamps: true,
   },
 );
 
-module.exports = model('House', houseSchema);
+module.exports = model('NonResidential', nonResidentialSchema);

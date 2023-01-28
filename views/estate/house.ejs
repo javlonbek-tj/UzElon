@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-<div class="flat_adding mtt">
+<div class="product_adding mtt">
   <form class="row g-3 fs-4" action="/add-product" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
@@ -16,42 +16,46 @@
     </div>
     <div class="col-md-6">
       <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
-      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Uy sotiladi" />
+      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Hovli uy sotiladi" />
     </div>
     <div class="col-md-6">
-      <label for="room" class="form-label">Xonalar soni</label>
+      <label for="rooms" class="form-label">Xonalar soni</label>
       <input type="number" class="form-control fs-3" name="rooms" />
     </div>
     <div class="col-md-6">
-      <label for="square" class="form-label">Maydoni (sotix)</label>
+      <label for="area" class="form-label">Maydoni (sotix)</label>
       <input type="number" class="form-control fs-3" name="area" step="0.01" />
     </div>
     <div class="col-md-6">
-      <label for="condition_flat" class="form-label">Remont holati</label>
-      <input type="text" class="form-control fs-3" name="houseCondition" />
+      <label for="houseCondition" class="form-label">Uy holati</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="houseCondition">
+        <option value="Yangi">Yangi</option>
+        <option value="O'rtacha">O'rtacha</option>
+        <option value="Remont talab">Remont talab</option>
+      </select>
     </div>
     <div>
       <h4 class="mt-3">Hovli uyda mavjud</h4>
     </div>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" name="gas" value="Gaz" id="gas" />
-      <label class="form-check-label" for="flexCheckDefault"> Gaz </label>
+      <label class="form-check-label" for="gas"> Gaz </label>
     </div>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" name="electricity" value="Elektr" id="electricity" />
-      <label class="form-check-label" for="flexCheckChecked"> Elektr </label>
+      <label class="form-check-label" for="electricity"> Elektr </label>
     </div>
     <div class="form-floating fs-4 mb-5">
       <textarea class="form-control fs-3" name="address" style="height: 70px"></textarea>
-      <label for="floatingTextarea2">Manzilni kiriting</label>
+      <label for="address">Manzilni kiriting</label>
     </div>
     <div class="col-md-6">
-      <label for="flatPrice" class="form-label">Narxi:</label>
+      <label for="price" class="form-label">Narxi:</label>
       <input type="number" class="form-control fs-3" name="price" />
     </div>
     <div class="col-md-6">
-      <label for="phone" class="form-label">Telefon raqamingizni kiriting</label>
-      <input type="number" class="form-control fs-3" name="phoneNumber" />
+      <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
+      <input type="number" class="form-control fs-3" name="phoneNumber" placeholder="998901234567" />
     </div>
     <div>
       <input type="hidden" name="productType" value="house" />

@@ -6,8 +6,9 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const homeRoutes = require('./routes/home.routes');
+const productsRoutes = require('./routes/products.routes');
 const userRoutes = require('./routes/user.routes');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 
@@ -24,17 +25,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(homeRoutes);
-app.use(userRoutes);
-
 // ROUTES
-app.use(homeRoutes);
+app.use(productsRoutes);
 app.use(userRoutes);
+app.use(authRoutes);
 
 const DB = process.env.MONGO_URI;
 const port = process.env.PORT || 5000;
 
 mongoose.connect(DB).then(() => {
+  console.log('Connected to DB');
   app.listen(port, () => {
     console.log(`App running on ${port}...`);
   });

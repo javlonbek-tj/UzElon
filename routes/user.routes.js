@@ -8,26 +8,34 @@ const {
   getFlatCategory,
   getHouseCategory,
   getLandCategory,
-  getBuildingCategory,
+  getConstructionCategory,
   getCarCategory,
   getTrackCategory,
   getMotoCategory,
   getResumeCategory,
-  getHouseBuildCategory,
+  getNonResidentialCategory,
   getServiceCategory,
-} = require('../controllers/userController');
+  getPhoneCategory,
+  getLapTopCategory,
+  getHouseAppliancesCategory,
+  getAnimalCategory,
+} = require('../controllers/addProduct');
 
 router.get('/add-product', getAddProduct);
-router.get('/flat-category', getFlatCategory);
-router.get('/house-category', getHouseCategory);
-router.get('/land-category', getLandCategory);
-router.get('/e-building-category', getBuildingCategory);
-router.get('/car-category', getCarCategory);
-router.get('/track-category', getTrackCategory);
-router.get('/moto-category', getMotoCategory);
-router.get('/resume-category', getResumeCategory);
-router.get('/house-building-category', getHouseBuildCategory);
-router.get('/service-category', getServiceCategory);
+router.get('/flat', getFlatCategory);
+router.get('/house', getHouseCategory);
+router.get('/land', getLandCategory);
+router.get('/nonResidential', getNonResidentialCategory);
+router.get('/car', getCarCategory);
+router.get('/track', getTrackCategory);
+router.get('/moto', getMotoCategory);
+router.get('/resume', getResumeCategory);
+router.get('/construction', getConstructionCategory);
+router.get('/service', getServiceCategory);
+router.get('/phone', getPhoneCategory);
+router.get('/lap-top', getLapTopCategory);
+router.get('/houseAplliances', getHouseAppliancesCategory);
+router.get('/animal', getAnimalCategory);
 router.post('/add-product', postAddProduct);
 
 module.exports = router;

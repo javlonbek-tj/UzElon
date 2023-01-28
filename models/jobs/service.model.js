@@ -1,39 +1,44 @@
 const { Schema, model } = require('mongoose');
 
-const serviceSchema = new Schema({
-  shortInfo: {
-    type: String,
-    required: true,
-    max: 30,
+const serviceSchema = new Schema(
+  {
+    shortInfo: {
+      type: String,
+      required: true,
+      max: 30,
+    },
+    gender: {
+      type: String,
+      required: true,
+    },
+    serviceType: {
+      type: String,
+      required: true,
+    },
+    experience: {
+      type: Number,
+      required: true,
+    },
+    birthday: {
+      type: Date,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: Number,
+      required: true,
+    },
   },
-  gender: {
-    type: String,
-    required: true,
+  {
+    timestamps: true,
   },
-  serviceType: {
-    type: String,
-    required: true,
-  },
-  experience: {
-    type: Number,
-    required: true,
-  },
-  birthday: {
-    type: Date,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  phoneNumber: {
-    type: Number,
-    required: true,
-  },
-});
+);
 
 module.exports = model('Service', serviceSchema);

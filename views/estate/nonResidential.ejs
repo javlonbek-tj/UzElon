@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-<div class="flat_adding mtt">
+<div class="product_adding mtt">
   <form class="row g-3 fs-4" action="/add-product" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
@@ -19,38 +19,38 @@
       <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Magazin sotiladi" />
     </div>
     <div class="col-md-6">
-      <label for="room" class="form-label">Xonalar soni</label>
+      <label for="rooms" class="form-label">Xonalar soni</label>
       <input type="number" class="form-control fs-3" name="rooms" />
     </div>
     <div class="col-md-6">
-      <label for="floor" class="form-label">Bino maydoni(M2)</label>
+      <label for="area" class="form-label">Bino maydoni(M2)</label>
       <input type="number" class="form-control fs-3" name="area" />
     </div>
     <div>
       <h4 class="mt-3">Binoda mavjud</h4>
     </div>
     <div class="form-check">
-      <input class="form-check-input" name="gas" type="checkbox" value="Gaz" id="flexCheckDefault" />
-      <label class="form-check-label" for="flexCheckDefault"> Gaz </label>
+      <input class="form-check-input" name="gas" type="checkbox" value="Gaz" id="gas" />
+      <label class="form-check-label" for="gas"> Gaz </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" name="electricity" type="checkbox" value="Elektr" id="flexCheckChecked" />
-      <label class="form-check-label" for="flexCheckChecked"> Elektr </label>
+      <input class="form-check-input" name="electricity" type="checkbox" value="EelectricityheckChecked" />
+      <label class="form-check-label" for="electricity"> Elektr </label>
     </div>
     <div class="form-floating fs-4 mb-5">
       <textarea class="form-control fs-3" name="address" style="height: 70px"></textarea>
-      <label for="floatingTextarea2">Manzilni kiriting</label>
+      <label for="address">Manzilni kiriting</label>
     </div>
     <div class="col-md-6">
-      <label for="flatPrice" class="form-label">Narxi:</label>
+      <label for="price" class="form-label">Narxi:</label>
       <input type="number" class="form-control fs-3" name="price" />
     </div>
     <div class="col-md-6">
-      <label for="phone" class="form-label">Telefon raqamingizni kiriting</label>
+      <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
       <input type="number" class="form-control fs-3" name="phoneNumber" />
     </div>
     <div>
-      <input type="hidden" name="productType" value="e-building" />
+      <input type="hidden" name="productType" value="non-resedential" />
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>

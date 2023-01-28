@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+<div class="product_adding mtt">
+  <form class="row g-3 fs-4" action="/add-product" method="POST">
+    <div class="my-5 adding_file">
+      <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
+      <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
+      <input type="file" id="img" class="d-none" multiple />
+    </div>
+    <div class="col-md-6">
+      <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
+      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Ot sotiladi" />
+    </div>
+    <div class="col-md-6">
+      <label for="animalName" class="form-label">Uy hayvoni nomi:</label>
+      <input type="text" class="form-control fs-3" name="animalName" />
+    </div>
+    <div class="form-floating fs-4 mb-5">
+      <textarea class="form-control fs-3" name="address" style="height: 70px"></textarea>
+      <label for="address">Manzilni kiriting</label>
+    </div>
+    <div class="col-md-6">
+      <label for="price" class="form-label">Narxi:</label>
+      <input type="number" class="form-control fs-3" name="price" />
+    </div>
+    <div class="col-md-6">
+      <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
+      <input type="number" class="form-control fs-3" name="phoneNumber" />
+    </div>
+    <div>
+      <input type="hidden" name="productType" value="animal" />
+      <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
+    </div>
+  </form>
+</div>
+<%- include('../includes/end.ejs') %>

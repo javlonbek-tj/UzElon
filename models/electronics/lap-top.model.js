@@ -1,22 +1,25 @@
 const { Schema, model } = require('mongoose');
 
-const houseSchema = new Schema(
+const lapTopSchema = new Schema(
   {
     shortInfo: {
       type: String,
       required: true,
       max: 30,
     },
-    rooms: {
-      type: Number,
-      required: true,
-      min: 1,
-    },
-    area: {
-      type: Number,
+    mark: {
+      type: String,
       required: true,
     },
-    houseCondition: {
+    lapTopCondition: {
+      type: String,
+      required: true,
+    },
+    cpu: {
+      type: String,
+      required: true,
+    },
+    ram: {
       type: String,
       required: true,
     },
@@ -32,12 +35,10 @@ const houseSchema = new Schema(
       type: Number,
       required: true,
     },
-    houseHas: [String],
-    rentOrSell: String,
   },
   {
     timestamps: true,
   },
 );
 
-module.exports = model('House', houseSchema);
+module.exports = model('LapTop', lapTopSchema);

@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-<div class="flat_adding mtt">
+<div class="product_adding mtt">
   <form class="row g-3 fs-4" action="/add-product" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
@@ -16,14 +16,14 @@
     </div>
     <div class="col-md-6">
       <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
-      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Magazin sotiladi" />
+      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Porter arendaga" />
     </div>
     <div class="col-md-6">
-      <label for="room" class="form-label">Modeli</label>
+      <label for="model" class="form-label">Modeli</label>
       <input type="text" class="form-control fs-3" name="model" />
     </div>
     <div class="col-md-6">
-      <label for="nthfloor" class="form-label">Yoqilg'i turi</label>
+      <label for="fluel" class="form-label">Yoqilg'i turi</label>
       <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="fluel">
         <option value="Benzin">Benzin</option>
         <option value="Metan">Metan</option>
@@ -31,7 +31,7 @@
       </select>
     </div>
     <div class="col-md-6">
-      <label for="nthfloor" class="form-label">Rangi</label>
+      <label for="color" class="form-label">Rangi</label>
       <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="color">
         <option value="Oq">Oq</option>
         <option value="Qora">Qora</option>
@@ -44,23 +44,23 @@
       </select>
     </div>
     <div class="col-md-6">
-      <label for="condition_flat" class="form-label">Ishlab chiqarilgan yili</label>
-      <input type="text" class="form-control fs-3" name="year" />
+      <label for="year" class="form-label">Ishlab chiqarilgan yili</label>
+      <input type="number" class="form-control fs-3" name="year" />
     </div>
     <div class="col-md-6">
-      <label for="condition_flat" class="form-label">Yurgan kilometraji</label>
-      <input type="text" class="form-control fs-3" name="kmRun" />
+      <label for="kmRun" class="form-label">Yurgan kilometraji</label>
+      <input type="number" class="form-control fs-3" name="kmRun" />
     </div>
     <div class="form-floating fs-4 mb-5">
       <textarea class="form-control fs-3" name="address" style="height: 100px"></textarea>
-      <label for="floatingTextarea2">Manzilni kiriting</label>
+      <label for="address">Manzilni kiriting</label>
     </div>
     <div class="col-md-6">
-      <label for="flatPrice" class="form-label">Narxi:</label>
+      <label for="price" class="form-label">Narxi:</label>
       <input type="number" class="form-control fs-3" name="price" />
     </div>
     <div class="col-md-6">
-      <label for="phone" class="form-label">Telefon raqamingizni kiriting</label>
+      <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
       <input type="number" class="form-control fs-3" name="phoneNumber" />
     </div>
     <div>

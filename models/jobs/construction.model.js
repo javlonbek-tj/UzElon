@@ -1,22 +1,25 @@
 const { Schema, model } = require('mongoose');
 
-const houseSchema = new Schema(
+const constructionSchema = new Schema(
   {
     shortInfo: {
       type: String,
       required: true,
       max: 30,
     },
-    rooms: {
-      type: Number,
-      required: true,
-      min: 1,
-    },
-    area: {
-      type: Number,
+    serviceType: {
+      type: String,
       required: true,
     },
-    houseCondition: {
+    experience: {
+      type: Number,
+      required: true,
+    },
+    numWorkers: {
+      type: Number,
+      required: true,
+    },
+    workTime: {
       type: String,
       required: true,
     },
@@ -24,20 +27,14 @@ const houseSchema = new Schema(
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
     phoneNumber: {
       type: Number,
       required: true,
     },
-    houseHas: [String],
-    rentOrSell: String,
   },
   {
     timestamps: true,
   },
 );
 
-module.exports = model('House', houseSchema);
+module.exports = model('Construction', constructionSchema);

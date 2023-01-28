@@ -1,32 +1,37 @@
 const { Schema, model } = require('mongoose');
 
-const motoSchema = new Schema({
-  shortInfo: {
-    type: String,
-    required: true,
-    max: 30,
+const motoSchema = new Schema(
+  {
+    shortInfo: {
+      type: String,
+      required: true,
+      max: 30,
+    },
+    model: {
+      type: String,
+      required: true,
+    },
+    motoCondition: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    phoneNumber: {
+      type: Number,
+      required: true,
+    },
+    rentOrSell: String,
   },
-  model: {
-    type: String,
-    required: true,
+  {
+    timestamps: true,
   },
-  motoCondition: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  phoneNumber: {
-    type: Number,
-    required: true,
-  },
-  rentOrSell: String,
-});
+);
 
 module.exports = model('Moto', motoSchema);

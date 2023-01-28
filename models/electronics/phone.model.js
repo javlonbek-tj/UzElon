@@ -1,23 +1,26 @@
 const { Schema, model } = require('mongoose');
 
-const houseSchema = new Schema(
+const phoneSchema = new Schema(
   {
     shortInfo: {
       type: String,
       required: true,
       max: 30,
     },
-    rooms: {
-      type: Number,
-      required: true,
-      min: 1,
-    },
-    area: {
-      type: Number,
-      required: true,
-    },
-    houseCondition: {
+    mark: {
       type: String,
+      required: true,
+    },
+    model: {
+      type: String,
+      required: true,
+    },
+    phoneCondition: {
+      type: String,
+      required: true,
+    },
+    memory: {
+      type: Number,
       required: true,
     },
     address: {
@@ -32,12 +35,10 @@ const houseSchema = new Schema(
       type: Number,
       required: true,
     },
-    houseHas: [String],
-    rentOrSell: String,
   },
   {
     timestamps: true,
   },
 );
 
-module.exports = model('House', houseSchema);
+module.exports = model('Phone', phoneSchema);
