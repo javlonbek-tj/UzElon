@@ -5,13 +5,14 @@ const NonResidential = require('../models/home/nonResidential.model');
 const Car = require('../models/cars/car.model');
 const Track = require('../models/cars/track.model');
 const Moto = require('../models/cars/moto.model');
-const Resume = require('../models/jobs/resume.model');
 const Construction = require('../models/jobs/construction.model');
 const Service = require('../models/jobs/service.model');
+const Vacancy = require('../models/jobs/vacancy.model');
 const Phone = require('../models/electronics/phone.model');
 const LapTop = require('../models/electronics/lap-top.model');
 const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
+const General = require('../models/general.model');
 
 const getAddProduct = (req, res, next) => {
   try {
@@ -85,15 +86,6 @@ const getMotoCategory = (req, res, next) => {
     console.log(err);
   }
 };
-const getResumeCategory = (req, res, next) => {
-  try {
-    res.render('jobs/resume', {
-      pageTitle: 'Add product',
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
 const getConstructionCategory = (req, res, next) => {
   try {
     res.render('jobs/construction', {
@@ -106,6 +98,15 @@ const getConstructionCategory = (req, res, next) => {
 const getServiceCategory = (req, res, next) => {
   try {
     res.render('jobs/service', {
+      pageTitle: 'Add product',
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getVacancyCategory = (req, res, next) => {
+  try {
+    res.render('jobs/vacancy', {
       pageTitle: 'Add product',
     });
   } catch (err) {
@@ -149,13 +150,24 @@ getAnimalCategory = (req, res, next) => {
   }
 };
 
-const postAddProduct = (req, res, next) => {
+const postAddProduct = async (req, res, next) => {
   try {
     const productType = req.body.productType;
     if (productType === 'flat') {
       const flatHas = [];
-      const { rentOrSell, shortInfo, rooms, floors, floor, area, flatCondition, address, price, phoneNumber } =
-        req.body;
+      const {
+        rentOrSell,
+        shortInfo,
+        rooms,
+        floors,
+        floor,
+        area,
+        flatCondition,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const { airConditioning, freeze, furniture, tv, washing } = req.body;
       if (airConditioning) {
         flatHas.push(airConditioning);
@@ -180,23 +192,25 @@ const postAddProduct = (req, res, next) => {
         area: area,
         flatCondition: flatCondition,
         address: address,
+        extraInfo,
         price: price,
         phoneNumber: phoneNumber,
         rentOrSell: rentOrSell,
         flatHas: flatHas,
       });
-      flat
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newFlat = await flat.save();
+      const general = new General({
+        _id: newFlat._id,
+        shortInfo: newFlat.shortInfo,
+        price: newFlat.price,
+        flatId: newFlat._id,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'house') {
       const houseHas = [];
-      const { rentOrSell, shortInfo, rooms, area, houseCondition, address, price, phoneNumber } = req.body;
+      const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber } = req.body;
       const { gas, electricity } = req.body;
       if (gas) {
         houseHas.push(gas);
@@ -210,23 +224,24 @@ const postAddProduct = (req, res, next) => {
         area: area,
         houseCondition: houseCondition,
         address: address,
+        extraInfo,
         price: price,
         phoneNumber: phoneNumber,
         houseHas: houseHas,
         rentOrSell: rentOrSell,
       });
-      house
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newHouse = await house.save();
+      const general = new General({
+        _id: newHouse._id,
+        shortInfo: newHouse.shortInfo,
+        price: newHouse.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'land') {
       const landHas = [];
-      const { rentOrSell, shortInfo, area, address, price, phoneNumber, gas, electricity } = req.body;
+      const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
       if (gas) {
         landHas.push(gas);
       }
@@ -237,23 +252,24 @@ const postAddProduct = (req, res, next) => {
         shortInfo,
         area,
         address,
+        extraInfo,
         price,
         phoneNumber,
         rentOrSell,
         landHas,
       });
-      land
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newLand = await land.save();
+      const general = new General({
+        _id: newLand._id,
+        shortInfo: newLand.shortInfo,
+        price: newLand.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'non-residential') {
       const buildingHas = [];
-      const { shortInfo, rentOrSell, rooms, area, address, price, phoneNumber, gas, electricity } = req.body;
+      const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
       if (gas) {
         buildingHas.push(gas);
       }
@@ -265,23 +281,36 @@ const postAddProduct = (req, res, next) => {
         rooms,
         area,
         address,
+        extraInfo,
         price,
         phoneNumber,
         rentOrSell,
         buildingHas,
       });
-      nonResidential
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newNonResidential = await nonResidential.save();
+      const general = new General({
+        _id: newNonResidential._id,
+        shortInfo: newNonResidential.shortInfo,
+        price: newNonResidential.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'car') {
-      const { rentOrSell, shortInfo, model, transmission, fluel, color, year, kmRun, address, price, phoneNumber } =
-        req.body;
+      const {
+        rentOrSell,
+        shortInfo,
+        model,
+        transmission,
+        fluel,
+        color,
+        year,
+        kmRun,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const car = new Car({
         shortInfo,
         model,
@@ -295,17 +324,18 @@ const postAddProduct = (req, res, next) => {
         phoneNumber,
         rentOrSell,
       });
-      car
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newcar = await car.save();
+      const general = new General({
+        _id: newcar._id,
+        shortInfo: newcar.shortInfo,
+        price: newcar.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'track') {
-      const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, price, phoneNumber } = req.body;
+      const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber } =
+        req.body;
       const track = new Track({
         shortInfo,
         model,
@@ -314,70 +344,50 @@ const postAddProduct = (req, res, next) => {
         year,
         kmRun,
         address,
+        extraInfo,
         price,
         phoneNumber,
         rentOrSell,
       });
-      track
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newTrack = await track.save();
+      const general = new General({
+        _id: newTrack._id,
+        shortInfo: newTrack.shortInfo,
+        price: newTrack.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'moto') {
-      const { rentOrSell, shortInfo, model, motoCondition, address, price, phoneNumber } = req.body;
+      const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber } = req.body;
       const moto = new Moto({
         shortInfo,
         model,
         motoCondition,
         address,
+        extraInfo,
         price,
         phoneNumber,
         rentOrSell,
       });
-      moto
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-    if (productType === 'resume') {
-      const { shortInfo, educationType, gender, specialization, experience, birthday, address, salary, phoneNumber } =
-        req.body;
-      const resume = new Resume({
-        shortInfo,
-        educationType,
-        gender,
-        specialization,
-        experience,
-        birthday,
-        address,
-        salary,
-        phoneNumber,
+      const newMoto = await moto.save();
+      const general = new General({
+        _id: newMoto._id,
+        shortInfo: newMoto.shortInfo,
+        price: newMoto.price,
       });
-      resume
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'construction') {
-      const { shortInfo, serviceType, experience, numWorkers, workTime, address, phoneNumber } = req.body;
+      const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber } = req.body;
       const construction = new Construction({
         shortInfo,
         serviceType,
         experience,
         numWorkers,
         workTime,
+        extraInfo,
         address,
         phoneNumber,
       });
@@ -391,7 +401,7 @@ const postAddProduct = (req, res, next) => {
         });
     }
     if (productType === 'service') {
-      const { shortInfo, gender, serviceType, experience, birthday, address, price, phoneNumber } = req.body;
+      const { shortInfo, gender, serviceType, experience, birthday, address, extraInfo, price, phoneNumber } = req.body;
       const service = new Service({
         shortInfo,
         gender,
@@ -399,20 +409,42 @@ const postAddProduct = (req, res, next) => {
         experience,
         birthday,
         address,
+        extraInfo,
         price,
         phoneNumber,
       });
-      service
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newService = await service.save();
+      const general = new General({
+        _id: newService._id,
+        shortInfo: newService.shortInfo,
+        price: newService.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
+    }
+    if (productType === 'vacancy') {
+      const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber } = req.body;
+      const vacancy = new Vacancy({
+        shortInfo,
+        gender,
+        position,
+        requiredAge,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      });
+      const newVacancy = await vacancy.save();
+      const general = new General({
+        _id: newVacancy._id,
+        shortInfo: newVacancy.shortInfo,
+        price: newVacancy.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'phone') {
-      const { shortInfo, mark, model, phoneCondition, memory, address, price, phoneNumber } = req.body;
+      const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber } = req.body;
       const phone = new Phone({
         shortInfo,
         mark,
@@ -420,20 +452,21 @@ const postAddProduct = (req, res, next) => {
         phoneCondition,
         memory,
         address,
+        extraInfo,
         price,
         phoneNumber,
       });
-      phone
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newPhone = await phone.save();
+      const general = new General({
+        _id: newPhone._id,
+        shortInfo: newPhone.shortInfo,
+        price: newPhone.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'laptop') {
-      const { shortInfo, mark, lapTopCondition, cpu, ram, address, price, phoneNumber } = req.body;
+      const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber } = req.body;
       const laptop = new LapTop({
         shortInfo,
         mark,
@@ -441,54 +474,57 @@ const postAddProduct = (req, res, next) => {
         cpu,
         ram,
         address,
+        extraInfo,
         price,
         phoneNumber,
       });
-      laptop
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newLaptop = await laptop.save();
+      const general = new General({
+        _id: newLaptop._id,
+        shortInfo: newLaptop.shortInfo,
+        price: newLaptop.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'houseAppliances') {
-      const { shortInfo, applianceName, applianceCondition, address, price, phoneNumber } = req.body;
+      const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber } = req.body;
       const houseAppliances = new HouseAppliances({
         shortInfo,
         applianceName,
         applianceCondition,
         address,
+        extraInfo,
         price,
         phoneNumber,
       });
-      houseAppliances
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newHomeAppliances = await houseAppliances.save();
+      const general = new General({
+        _id: newHomeAppliances._id,
+        shortInfo: newHomeAppliances.shortInfo,
+        price: newHomeAppliances.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'animal') {
-      const { shortInfo, animalName, address, price, phoneNumber } = req.body;
+      const { shortInfo, animalName, address, price, extraInfo, phoneNumber } = req.body;
       const animal = new Animal({
         shortInfo,
         animalName,
         address,
+        extraInfo,
         price,
         phoneNumber,
       });
-      animal
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newAnimal = await AnimationTimeline.save();
+      const general = new General({
+        _id: newAnimal._id,
+        shortInfo: newAnimal.shortInfo,
+        price: newAnimal.price,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
   } catch (err) {
     console.log(err);
@@ -505,9 +541,9 @@ module.exports = {
   getCarCategory,
   getTrackCategory,
   getMotoCategory,
-  getResumeCategory,
   getConstructionCategory,
   getServiceCategory,
+  getVacancyCategory,
   getPhoneCategory,
   getLapTopCategory,
   getHouseAppliancesCategory,

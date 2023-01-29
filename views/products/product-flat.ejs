@@ -28,13 +28,13 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="./image/blog-2.jpg" class="d-block w-100" alt="..." />
+              <img src="/image/blog-2.jpg" class="d-block w-100" alt="..." />
             </div>
             <div class="carousel-item">
-              <img src="./image/blog-2.jpg" class="d-block w-100" alt="..." />
+              <img src="/image/blog-2.jpg" class="d-block w-100" alt="..." />
             </div>
             <div class="carousel-item">
-              <img src="./image/blog-3.jpg" class="d-block w-100" alt="..." />
+              <img src="/image/blog-3.jpg" class="d-block w-100" alt="..." />
             </div>
           </div>
           <button
@@ -61,59 +61,29 @@
       <div class="detail_card col-lg-7">
         <div class="card">
           <div class="card-body">
-            <h1 class="h2">Active Wear</h1>
-            <p class="h3 py-2">$25.00</p>
-            <p class="py-2">
-              <i class="fa fa-star text-warning"></i>
-              <i class="fa fa-star text-warning"></i>
-              <i class="fa fa-star text-warning"></i>
-              <i class="fa fa-star text-warning"></i>
-              <i class="fa fa-star text-secondary"></i>
-              <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
-            </p>
-            <ul class="list-inline">
-              <li class="list-inline-item">
-                <h6>Brand:</h6>
-              </li>
-              <li class="list-inline-item">
-                <p class="text-muted"><strong>Easy Wear</strong></p>
-              </li>
-            </ul>
-
-            <h3>Description:</h3>
-            <p class="fs-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et
-              dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam
-              ultrices aliquet interdum quis nulla.
-            </p>
-            <ul class="list-inline">
-              <li class="list-inline-item">
-                <h6>Avaliable Color :</h6>
-              </li>
-              <li class="list-inline-item">
-                <p class="text-muted"><strong>White / Black</strong></p>
+            <div class="d-md-flex justify-content-between">
+              <h2 class="text-primary">
+                Kvartira: <%= flat.rentOrSell %>, <%= flat.rooms %> xonali, <%=flat.area %> kv m.
+              </h2>
+              <p class="fs-5">E'lon qo'shilgan sana: 2023.01.27 20:39</p>
+            </div>
+            <p class="h1 py-2"><%= flat.price %></p>
+            <h3><%= flat.address %></h3>
+            <ul class="list-unstyled pb-3 fs-4 details">
+              <li><span> Xonalar soni:</span> &nbsp <%= flat.rooms %></li>
+              <li><span> Kvartira maydoni:</span> &nbsp <%= flat.area %> km m.</li>
+              <li><span> Qavatlik:</span> &nbsp <%= flat.floors %></li>
+              <li><span> Qavati: </span> &nbsp <%= flat.floor %></li>
+              <li><span> Kvartira holati: &nbsp</span> <%= flat.flatCondition %></li>
+              <li>
+                <span> Kvartirada mavjud: &nbsp </span><% for (let flatH of flat.flatHas) { %> <%= flatH, %> <% } %>
               </li>
             </ul>
-
-            <h6>Specification:</h6>
-            <ul class="list-unstyled pb-3">
-              <li>Lorem ipsum dolor sit</li>
-              <li>Amet, consectetur</li>
-              <li>Adipiscing elit,set</li>
-              <li>Duis aute irure</li>
-              <li>Ut enim ad minim</li>
-              <li>Dolore magna aliqua</li>
-              <li>Excepteur sint</li>
-            </ul>
-            <div class="row pb-3">
-              <div class="col d-grid">
-                <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
-              </div>
-              <div class="col d-grid">
-                <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">
-                  Add To Cart
-                </button>
-              </div>
+            <h3>Tavsif:</h3>
+            <p class="fs-3 mb-3"><%= flat.extraInfo %></p>
+            <div class="pb-3 d-flex justify-content-evenly details_buttons">
+              <button type="submit"><%= flat.phoneNumber %></button>
+              <button type="submit">Muallifga yozish</button>
             </div>
           </div>
         </div>

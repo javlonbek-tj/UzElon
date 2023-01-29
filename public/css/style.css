@@ -172,25 +172,21 @@ section {
 
 .cards .box-container .box .content .icons {
   border-bottom: var(--border);
+  line-height: 1;
 }
 
 .cards .box-container .box .content .icons a {
   color: var(--light-color);
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .cards .box-container .box .content .icons a:hover {
   color: var(--black);
 }
 
-.cards .box-container .box .content .icons a i {
-  color: var(--orange);
-  padding-right: 0.5rem;
-}
-
 .cards .box-container .box .content h3 {
   color: var(--black);
-  height: 3rem;
+  height: 1.2rem;
 }
 
 /*  Filtering starts here */
@@ -279,15 +275,29 @@ section {
   font-size: 1.8rem;
 }
 .product_adding {
-  max-width: 60%;
-  margin: 20rem auto;
+  width: 55%;
+  margin: 8rem auto;
+}
+.details span {
+  color: #666;
+}
+.details_buttons button {
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: rgb(88, 88, 141);
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: 0.2s all linear;
+}
+.details_buttons button:hover {
+  background-color: rgb(63, 63, 118);
 }
 
 /* Sign up */
 
 .signup {
   width: 400px;
-  margin: 5rem auto;
+  margin: 4rem auto;
 }
 .signup-content {
   background: #fff;

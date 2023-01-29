@@ -34,7 +34,6 @@ const DB = process.env.MONGO_URI;
 const port = process.env.PORT || 5000;
 
 mongoose.connect(DB).then(() => {
-  console.log('Connected to DB');
   app.listen(port, () => {
     console.log(`App running on ${port}...`);
   });

@@ -12,9 +12,9 @@ const {
   getCarCategory,
   getTrackCategory,
   getMotoCategory,
-  getResumeCategory,
   getNonResidentialCategory,
   getServiceCategory,
+  getVacancyCategory,
   getPhoneCategory,
   getLapTopCategory,
   getHouseAppliancesCategory,
@@ -29,9 +29,9 @@ router.get('/nonResidential', getNonResidentialCategory);
 router.get('/car', getCarCategory);
 router.get('/track', getTrackCategory);
 router.get('/moto', getMotoCategory);
-router.get('/resume', getResumeCategory);
 router.get('/construction', getConstructionCategory);
 router.get('/service', getServiceCategory);
+router.get('/vacancy', getVacancyCategory);
 router.get('/phone', getPhoneCategory);
 router.get('/lap-top', getLapTopCategory);
 router.get('/houseAplliances', getHouseAppliancesCategory);

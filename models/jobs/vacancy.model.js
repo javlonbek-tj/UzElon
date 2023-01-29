@@ -1,37 +1,29 @@
 const { Schema, model } = require('mongoose');
 
-const resumeSchema = new Schema(
+const vacancySchema = new Schema(
   {
     shortInfo: {
       type: String,
       required: true,
       max: 30,
     },
-    educationType: {
-      type: String,
-      required: true,
-    },
     gender: {
       type: String,
       required: true,
     },
-    specialization: {
+    position: {
       type: String,
       required: true,
     },
-    experience: {
+    requiredAge: {
       type: Number,
-      required: true,
-    },
-    birthday: {
-      type: Date,
       required: true,
     },
     address: {
       type: String,
       required: true,
     },
-    salary: {
+    price: {
       type: Number,
       required: true,
     },
@@ -45,4 +37,4 @@ const resumeSchema = new Schema(
   },
 );
 
-module.exports = model('Resume', resumeSchema);
+module.exports = model('Vacancy', vacancySchema);

@@ -6,6 +6,6 @@ const { getHomePage, getOneProduct, getAllProducts } = require('../controllers/p
 
 router.get('/', getHomePage);
 router.get('/products', getAllProducts);
-router.get('/product-detail', getOneProduct);
+router.get('/products/:productId', getOneProduct);
 
 module.exports = router;

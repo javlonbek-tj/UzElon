@@ -8,34 +8,22 @@
     </div>
     <div class="col-md-6">
       <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
-      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="SamSung A22 sotiladi" />
+      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Buxgalter kerak" />
     </div>
     <div class="col-md-6">
-      <label for="mark" class="form-label">Markasi</label>
-      <input type="text" class="form-control fs-3" name="mark" />
-    </div>
-    <div class="col-md-6">
-      <label for="model" class="form-label">Modeli</label>
-      <input type="text" class="form-control fs-3" name="model" />
-    </div>
-    <div class="col-md-6">
-      <label for="phoneCondition" class="form-label">Telefon holati</label>
-      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="phoneCondition">
-        <option value="Ishlatilgan">Ishlatilgan</option>
-        <option value="Yangi">Yangi</option>
+      <label for="gender" class="form-label">Jinsi</label>
+      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="gender">
+        <option value="Ayol">Ayol</option>
+        <option value="Erkak">Erkak</option>
       </select>
     </div>
     <div class="col-md-6">
-      <label for="memory" class="form-label">Doimiy xotira</label>
-      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="memory">
-        <option value="16">16</option>
-        <option value="32">32</option>
-        <option value="64">64</option>
-        <option value="128">128</option>
-        <option value="256">256</option>
-        <option value="512">512</option>
-        <option value="1024">1024</option>
-      </select>
+      <label for="specialization" class="form-label">Lavozimi</label>
+      <input type="text" class="form-control fs-3" name="position" />
+    </div>
+    <div class="col-md-6">
+      <label for="birthday" class="form-label">Yosh chegarasi</label>
+      <input type="text" class="form-control fs-3" name="requiredAge" />
     </div>
     <div class="col-md-6">
       <label for="color" class="form-label">Manzilni tanlang</label>
@@ -62,7 +50,7 @@
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
     <div class="col-md-6">
-      <label for="price" class="form-label">Narxi:</label>
+      <label for="price" class="form-label">Maosh:</label>
       <input type="number" class="form-control fs-3" name="price" />
     </div>
     <div class="col-md-6">
@@ -70,7 +58,7 @@
       <input type="number" class="form-control fs-3" name="phoneNumber" />
     </div>
     <div>
-      <input type="hidden" name="productType" value="phone" />
+      <input type="hidden" name="productType" value="vacancy" />
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>
