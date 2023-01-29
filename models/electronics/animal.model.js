@@ -11,6 +11,10 @@ const animalSchema = new Schema(
       type: String,
       required: true,
     },
+    extraInfo: {
+      type: String,
+      required: true,
+    },
     address: {
       type: String,
       required: true,

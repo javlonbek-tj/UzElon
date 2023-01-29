@@ -31,9 +31,55 @@ const getOneProduct = async (req, res, next) => {
     const prodId = req.params.productId;
     if (await Flat.findById(prodId)) {
       const flat = await Flat.findById(prodId);
-      return res.render('products/product-flat', {
-        pageTitle: 'Kvartira',
+      return res.render('products/home/product-flat', {
+        pageTitle: 'Kvartira oldi-sotdisi',
         flat,
+      });
+    }
+    if (await Land.findById(prodId)) {
+      const land = await Land.findById(prodId);
+      return res.render('products/home/product-land', {
+        pageTitle: 'Yer oldi-sotdisi',
+        land,
+      });
+    }
+    if (await House.findById(prodId)) {
+      const house = await House.findById(prodId);
+      return res.render('products/home/product-house', {
+        pageTitle: 'Hovli uy oldi-sotdisi',
+        house,
+      });
+    }
+    if (await Car.findById(prodId)) {
+      const car = await Car.findById(prodId);
+      const year = car.year.getFullYear();
+      return res.render('products/cars/product-car', {
+        pageTitle: 'Avtomobil oldi-sotdisi',
+        car,
+        year,
+      });
+    }
+    if (await Track.findById(prodId)) {
+      const track = await Track.findById(prodId);
+      const year = track.year.getFullYear();
+      return res.render('products/cars/product-track', {
+        pageTitle: 'Avtomobil oldi-sotdisi',
+        track,
+        year,
+      });
+    }
+    if (await Moto.findById(prodId)) {
+      const moto = await Moto.findById(prodId);
+      return res.render('products/cars/product-moto', {
+        pageTitle: 'Avtomobil oldi-sotdisi',
+        moto,
+      });
+    }
+    if (await Animal.findById(prodId)) {
+      const animal = await Animal.findById(prodId);
+      return res.render('products/electronics/product-animal', {
+        pageTitle: 'Uy hayvonlari oldi-sotdisi',
+        animal,
       });
     }
   } catch (err) {
@@ -44,7 +90,7 @@ const getAllProducts = async (req, res, next) => {
   try {
     const prods = await General.find();
     res.render('products/products', {
-      pageTitle: 'AvtoVodil',
+      pageTitle: "AvtoVodil barcha e'lonlar",
       prods,
     });
   } catch (err) {

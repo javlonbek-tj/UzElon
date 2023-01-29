@@ -35,6 +35,10 @@ const carSchema = new Schema(
       type: String,
       required: true,
     },
+    extraInfo: {
+      type: String,
+      required: true,
+    },
     price: {
       type: Number,
       required: true,

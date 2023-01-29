@@ -320,6 +320,7 @@ const postAddProduct = async (req, res, next) => {
         year,
         kmRun,
         address,
+        extraInfo,
         price,
         phoneNumber,
         rentOrSell,
@@ -517,7 +518,7 @@ const postAddProduct = async (req, res, next) => {
         price,
         phoneNumber,
       });
-      const newAnimal = await AnimationTimeline.save();
+      const newAnimal = await animal.save();
       const general = new General({
         _id: newAnimal._id,
         shortInfo: newAnimal.shortInfo,

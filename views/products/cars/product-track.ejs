@@ -1,4 +1,4 @@
-<%- include('../includes/head.ejs') %>
+<%- include('../../includes/head.ejs') %>
 <section class="mts">
   <div class="container pb-5">
     <div class="row">
@@ -63,26 +63,21 @@
           <div class="card-body">
             <div class="d-md-flex justify-content-between">
               <h2 class="text-primary">
-                Kvartira: <%= flat.rentOrSell %>, <%= flat.rooms %> xonali, <%=flat.area %> kv m.
+                <%= track.model %> <%= track.rentOrSell %>, <%= year %>, <%=track.kmRun %> km.
               </h2>
               <p class="fs-5">E'lon qo'shilgan sana: 2023.01.27 20:39</p>
             </div>
-            <p class="h1 py-2"><%= flat.price %></p>
-            <h3><%= flat.address %></h3>
+            <p class="h1 py-2"><%= track.price %>$</p>
+            <h3 class="text-primary"><%= track.address %></h3>
             <ul class="list-unstyled pb-3 fs-4 details">
-              <li><span> Xonalar soni:</span> &nbsp <%= flat.rooms %></li>
-              <li><span> Kvartira maydoni:</span> &nbsp <%= flat.area %> km m.</li>
-              <li><span> Qavatlik:</span> &nbsp <%= flat.floors %></li>
-              <li><span> Qavati: </span> &nbsp <%= flat.floor %></li>
-              <li><span> Kvartira holati: &nbsp</span> <%= flat.flatCondition %></li>
-              <li>
-                <span> Kvartirada mavjud: &nbsp </span><% for (let flatH of flat.flatHas) { %> <%= flatH, %> <% } %>
-              </li>
+              <li><span> Yoqilg'i turi:</span> &nbsp <%= track.fluel %></li>
+              <li><span> Yili: </span> &nbsp <%= year %></li>
+              <li><span> Yurgan kilometraji: &nbsp</span> <%= track.kmRun %> km</li>
             </ul>
             <h3>Tavsif:</h3>
-            <p class="fs-3 mb-3"><%= flat.extraInfo %></p>
+            <p class="fs-4 mb-3"><%= track.extraInfo %></p>
             <div class="pb-3 d-flex justify-content-evenly details_buttons">
-              <button type="submit"><%= flat.phoneNumber %></button>
+              <button type="submit">+<%= track.phoneNumber %></button>
               <button type="submit">Muallifga yozish</button>
             </div>
           </div>
@@ -116,4 +111,4 @@
     </div>
   </div>
 </section>
-<%- include('../includes/end.ejs') %>
+<%- include('../../includes/end.ejs') %>
