@@ -131,7 +131,7 @@ const getLapTopCategory = (req, res, next) => {
     console.log(err);
   }
 };
-getHouseAppliancesCategory = (req, res, next) => {
+const getHouseAppliancesCategory = (req, res, next) => {
   try {
     res.render('electronics/houseAppliances', {
       pageTitle: 'Add product',
@@ -140,7 +140,7 @@ getHouseAppliancesCategory = (req, res, next) => {
     console.log(err);
   }
 };
-getAnimalCategory = (req, res, next) => {
+const getAnimalCategory = (req, res, next) => {
   try {
     res.render('electronics/animal', {
       pageTitle: 'Add product',
@@ -203,7 +203,7 @@ const postAddProduct = async (req, res, next) => {
         _id: newFlat._id,
         shortInfo: newFlat.shortInfo,
         price: newFlat.price,
-        flatId: newFlat._id,
+        dollar: true,
       });
       const saved = await general.save();
       res.redirect('/');
@@ -235,6 +235,7 @@ const postAddProduct = async (req, res, next) => {
         _id: newHouse._id,
         shortInfo: newHouse.shortInfo,
         price: newHouse.price,
+        dollar: true,
       });
       const saved = await general.save();
       res.redirect('/');
@@ -263,6 +264,7 @@ const postAddProduct = async (req, res, next) => {
         _id: newLand._id,
         shortInfo: newLand.shortInfo,
         price: newLand.price,
+        dollar: true,
       });
       const saved = await general.save();
       res.redirect('/');
@@ -292,6 +294,7 @@ const postAddProduct = async (req, res, next) => {
         _id: newNonResidential._id,
         shortInfo: newNonResidential.shortInfo,
         price: newNonResidential.price,
+        dollar: true,
       });
       const saved = await general.save();
       res.redirect('/');
@@ -330,6 +333,7 @@ const postAddProduct = async (req, res, next) => {
         _id: newcar._id,
         shortInfo: newcar.shortInfo,
         price: newcar.price,
+        dollar: true,
       });
       const saved = await general.save();
       res.redirect('/');
@@ -355,6 +359,7 @@ const postAddProduct = async (req, res, next) => {
         _id: newTrack._id,
         shortInfo: newTrack.shortInfo,
         price: newTrack.price,
+        dollar: true,
       });
       const saved = await general.save();
       res.redirect('/');
@@ -392,33 +397,30 @@ const postAddProduct = async (req, res, next) => {
         address,
         phoneNumber,
       });
-      construction
-        .save()
-        .then(() => {
-          res.redirect('/');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const newConstruction = await construction.save();
+      const general = new General({
+        _id: newConstruction._id,
+        shortInfo: newConstruction.shortInfo,
+      });
+      const saved = await general.save();
+      res.redirect('/');
     }
     if (productType === 'service') {
-      const { shortInfo, gender, serviceType, experience, birthday, address, extraInfo, price, phoneNumber } = req.body;
+      const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber } = req.body;
       const service = new Service({
         shortInfo,
         gender,
         serviceType,
         experience,
-        birthday,
+        age,
         address,
         extraInfo,
-        price,
         phoneNumber,
       });
       const newService = await service.save();
       const general = new General({
         _id: newService._id,
         shortInfo: newService.shortInfo,
-        price: newService.price,
       });
       const saved = await general.save();
       res.redirect('/');

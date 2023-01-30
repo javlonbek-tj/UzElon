@@ -11,11 +11,11 @@ const animalSchema = new Schema(
       type: String,
       required: true,
     },
-    extraInfo: {
+    address: {
       type: String,
       required: true,
     },
-    address: {
+    extraInfo: {
       type: String,
       required: true,
     },
@@ -24,7 +24,7 @@ const animalSchema = new Schema(
       required: true,
     },
     phoneNumber: {
-      type: String,
+      type: Number,
       required: true,
     },
   },

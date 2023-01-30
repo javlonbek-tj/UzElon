@@ -61,26 +61,21 @@
       <div class="detail_card col-lg-7">
         <div class="card">
           <div class="card-body">
-            <div class="d-md-flex justify-content-between">
-              <h2 class="text-primary">
-                Hovli uy <%= house.rentOrSell %>, <%= house.rooms %> xonali, <%=house.area %> sotix
-              </h2>
+            <div class="d-md-flex justify-content-between mb-3">
+              <h2 class="main_info"><%= vacancy.shortInfo %></h2>
               <p class="fs-5">E'lon qo'shilgan sana: 2023.01.27 20:39</p>
             </div>
-            <p class="h1 py-2"><%= house.price %>$</p>
-            <h3 class="text-primary"><%= house.address %></h3>
+            <p class="h1 py-2"><%= vacancy.price %> so'm</p>
+            <h3 class="mb-5"><%= vacancy.address %></h3>
             <ul class="list-unstyled pb-3 fs-4 details">
-              <li><span> Xonalar soni:</span> &nbsp <%= house.rooms %></li>
-              <li><span> Maydoni:</span> &nbsp <%= house.area %> sotix.</li>
-              <li><span> Remont holati: &nbsp</span> <%= house.houseCondition %></li>
-              <li>
-                <span> Uyda mavjud: &nbsp </span><% for (let houseH of house.houseHas) { %> <%= houseH, %> <% } %>
-              </li>
+              <li><span> Jinsi:</span> &nbsp <%= vacancy.gender %></li>
+              <li><span> Yosh chegarasi:</span> &nbsp <%= vacancy.requiredAge %> yosh</li>
+              <li><span> Lavozimi: &nbsp</span> <%= vacancy.position %></li>
             </ul>
             <h3>Tavsif:</h3>
-            <p class="fs-4 mb-3"><%= house.extraInfo %></p>
+            <p class="fs-4 mb-5"><%= vacancy.extraInfo %></p>
             <div class="pb-3 d-flex justify-content-evenly details_buttons">
-              <button type="submit">+<%= house.phoneNumber %></button>
+              <button type="submit">+<%= vacancy.phoneNumber %></button>
               <button type="submit">Muallifga yozish</button>
             </div>
           </div>

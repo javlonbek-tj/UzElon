@@ -61,16 +61,28 @@
       <div class="detail_card col-lg-7">
         <div class="card">
           <div class="card-body">
-            <div class="d-md-flex justify-content-between">
-              <h2 class="text-primary"><%= animal.animalName %> sotiladi</h2>
+            <div class="d-md-flex justify-content-between mb-3">
+              <h2 class="main_info">
+                Kvartira <%= flat.rentOrSell %>, <%= flat.rooms %> xonali, <%=flat.area %> kv m.
+              </h2>
               <p class="fs-5">E'lon qo'shilgan sana: 2023.01.27 20:39</p>
             </div>
-            <p class="h1 py-2"><%= animal.price %></p>
-            <h3><%= animal.address %></h3>
+            <p class="h1 py-2"><%= flat.price %> $</p>
+            <h3 class="mb-5 main_info"><%= flat.address %></h3>
+            <ul class="list-unstyled pb-3 fs-4 details">
+              <li><span> Xonalar soni:</span> &nbsp <%= flat.rooms %></li>
+              <li><span> Kvartira maydoni:</span> &nbsp <%= flat.area %> kv m.</li>
+              <li><span> Qavatlik:</span> &nbsp <%= flat.floors %></li>
+              <li><span> Qavati: </span> &nbsp <%= flat.floor %></li>
+              <li><span> Kvartira holati: &nbsp</span> <%= flat.flatCondition %></li>
+              <li>
+                <span> Kvartirada mavjud: &nbsp </span><% for (let flatH of flat.flatHas) { %> <%= flatH, %> <% } %>
+              </li>
+            </ul>
             <h3>Tavsif:</h3>
-            <p class="fs-3 mb-3"><%= animal.extraInfo %></p>
+            <p class="fs-4 mb-5"><%= flat.extraInfo %></p>
             <div class="pb-3 d-flex justify-content-evenly details_buttons">
-              <button type="submit"><%= animal.phoneNumber %></button>
+              <button type="submit">+<%= flat.phoneNumber %></button>
               <button type="submit">Muallifga yozish</button>
             </div>
           </div>

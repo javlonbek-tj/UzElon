@@ -7,7 +7,10 @@ const generalSchema = new Schema({
   },
   price: {
     type: Number,
-    required: true,
+  },
+  dollar: {
+    type: Boolean,
+    default: false,
   },
 });
 

@@ -27,6 +27,10 @@ const constructionSchema = new Schema(
       type: String,
       required: true,
     },
+    extraInfo: {
+      type: String,
+      required: true,
+    },
     phoneNumber: {
       type: Number,
       required: true,

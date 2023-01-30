@@ -19,15 +19,15 @@ const serviceSchema = new Schema(
       type: Number,
       required: true,
     },
-    birthday: {
-      type: Date,
+    age: {
+      type: Number,
       required: true,
     },
     address: {
       type: String,
       required: true,
     },
-    price: {
+    extraInfo: {
       type: String,
       required: true,
     },

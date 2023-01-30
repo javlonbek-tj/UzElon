@@ -61,24 +61,23 @@
       <div class="detail_card col-lg-7">
         <div class="card">
           <div class="card-body">
-            <div class="d-md-flex justify-content-between">
-              <h2 class="text-primary"><%= nonResidential.shortInfo %></h2>
+            <div class="d-md-flex justify-content-between mb-3">
+              <h2 class="main_info"><%= car.model %> <%= car.rentOrSell %>, <%= year %>, <%=car.kmRun %> km.</h2>
               <p class="fs-5">E'lon qo'shilgan sana: 2023.01.27 20:39</p>
             </div>
-            <p class="h1 py-2"><%= nonResidential.price %>$</p>
-            <h3 class="text-primary"><%= nonResidential.address %></h3>
+            <p class="h1 py-2"><%= car.price %> $</p>
+            <h3 class="main_info mb-5"><%= car.address %></h3>
             <ul class="list-unstyled pb-3 fs-4 details">
-              <li><span> Xonalar soni:</span> &nbsp <%= nonResidential.rooms %></li>
-              <li><span> Maydoni:</span> &nbsp <%= nonResidential.area %> kv m.</li>
-              <li>
-                <span> Binoda mavjud: &nbsp </span><% for (let buildingH of nonResidential.buildingHas) { %> <%=
-                buildingH %> <% } %>
-              </li>
+              <li><span> Transmissiya turi:</span> &nbsp <%= car.transmission %></li>
+              <li><span> Yoqilg'i turi:</span> &nbsp <%= car.fluel %></li>
+              <li><span> Rangi:</span> &nbsp <%= car.color %></li>
+              <li><span> Yili: </span> &nbsp <%= year %></li>
+              <li><span> Yurgan kilometraji: &nbsp</span> <%= car.kmRun %> km</li>
             </ul>
             <h3>Tavsif:</h3>
-            <p class="fs-4 mb-3"><%= nonResidential.extraInfo %></p>
+            <p class="fs-4 mb-5"><%= car.extraInfo %></p>
             <div class="pb-3 d-flex justify-content-evenly details_buttons">
-              <button type="submit">+<%= nonResidential.phoneNumber %></button>
+              <button type="submit">+<%= car.phoneNumber %></button>
               <button type="submit">Muallifga yozish</button>
             </div>
           </div>

@@ -17,9 +17,11 @@ const Animal = require('../models/electronics/animal.model');
 const getHomePage = async (req, res, next) => {
   try {
     const prods = await General.find();
-    res.render('products/home', {
+    const price = prods.map(p => p.price.toLocaleString('fr'));
+    res.render('home', {
       pageTitle: 'AvtoVodil',
       prods,
+      price,
     });
   } catch (err) {
     console.log(err);
@@ -31,29 +33,36 @@ const getOneProduct = async (req, res, next) => {
     const prodId = req.params.productId;
     if (await Flat.findById(prodId)) {
       const flat = await Flat.findById(prodId);
-      return res.render('products/home/product-flat', {
+      return res.render('products/home-detail/product-flat', {
         pageTitle: 'Kvartira oldi-sotdisi',
         flat,
       });
     }
     if (await Land.findById(prodId)) {
       const land = await Land.findById(prodId);
-      return res.render('products/home/product-land', {
+      return res.render('products/home-detail/product-land', {
         pageTitle: 'Yer oldi-sotdisi',
         land,
       });
     }
     if (await House.findById(prodId)) {
       const house = await House.findById(prodId);
-      return res.render('products/home/product-house', {
+      return res.render('products/home-detail/product-house', {
         pageTitle: 'Hovli uy oldi-sotdisi',
         house,
+      });
+    }
+    if (await NonResidential.findById(prodId)) {
+      const nonResidential = await NonResidential.findById(prodId);
+      return res.render('products/home-detail/product-nonResidential', {
+        pageTitle: 'Noturar joy oldi-sotdisi',
+        nonResidential,
       });
     }
     if (await Car.findById(prodId)) {
       const car = await Car.findById(prodId);
       const year = car.year.getFullYear();
-      return res.render('products/cars/product-car', {
+      return res.render('products/car-detail/product-car', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         car,
         year,
@@ -62,7 +71,7 @@ const getOneProduct = async (req, res, next) => {
     if (await Track.findById(prodId)) {
       const track = await Track.findById(prodId);
       const year = track.year.getFullYear();
-      return res.render('products/cars/product-track', {
+      return res.render('products/car-detail/product-track', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         track,
         year,
@@ -70,14 +79,56 @@ const getOneProduct = async (req, res, next) => {
     }
     if (await Moto.findById(prodId)) {
       const moto = await Moto.findById(prodId);
-      return res.render('products/cars/product-moto', {
+      return res.render('products/car-detail/product-moto', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         moto,
       });
     }
+    if (await Vacancy.findById(prodId)) {
+      const vacancy = await Vacancy.findById(prodId);
+      return res.render('products/job-details/product-vacancy', {
+        pageTitle: `Bo'sh ish o'rinlari`,
+        vacancy,
+      });
+    }
+    if (await Service.findById(prodId)) {
+      const service = await Service.findById(prodId);
+      return res.render('products/job-details/product-service', {
+        pageTitle: `Xizmat ko'rsatish`,
+        service,
+      });
+    }
+    if (await Construction.findById(prodId)) {
+      const construction = await Construction.findById(prodId);
+      return res.render('products/job-details/product-construction', {
+        pageTitle: `Qurilish xizmati`,
+        construction,
+      });
+    }
+    if (await Phone.findById(prodId)) {
+      const phone = await Phone.findById(prodId);
+      return res.render('products/electronic-details/product-phone', {
+        pageTitle: `Telefonlar oldi-sotdisi`,
+        phone,
+      });
+    }
+    if (await HouseAppliances.findById(prodId)) {
+      const houseAppliances = await HouseAppliances.findById(prodId);
+      return res.render('products/electronic-details/product-houseApp', {
+        pageTitle: `Uy jihozlari oldi-sotdisi`,
+        houseAppliances,
+      });
+    }
+    if (await LapTop.findById(prodId)) {
+      const lapTop = await LapTop.findById(prodId);
+      return res.render('products/electronic-details/product-lapTop', {
+        pageTitle: `Kompyuterlar oldi-sotdisi`,
+        lapTop,
+      });
+    }
     if (await Animal.findById(prodId)) {
       const animal = await Animal.findById(prodId);
-      return res.render('products/electronics/product-animal', {
+      return res.render('products/electronic-details/product-animal', {
         pageTitle: 'Uy hayvonlari oldi-sotdisi',
         animal,
       });
@@ -89,9 +140,11 @@ const getOneProduct = async (req, res, next) => {
 const getAllProducts = async (req, res, next) => {
   try {
     const prods = await General.find();
-    res.render('products/products', {
+    const price = prods.map(p => p.price.toLocaleString('fr'));
+    res.render('products', {
       pageTitle: "AvtoVodil barcha e'lonlar",
       prods,
+      price,
     });
   } catch (err) {
     console.log(err);

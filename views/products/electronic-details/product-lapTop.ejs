@@ -61,23 +61,22 @@
       <div class="detail_card col-lg-7">
         <div class="card">
           <div class="card-body">
-            <div class="d-md-flex justify-content-between">
-              <h2 class="text-primary">
-                <%= track.model %> <%= track.rentOrSell %>, <%= year %>, <%=track.kmRun %> km.
-              </h2>
+            <div class="d-md-flex justify-content-between mb-3">
+              <h2 class="main_info"><%= lapTop.shortInfo %></h2>
               <p class="fs-5">E'lon qo'shilgan sana: 2023.01.27 20:39</p>
             </div>
-            <p class="h1 py-2"><%= track.price %>$</p>
-            <h3 class="text-primary"><%= track.address %></h3>
+            <p class="h1 py-2"><%= lapTop.price %> so'm</p>
+            <h3 class="main_info mb-5"><%= lapTop.address %></h3>
             <ul class="list-unstyled pb-3 fs-4 details">
-              <li><span> Yoqilg'i turi:</span> &nbsp <%= track.fluel %></li>
-              <li><span> Yili: </span> &nbsp <%= year %></li>
-              <li><span> Yurgan kilometraji: &nbsp</span> <%= track.kmRun %> km</li>
+              <li><span> Markasi:</span> &nbsp <%= lapTop.mark %></li>
+              <li><span> CPU(Protsessor):</span> &nbsp <%= lapTop.cpu %></li>
+              <li><span> RAM(Operativka):</span> &nbsp <%= lapTop.ram %></li>
+              <li><span> Holapi: </span> &nbsp <%= lapTop.lapTopCondition %></li>
             </ul>
             <h3>Tavsif:</h3>
-            <p class="fs-4 mb-3"><%= track.extraInfo %></p>
+            <p class="fs-4 mb-5"><%= lapTop.extraInfo %></p>
             <div class="pb-3 d-flex justify-content-evenly details_buttons">
-              <button type="submit">+<%= track.phoneNumber %></button>
+              <button type="submit">+<%= lapTop.phoneNumber %></button>
               <button type="submit">Muallifga yozish</button>
             </div>
           </div>

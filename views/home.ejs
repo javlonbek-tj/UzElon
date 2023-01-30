@@ -1,4 +1,4 @@
-<%- include('../includes/head.ejs') %>
+<%- include('./includes/head.ejs') %>
 <div id="nav_carousel" class="carousel slide container-lg mt-5" data-bs-ride="carousel" data-bs-interval="2000">
     <div class="carousel-inner">
       <div class="carousel-item active data-bs-interval="2000"">
@@ -41,6 +41,7 @@
     </div>
     <div class="box-container">
       <% for (let product of prods) { %>
+      <% for (let p of price) { %>
       <div class="box">
         <a href="/products/<%= product._id %>"><img src="/image/blog-1.jpg" alt="" /></a>
         <div class="content p-3">
@@ -48,7 +49,7 @@
             <h4 href="#"><%= product.shortInfo %></h4>
             <a href=""> 1st may, 2021 </a>
           </div>
-          <h3 class="text-center"><%= product.price%></h3>
+          <h3 class="text-center"><%= p%> <%= (product.dollar) ? '$' : "so'm"%></h3>
         </div>
         <div class="card_footer d-flex justify-content-between px-5 py-2">
           <h6><i class="fa-solid fa-eye"></i> 15 seen</h6>
@@ -56,8 +57,9 @@
         </div>
       </div>
       <% } %>
+      <% } %>
     </div>
   <% } %>
     </section>
   
-  <%- include('../includes/end.ejs') %>
+  <%- include('./includes/end.ejs') %>

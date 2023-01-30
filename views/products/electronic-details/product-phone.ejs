@@ -61,22 +61,22 @@
       <div class="detail_card col-lg-7">
         <div class="card">
           <div class="card-body">
-            <div class="d-md-flex justify-content-between">
-              <h2 class="text-primary">Yer <%= land.rentOrSell %>, <%= land.area %> sotix</h2>
+            <div class="d-md-flex justify-content-between mb-3">
+              <h2 class="main_info"><%= phone.shortInfo%></h2>
               <p class="fs-5">E'lon qo'shilgan sana: 2023.01.27 20:39</p>
             </div>
-            <p class="h1 py-2"><%= land.price %>$</p>
-            <h3 class="text-primary"><%= land.address %></h3>
+            <p class="h1 py-2"><%= phone.price %> so'm</p>
+            <h3 class="main_info mb-5"><%= phone.address %></h3>
             <ul class="list-unstyled pb-3 fs-4 details">
-              <li><span> Yer maydoni:</span> &nbsp <%= land.area %></li>
-              <li>
-                <span> Yer atrofida mavjud: &nbsp </span><% for (let landH of land.landHas) { %> <%= landH, %> <% } %>
-              </li>
+              <li><span> Markasi:</span> &nbsp <%= phone.mark %></li>
+              <li><span> Modeli:</span> &nbsp <%= phone.model %></li>
+              <li><span> Doimiy xotira:</span> &nbsp <%= phone.memory %></li>
+              <li><span> Telefon holati: </span> &nbsp <%= phone.phoneCondition %></li>
             </ul>
             <h3>Tavsif:</h3>
-            <p class="fs-4 mb-3"><%= land.extraInfo %></p>
+            <p class="fs-4 mb-5"><%= phone.extraInfo %></p>
             <div class="pb-3 d-flex justify-content-evenly details_buttons">
-              <button type="submit">+<%= land.phoneNumber %></button>
+              <button type="submit">+<%= phone.phoneNumber %></button>
               <button type="submit">Muallifga yozish</button>
             </div>
           </div>

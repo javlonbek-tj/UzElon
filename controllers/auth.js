@@ -1,6 +1,6 @@
 const getSignUp = (req, res, next) => {
   try {
-    res.render('user/signup', {
+    res.render('auth/signup', {
       pageTitle: 'AvtoVodil',
     });
   } catch (err) {
@@ -9,7 +9,7 @@ const getSignUp = (req, res, next) => {
 };
 const getLogin = (req, res, next) => {
   try {
-    res.render('user/login', {
+    res.render('auth/login', {
       pageTitle: 'AvtoVodil',
     });
   } catch (err) {

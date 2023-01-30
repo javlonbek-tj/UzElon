@@ -292,6 +292,9 @@ section {
 .details_buttons button:hover {
   background-color: rgb(63, 63, 118);
 }
+.main_info {
+  color: rgb(38, 38, 90);
+}
 
 /* Sign up */
 

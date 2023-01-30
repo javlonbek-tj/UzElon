@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const productsRoutes = require('./routes/products.routes');
+const addProductRoutes = require('./routes/addProduct.routes');
 const userRoutes = require('./routes/user.routes');
 const authRoutes = require('./routes/auth.routes');
 
@@ -27,7 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ROUTES
 app.use(productsRoutes);
-app.use(userRoutes);
+app.use(addProductRoutes);
+app.use('/user', userRoutes);
 app.use(authRoutes);
 
 const DB = process.env.MONGO_URI;
