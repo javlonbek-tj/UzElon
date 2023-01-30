@@ -18,7 +18,7 @@ const getUserProducts = async (req, res, next) => {
   try {
     const prods = await General.find();
     const price = prods.map(p => p.price.toLocaleString('fr'));
-    res.render('products/home', {
+    res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
       price,
@@ -27,7 +27,17 @@ const getUserProducts = async (req, res, next) => {
     console.log(err);
   }
 };
+const getUserProfile = async (req, res, next) => {
+  try {
+    res.render('user/profile', {
+      pageTitle: `Mening Profilim`,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 module.exports = {
   getUserProducts,
+  getUserProfile,
 };

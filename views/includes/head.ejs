@@ -45,6 +45,9 @@
 
         <div id="icons" class="icons">
           <a href="/add-product">Add product</a>
+          <% if(1) { %>
+          <a href="/user/profile"> <i class="fa-solid fa-user"></i> </a>
+          <% } %>
         </div>
       </div>
     </header>
@@ -62,7 +65,7 @@
           <i class="fa-solid fa-plus d-flex justify-content-center mb-2"></i>
           <p>Add product</p>
         </a>
-        <a href="/signup" class="pt-3 mt-3">
+        <a href="<%= true ? '/user/profile' : '/signup'%>" class="pt-3 mt-3">
           <i class="fa fa-user d-flex justify-content-center mb-2"></i>
           <p>Profile</p>
         </a>

@@ -45,7 +45,7 @@
 </section>
 <section class="cards container-lg" id="cards">
   <% if(prods.length <= 0) { %>
-  <h1>E'lonlar mavjud emas</h1>
+  <h1 class="text-center">E'lonlar mavjud emas</h1>
   <% } else { %>
   <div class="top-products d-flex justify-content-between">
     <h2>Top products</h2>
@@ -59,7 +59,7 @@
           <h4 href="#"><%= product.shortInfo %></h4>
           <a href=""> 1st may, 2021 </a>
         </div>
-        <h3 class="text-center"><%= p%> <%= (product.dollar) ? '$' : "so'm"%></h3>
+        <h3 class="text-center"><%= p %> <%= (product.dollar) ? '$' : "so'm"%></h3>
       </div>
       <div class="card_footer d-flex justify-content-between px-5 py-2">
         <h6><i class="fa-solid fa-eye"></i> 15 seen</h6>
