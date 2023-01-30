@@ -33,28 +33,28 @@ const getOneProduct = async (req, res, next) => {
     const prodId = req.params.productId;
     if (await Flat.findById(prodId)) {
       const flat = await Flat.findById(prodId);
-      return res.render('products/home-detail/product-flat', {
+      return res.render('products/home-details/product-flat', {
         pageTitle: 'Kvartira oldi-sotdisi',
         flat,
       });
     }
     if (await Land.findById(prodId)) {
       const land = await Land.findById(prodId);
-      return res.render('products/home-detail/product-land', {
+      return res.render('products/home-details/product-land', {
         pageTitle: 'Yer oldi-sotdisi',
         land,
       });
     }
     if (await House.findById(prodId)) {
       const house = await House.findById(prodId);
-      return res.render('products/home-detail/product-house', {
+      return res.render('products/home-details/product-house', {
         pageTitle: 'Hovli uy oldi-sotdisi',
         house,
       });
     }
     if (await NonResidential.findById(prodId)) {
       const nonResidential = await NonResidential.findById(prodId);
-      return res.render('products/home-detail/product-nonResidential', {
+      return res.render('products/home-details/product-nonResidential', {
         pageTitle: 'Noturar joy oldi-sotdisi',
         nonResidential,
       });
@@ -62,7 +62,7 @@ const getOneProduct = async (req, res, next) => {
     if (await Car.findById(prodId)) {
       const car = await Car.findById(prodId);
       const year = car.year.getFullYear();
-      return res.render('products/car-detail/product-car', {
+      return res.render('products/car-details/product-car', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         car,
         year,
@@ -71,7 +71,7 @@ const getOneProduct = async (req, res, next) => {
     if (await Track.findById(prodId)) {
       const track = await Track.findById(prodId);
       const year = track.year.getFullYear();
-      return res.render('products/car-detail/product-track', {
+      return res.render('products/car-details/product-track', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         track,
         year,
@@ -79,7 +79,7 @@ const getOneProduct = async (req, res, next) => {
     }
     if (await Moto.findById(prodId)) {
       const moto = await Moto.findById(prodId);
-      return res.render('products/car-detail/product-moto', {
+      return res.render('products/car-details/product-moto', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         moto,
       });
