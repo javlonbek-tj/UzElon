@@ -78,18 +78,6 @@ const getLogin = (req, res, next) => {
 const postLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(422).render('auth/login', {
-        pageTitle: 'AvtoVodil',
-        errorMessage: errors.array()[0].msg,
-        oldInput: {
-          email,
-          password,
-        },
-        validationErrors: errors.array(),
-      });
-    }
     const user = await User.findOne({ email }).select('+password');
     if (!user || !(await user.correctPassword(password, user.password))) {
       return res.status(422).render('auth/login', {
@@ -99,7 +87,6 @@ const postLogin = async (req, res, next) => {
           email,
           password,
         },
-        validationErrors: errors.array(),
       });
     }
     const token = signUpToken(user._id);

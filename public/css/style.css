@@ -286,7 +286,7 @@ section {
 .main_info {
   color: rgb(38, 38, 90);
 }
-.pageNotFound {
+.allError {
   width: 450px;
   height: 350px;
 }
@@ -472,7 +472,7 @@ section {
     width: 280px;
     margin: auto;
   }
-  .pageNotFound {
+  .allError {
     width: 320px;
     height: 240px;
   }
@@ -491,7 +491,7 @@ section {
   .filtering button {
     width: 120px;
   }
-  .pageNotFound {
+  .allError {
     width: 250px;
     height: 150px;
   }

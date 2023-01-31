@@ -13,6 +13,7 @@ const Phone = require('../models/electronics/phone.model');
 const LapTop = require('../models/electronics/lap-top.model');
 const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
+const AppError = require('../utils/appError');
 
 const getHomePage = async (req, res, next) => {
   try {
@@ -31,6 +32,9 @@ const getHomePage = async (req, res, next) => {
 const getOneProduct = async (req, res, next) => {
   try {
     const prodId = req.params.productId;
+    if (!prodId) {
+      return new AppError(`E'lon to'g'risida ma'lumotlar topilmadi`, 400);
+    }
     if (await Flat.findById(prodId)) {
       const flat = await Flat.findById(prodId);
       return res.render('products/home-details/product-flat', {

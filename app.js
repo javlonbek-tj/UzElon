@@ -10,7 +10,7 @@ const productsRoutes = require('./routes/products.routes');
 const addProductRoutes = require('./routes/addProduct.routes');
 const userRoutes = require('./routes/user.routes');
 const authRoutes = require('./routes/auth.routes');
-const errorController = require('./controllers/error');
+const { get404, allError } = require('./controllers/error');
 
 const app = express();
 
@@ -33,7 +33,8 @@ app.use(addProductRoutes);
 app.use('/user', userRoutes);
 app.use(authRoutes);
 
-app.use(errorController.get404);
+app.use(get404);
+app.use(allError);
 
 const DB = process.env.MONGO_URI;
 const port = process.env.PORT || 5000;
