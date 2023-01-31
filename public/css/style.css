@@ -286,6 +286,10 @@ section {
 .main_info {
   color: rgb(38, 38, 90);
 }
+.pageNotFound {
+  width: 450px;
+  height: 350px;
+}
 
 /* Sign up */
 
@@ -308,6 +312,9 @@ section {
 }
 .form-group input:focus {
   border-color: var(--black);
+}
+.form-group .invalidInput {
+  border-bottom: 1px solid red;
 }
 .form-button input:hover {
   background-color: #bbb;
@@ -465,6 +472,10 @@ section {
     width: 280px;
     margin: auto;
   }
+  .pageNotFound {
+    width: 320px;
+    height: 240px;
+  }
 }
 @media (max-width: 359px) {
   #cards {
@@ -479,5 +490,9 @@ section {
   .filtering select,
   .filtering button {
     width: 120px;
+  }
+  .pageNotFound {
+    width: 250px;
+    height: 150px;
   }
 }

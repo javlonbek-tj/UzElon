@@ -210,7 +210,17 @@ const postAddProduct = async (req, res, next) => {
     }
     if (productType === 'house') {
       const houseHas = [];
-      const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber } = req.body;
+      const {
+        rentOrSell,
+        shortInfo,
+        rooms,
+        area,
+        houseCondition,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const { gas, electricity } = req.body;
       if (gas) {
         houseHas.push(gas);
@@ -242,7 +252,17 @@ const postAddProduct = async (req, res, next) => {
     }
     if (productType === 'land') {
       const landHas = [];
-      const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
+      const {
+        rentOrSell,
+        shortInfo,
+        area,
+        address,
+        price,
+        extraInfo,
+        phoneNumber,
+        gas,
+        electricity,
+      } = req.body;
       if (gas) {
         landHas.push(gas);
       }
@@ -271,7 +291,18 @@ const postAddProduct = async (req, res, next) => {
     }
     if (productType === 'non-residential') {
       const buildingHas = [];
-      const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
+      const {
+        shortInfo,
+        rentOrSell,
+        rooms,
+        area,
+        address,
+        price,
+        extraInfo,
+        phoneNumber,
+        gas,
+        electricity,
+      } = req.body;
       if (gas) {
         buildingHas.push(gas);
       }
@@ -339,8 +370,19 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'track') {
-      const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber } =
-        req.body;
+      const {
+        rentOrSell,
+        shortInfo,
+        model,
+        fluel,
+        color,
+        year,
+        kmRun,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const track = new Track({
         shortInfo,
         model,
@@ -365,7 +407,16 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'moto') {
-      const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber } = req.body;
+      const {
+        rentOrSell,
+        shortInfo,
+        model,
+        motoCondition,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const moto = new Moto({
         shortInfo,
         model,
@@ -386,7 +437,16 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'construction') {
-      const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber } = req.body;
+      const {
+        shortInfo,
+        serviceType,
+        experience,
+        numWorkers,
+        workTime,
+        extraInfo,
+        address,
+        phoneNumber,
+      } = req.body;
       const construction = new Construction({
         shortInfo,
         serviceType,
@@ -406,7 +466,16 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'service') {
-      const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber } = req.body;
+      const {
+        shortInfo,
+        gender,
+        serviceType,
+        experience,
+        age,
+        address,
+        extraInfo,
+        phoneNumber,
+      } = req.body;
       const service = new Service({
         shortInfo,
         gender,
@@ -426,7 +495,16 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'vacancy') {
-      const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber } = req.body;
+      const {
+        shortInfo,
+        gender,
+        position,
+        requiredAge,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const vacancy = new Vacancy({
         shortInfo,
         gender,
@@ -447,7 +525,17 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'phone') {
-      const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber } = req.body;
+      const {
+        shortInfo,
+        mark,
+        model,
+        phoneCondition,
+        memory,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const phone = new Phone({
         shortInfo,
         mark,
@@ -469,7 +557,17 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'laptop') {
-      const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber } = req.body;
+      const {
+        shortInfo,
+        mark,
+        lapTopCondition,
+        cpu,
+        ram,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const laptop = new LapTop({
         shortInfo,
         mark,
@@ -491,7 +589,15 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'houseAppliances') {
-      const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber } = req.body;
+      const {
+        shortInfo,
+        applianceName,
+        applianceCondition,
+        address,
+        extraInfo,
+        price,
+        phoneNumber,
+      } = req.body;
       const houseAppliances = new HouseAppliances({
         shortInfo,
         applianceName,
@@ -511,7 +617,8 @@ const postAddProduct = async (req, res, next) => {
       res.redirect('/');
     }
     if (productType === 'animal') {
-      const { shortInfo, animalName, address, price, extraInfo, phoneNumber } = req.body;
+      const { shortInfo, animalName, address, price, extraInfo, phoneNumber } =
+        req.body;
       const animal = new Animal({
         shortInfo,
         animalName,

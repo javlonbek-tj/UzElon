@@ -3,25 +3,76 @@
   <div class="signup-content text-center">
     <div class="signup-form">
       <h1>Sign up</h1>
-      <form method="POST" class="register-form fs-4 mt-5" id="register-form">
+      <form
+        method="POST"
+        class="register-form fs-4 mt-5"
+        id="register-form"
+        action="/signup"
+        novalidate
+      >
+        <% if(errorMessage) { %>
+        <h3 class="text-center text-danger mb-5"><%= errorMessage %></h3>
+        <% } %>
         <div class="form-group mb-5">
-          <label for="name"><i class="fa-solid fa-user me-4 fs-5"></i></label>
-          <input type="text" name="name" id="name" placeholder="Your Name" />
+          <label for="username"
+            ><i class="fa-solid fa-user me-4 fs-5"></i
+          ></label>
+          <input
+            class="<%= validationErrors.find(e => e.param === 'username') ? 'invalidInput' : '' %>"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            value="<%= oldInput.username %>"
+          />
         </div>
         <div class="form-group mb-5">
-          <label for="email"><i class="fa-solid fa-envelope me-4 fs-5"></i></label>
-          <input type="email" name="email" id="email" placeholder="Your Email" />
+          <label for="email"
+            ><i class="fa-solid fa-envelope me-4 fs-5"></i
+          ></label>
+          <input
+            class="<%= validationErrors.find(e => e.param === 'email') ? 'invalidInput' : '' %>"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Your Email"
+            value="<%= (oldInput.email === '@') ? ' ' : oldInput.email %>"
+          />
         </div>
         <div class="form-group mb-5">
-          <label for="pass"><i class="fa-solid fa-lock me-4 fs-5"></i></label>
-          <input type="password" name="pass" id="pass" placeholder="Password" />
+          <label for="password"
+            ><i class="fa-solid fa-lock me-4 fs-5"></i
+          ></label>
+          <input
+            class="<%= validationErrors.find(e => e.param === 'password') ? 'invalidInput' : '' %>"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            value="<%= oldInput.password %>"
+          />
         </div>
         <div class="form-group">
-          <label for="re-pass"><i class="fa-solid fa-lock text-primary me-4 fs-5"></i></label>
-          <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
+          <label for="rePassword"
+            ><i class="fa-solid fa-lock text-primary me-4 fs-5"></i
+          ></label>
+          <input
+            class="<%= validationErrors.find(e => e.param === 'rePassword') ? 'invalidInput' : '' %>"
+            type="password"
+            name="rePassword"
+            id="rePassword"
+            placeholder="Repeat your password"
+            value="<%= oldInput.rePassword %>"
+          />
         </div>
         <div class="form-button mt-5">
-          <input type="submit" name="signup" id="signup" class="form-submit py-3 px-5" value="Register" />
+          <input
+            type="submit"
+            name="signup"
+            id="signup"
+            class="form-submit py-3 px-5"
+            value="Register"
+          />
         </div>
         <div class="d-flex pt-4 justify-content-center">
           <p class="me-3">Already sign up?</p>
@@ -32,6 +83,8 @@
   </div>
 </section>
 <div class="text-center singUp_google fs-4">
-  <a href="#" class="p-3"><i class="fa-brands fa-google text-danger"></i> Sign up with google</a>
+  <a href="#" class="p-3"
+    ><i class="fa-brands fa-google text-danger"></i> Sign up with google</a
+  >
 </div>
 <%- include('../includes/end.ejs') %>

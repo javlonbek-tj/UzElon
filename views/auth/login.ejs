@@ -3,17 +3,48 @@
   <div class="signup-content text-center">
     <div class="signup-form">
       <h1 class="mb-5">Sign in</h1>
-      <form method="POST" class="register-form fs-4" id="register-form">
+      <form
+        method="POST"
+        class="register-form fs-4"
+        id="register-form"
+        action="/login"
+        novalidate
+      >
+        <% if(errorMessage) { %>
+        <h3 class="text-center text-danger mb-5"><%= errorMessage %></h3>
+        <% } %>
         <div class="form-group mb-5">
-          <label for="email"><i class="fa-solid fa-envelope me-4 fs-5"></i></label>
-          <input type="email" name="email" id="email" placeholder="Your Email" />
+          <label for="email"
+            ><i class="fa-solid fa-envelope me-4 fs-5"></i
+          ></label>
+          <input
+            class="<%= (validationErrors.length > 0) ? 'invalidInput' : '' %>"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Your Email"
+            value="<%= (oldInput.email === '@') ? ' ' : oldInput.email %>"
+          />
         </div>
         <div class="form-group mb-5">
           <label for="pass"><i class="fa-solid fa-lock me-4 fs-5"></i></label>
-          <input type="password" name="pass" id="pass" placeholder="Password" />
+          <input
+            class="<%= (validationErrors.length > 0) ? 'invalidInput' : '' %>"
+            type="password"
+            name="password"
+            id="pass"
+            placeholder="Password"
+            value="<%= oldInput.password %>"
+          />
         </div>
         <div class="form-button">
-          <input type="submit" name="signup" id="signup" class="form-submit py-3 px-5" value="Sign in" />
+          <input
+            type="submit"
+            name="signup"
+            id="signup"
+            class="form-submit py-3 px-5"
+            value="Login"
+          />
         </div>
         <div class="d-flex pt-4 justify-content-center">
           <p class="me-3">Have not you sign up?</p>
@@ -24,6 +55,8 @@
   </div>
 </section>
 <div class="text-center singUp_google fs-4">
-  <a href="#" class="p-3"><i class="fa-brands fa-google text-danger"></i> Sign in with google</a>
+  <a href="#" class="p-3"
+    ><i class="fa-brands fa-google text-danger"></i> Sign in with google</a
+  >
 </div>
 <%- include('../includes/end.ejs') %>
