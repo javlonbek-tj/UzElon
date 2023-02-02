@@ -1,9 +1,10 @@
-let loginForm = document.querySelector('.login-form');
+let drop = document.querySelector('.drop');
 
-document.querySelector('#login-btn').onclick = () => {
-  loginForm.classList.toggle('active');
+document.querySelector('#user_btn').onclick = () => {
+  drop.classList.toggle('active');
 };
 
-window.onscroll = () => {
-  loginForm.classList.remove('active');
+/* window.onclick = () => {
+  drop.classList.remove('active');
 };
+ */

@@ -82,7 +82,7 @@ section {
   border-radius: 25px;
   width: 50rem;
 }
-.header .icons a {
+.header .icons .add_product_link a {
   font-size: 1.7rem;
   margin: 0 2rem;
   color: #fff;
@@ -91,11 +91,7 @@ section {
   border-radius: 5px;
   transition: 0.2s all linear;
 }
-.header .icons a:nth-child(2) {
-  border-radius: 50%;
-  padding: 7px 12px;
-}
-.header .icons a:hover {
+.header .add_product_link a:hover {
   background-color: rgb(78, 78, 146);
 }
 .carousel-inner {
@@ -254,6 +250,54 @@ section {
 .footer {
   margin-top: 800px;
   text-align: center;
+}
+
+/* Authenticated User */
+
+.drop {
+  position: absolute;
+  top: 100%;
+  right: -110%;
+  width: 25rem;
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  border-radius: 1.2rem;
+  background: #fff;
+  text-align: center;
+}
+#user_btn {
+  cursor: pointer;
+}
+
+.drop a,
+.nav-form {
+  line-height: 15px;
+  display: block;
+  margin: 8px 0;
+  left: 0;
+  color: #313131;
+  position: relative;
+}
+.nav-link {
+  font-size: 1.7rem;
+}
+
+.authUser .drop.active {
+  right: 2rem;
+}
+.authUser img {
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
+}
+.nav-form button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  margin: auto;
+  color: #313131;
 }
 
 /* Extra styling */

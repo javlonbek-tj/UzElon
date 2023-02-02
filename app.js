@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const { isAuth } = require('./controllers/auth');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -24,9 +26,12 @@ app.set('views', 'views');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(isAuth);
 // ROUTES
+
 app.use(productsRoutes);
 app.use(addProductRoutes);
 app.use('/user', userRoutes);

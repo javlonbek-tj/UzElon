@@ -1,20 +1,16 @@
-const User = require('../models/auth.model');
+const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
-const promisify = require('util');
+const { promisify } = require('util');
 const { validationResult } = require('express-validator');
 
-const signUpToken = id => {
-  jwt.sign({ id: id }, process.env.JWT_SECRET, {
+const createSendToken = (user, req, res) => {
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
-};
-
-const createSendToken = (user, req, res) => {
-  const token = signUpToken(user._id);
 
   res.cookie('jwt', token, {
     expires: new Date(
-      Date.now() + process.env.JWT_EXPIRES_IN * 24 * 60 * 60 * 1000,
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     ),
     httpOnly: true,
   });
@@ -61,9 +57,8 @@ const postSignUp = async (req, res, next) => {
       password,
     });
     const savedUser = await user.save();
-    createSendToken(savedUser, req, res => {
-      res.redirect('/login');
-    });
+    createSendToken(savedUser, req, res);
+    res.redirect('/');
   } catch (err) {
     console.log(err);
   }
@@ -100,9 +95,7 @@ const postLogin = async (req, res, next) => {
         },
       });
     }
-    createSendToken(user, req, res => {
-      res.redirect('/login');
-    });
+    createSendToken(user, req, res);
     res.redirect('/');
   } catch (err) {
     console.log(err);
@@ -112,7 +105,8 @@ const postLogin = async (req, res, next) => {
 const isAuth = async (req, res, next) => {
   try {
     if (!req.cookies.jwt) {
-      return res.redirect('/login');
+      res.locals.user = false;
+      return next();
     }
     // 1) verify token
     const decoded = await promisify(jwt.verify)(
@@ -123,12 +117,14 @@ const isAuth = async (req, res, next) => {
     // 2) Check if user still exists
     const currentUser = await User.findById(decoded.id);
     if (!currentUser) {
-      return res.redirect('/login');
+      res.locals.user = false;
+      return next();
     }
 
     // 3) Check if user changed password after the token was issued
     if (currentUser.changedPasswordAfter(decoded.iat)) {
-      return res.redirect('/login');
+      res.locals.user = false;
+      return next();
     }
 
     // THERE IS A LOGGED IN USER
@@ -137,6 +133,17 @@ const isAuth = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
+};
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have permission to perform this action', 403),
+      );
+    }
+
+    next();
+  };
 };
 
 module.exports = {

@@ -24,10 +24,12 @@
           ><i class="fa-solid fa-dollar-sign"></i> Donate</a
         >
         <div class="d-flex fs-5">
+          <% if(!user) { %>
           <div class="d-flex" id="signUp">
             <a href="/login" class="text-white pe-2">Kirish |</a>
             <a href="/signup" class="text-white pe-3">Ro'yxatdan o'tish</a>
           </div>
+          <% } %>
           <a><i class="fa-solid fa-phone text-light"> +998 90 004 81 14</i></a>
         </div>
       </div>
@@ -43,10 +45,24 @@
           </div>
         </nav>
 
-        <div id="icons" class="icons">
-          <a href="/add-product">Add product</a>
-          <% if(false) { %>
-          <a href="/user/profile"> <i class="fa-solid fa-user"></i> </a>
+        <div id="icons" class="icons d-flex align-items-center">
+          <div class="add_product_link">
+            <a href="/add-product">Add product</a>
+          </div>
+          <% if(user) { %>
+          <div class="authUser">
+            <div id="user_btn"><img src="/image/defaultUser.jpg" alt="" /></div>
+            <div class="drop">
+              <a class="nav-link" href="/admin/profile"> Profilim</a>
+              <a class="nav-link" href="/admin/savedPosters"> Tanlanganlar</a>
+              <a class="nav-link" href="/admin/add-poster"> E'lon qo'shish</a>
+              <a class="nav-link" href="/admin/posters">E'lonlarim</a>
+              <a class="nav-link" href="/balance">Balansim</a>
+              <form action="/logout" method="POST" class="nav-form">
+                <button class="nav-link">Chiqish</button>
+              </form>
+            </div>
+          </div>
           <% } %>
         </div>
       </div>
