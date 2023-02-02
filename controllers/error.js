@@ -4,44 +4,43 @@ const get404 = (req, res, next) => {
   });
 };
 
-const sendErrorDev = (err, req, res) => {
-  console.error(err);
-  return res.status(err.statusCode).render('error', {
-    title: 'Something went wrong!',
-    msg: err.message,
+const sendErrorDev = (error, req, res) => {
+  console.log(error);
+  return res.status(error.statusCode).render('error', {
+    pageTitle: 'Something went wrong!',
+    msg: error.message,
   });
 };
 
-const sendErrorProd = (err, req, res) => {
+const sendErrorProd = (error, req, res) => {
   // A) Operational, trusted error: send message to client
-  if (err.isOperational) {
-    return res.status(err.statusCode).render('error', {
-      title: 'Something went wrong!',
-      msg: err.message,
+  if (error.isOperational) {
+    return res.status(error.statusCode).render('error', {
+      pageTitle: 'Something went wrong!',
+      msg: error.message,
     });
   }
   // B) Programming or other unknown error
   // 1) Log error
-  console.error(err);
+  console.log(error);
   // 2) Send generic message
-  return res.status(err.statusCode).render('error', {
-    title: 'Something went wrong!',
+  res.status(error.statusCode).render('error', {
+    paheTitle: 'Something went wrong!',
     msg: 'Please try again later.',
   });
 };
 
-const allError = (err, req, res, next) => {
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
+const globalError = (error, req, res, next) => {
+  error.statusCode = error.statusCode || 500;
 
   if (process.env.NODE_ENV === 'development') {
-    sendErrorDev(err, req, res);
+    sendErrorDev(error, req, res);
   } else if (process.env.NODE_ENV === 'production') {
-    sendErrorProd(err, req, res);
+    sendErrorProd(error, req, res);
   }
 };
 
 module.exports = {
   get404,
-  allError,
+  globalError,
 };

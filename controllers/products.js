@@ -32,9 +32,6 @@ const getHomePage = async (req, res, next) => {
 const getOneProduct = async (req, res, next) => {
   try {
     const prodId = req.params.productId;
-    if (!prodId) {
-      return new AppError(`E'lon to'g'risida ma'lumotlar topilmadi`, 400);
-    }
     if (await Flat.findById(prodId)) {
       const flat = await Flat.findById(prodId);
       return res.render('products/home-details/product-flat', {
@@ -138,7 +135,11 @@ const getOneProduct = async (req, res, next) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    const error = new AppError(
+      `Saytda texnik ishlar amalga oshirilmoqda. Noqulayliklar uchun uzr.`,
+      500,
+    );
+    return next(error);
   }
 };
 const getAllProducts = async (req, res, next) => {

@@ -10,18 +10,17 @@ const productsRoutes = require('./routes/products.routes');
 const addProductRoutes = require('./routes/addProduct.routes');
 const userRoutes = require('./routes/user.routes');
 const authRoutes = require('./routes/auth.routes');
-const { get404, allError } = require('./controllers/error');
+const { get404, globalError } = require('./controllers/error');
 
 const app = express();
-
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 // MIDDLEWARES
 
-if (process.env.NODE_ENV === 'development') {
+/* if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
-}
+} */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,15 +33,20 @@ app.use('/user', userRoutes);
 app.use(authRoutes);
 
 app.use(get404);
-app.use(allError);
+app.use(globalError);
 
 const DB = process.env.MONGO_URI;
 const port = process.env.PORT || 5000;
 
-mongoose.connect(DB).then(() => {
-  app.listen(port, () => {
-    console.log(`App running on ${port}...`);
-  });
+mongoose
+  .connect(DB)
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`App running on ${port}...`);
+    });
 
-  console.log('DB connection succesfully');
-});
+    console.log('DB connection succesfully');
+  })
+  .catch(err => {
+    console.log(err);
+  });

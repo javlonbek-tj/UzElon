@@ -1,10 +1,22 @@
 const User = require('../models/auth.model');
 const jwt = require('jsonwebtoken');
+const promisify = require('util');
 const { validationResult } = require('express-validator');
 
 const signUpToken = id => {
   jwt.sign({ id: id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+};
+
+const createSendToken = (user, req, res) => {
+  const token = signUpToken(user._id);
+
+  res.cookie('jwt', token, {
+    expires: new Date(
+      Date.now() + process.env.JWT_EXPIRES_IN * 24 * 60 * 60 * 1000,
+    ),
+    httpOnly: true,
   });
 };
 
@@ -49,10 +61,9 @@ const postSignUp = async (req, res, next) => {
       password,
     });
     const savedUser = await user.save();
-    const token = signUpToken(savedUser._id);
-    console.log(token);
-    res.redirect('/login');
-    console.log(token);
+    createSendToken(savedUser, req, res => {
+      res.redirect('/login');
+    });
   } catch (err) {
     console.log(err);
   }
@@ -89,9 +100,40 @@ const postLogin = async (req, res, next) => {
         },
       });
     }
-    const token = signUpToken(user._id);
-    console.log(token);
+    createSendToken(user, req, res => {
+      res.redirect('/login');
+    });
     res.redirect('/');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const isAuth = async (req, res, next) => {
+  try {
+    if (!req.cookies.jwt) {
+      return res.redirect('/login');
+    }
+    // 1) verify token
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET,
+    );
+
+    // 2) Check if user still exists
+    const currentUser = await User.findById(decoded.id);
+    if (!currentUser) {
+      return res.redirect('/login');
+    }
+
+    // 3) Check if user changed password after the token was issued
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+      return res.redirect('/login');
+    }
+
+    // THERE IS A LOGGED IN USER
+    res.locals.user = currentUser;
+    next();
   } catch (err) {
     console.log(err);
   }
@@ -102,4 +144,5 @@ module.exports = {
   getLogin,
   postSignUp,
   postLogin,
+  isAuth,
 };
