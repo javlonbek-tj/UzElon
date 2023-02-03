@@ -82,18 +82,6 @@ section {
   border-radius: 25px;
   width: 50rem;
 }
-.header .icons .add_product_link a {
-  font-size: 1.7rem;
-  margin: 0 2rem;
-  color: #fff;
-  background-color: rgb(63, 63, 118);
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: 0.2s all linear;
-}
-.header .add_product_link a:hover {
-  background-color: rgb(78, 78, 146);
-}
 .carousel-inner {
   height: 35rem;
 }
@@ -142,6 +130,12 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
   gap: 1.5rem;
+}
+.cards .user-box-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
 }
 
 .cards .box-container .box {
@@ -254,22 +248,23 @@ section {
 
 /* Authenticated User */
 
-.drop {
+.drop,
+.drop2 {
   position: absolute;
-  top: 100%;
-  right: -110%;
   width: 25rem;
   box-shadow: var(--box-shadow);
   padding: 1.5rem;
   border-radius: 1.2rem;
   background: #fff;
   text-align: center;
+  transition: 0.5s all ease-in-out;
 }
 #user_btn {
   cursor: pointer;
 }
 
 .drop a,
+.drop2 a,
 .nav-form {
   line-height: 15px;
   display: block;
@@ -278,12 +273,39 @@ section {
   color: #313131;
   position: relative;
 }
+.drop {
+  top: 100%;
+  right: -110%;
+}
+.drop2 {
+  bottom: 100%;
+  right: -110%;
+}
 .nav-link {
   font-size: 1.7rem;
 }
+.add_product_link a {
+  font-size: 1.7rem;
+  margin: 0 2rem;
+  color: #fff;
+  background-color: rgb(63, 63, 118);
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.2s all linear;
+}
+.add_product_link a:hover {
+  background-color: rgb(78, 78, 146);
+}
+.nav-link:hover {
+  font-weight: 500;
+  color: blue;
+}
 
-.authUser .drop.active {
+.drop.active {
   right: 2rem;
+}
+.drop2.active {
+  right: 0;
 }
 .authUser img {
   height: 3.5rem;
@@ -418,12 +440,17 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     gap: 1.5rem;
   }
-  #signUp a {
-    display: none;
+  .cards .user-box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
   }
+
   #header__for_adding,
   .header_logo,
-  #icons a {
+  .add_product_link a,
+  #user_btn {
     display: none;
   }
   .mobile__footer {

@@ -1,4 +1,5 @@
 const express = require('express');
+const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ const {
   getAnimalCategory,
 } = require('../controllers/addProduct');
 
-router.get('/add-product', getAddProduct);
+router.get('/add-product', isAuth, getAddProduct);
 router.get('/flat', getFlatCategory);
 router.get('/house', getHouseCategory);
 router.get('/land', getLandCategory);
@@ -36,6 +37,6 @@ router.get('/phone', getPhoneCategory);
 router.get('/lap-top', getLapTopCategory);
 router.get('/houseAplliances', getHouseAppliancesCategory);
 router.get('/animal', getAnimalCategory);
-router.post('/add-product', postAddProduct);
+router.post('/add-product', isAuth, postAddProduct);
 
 module.exports = router;

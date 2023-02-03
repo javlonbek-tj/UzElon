@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const { validationResult } = require('express-validator');
+const AppError = require('../utils/appError');
 
 const createSendToken = (user, req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -9,9 +10,7 @@ const createSendToken = (user, req, res) => {
   });
 
   res.cookie('jwt', token, {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-    ),
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
     httpOnly: true,
   });
 };
@@ -109,10 +108,7 @@ const isAuth = async (req, res, next) => {
       return next();
     }
     // 1) verify token
-    const decoded = await promisify(jwt.verify)(
-      req.cookies.jwt,
-      process.env.JWT_SECRET,
-    );
+    const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
 
     // 2) Check if user still exists
     const currentUser = await User.findById(decoded.id);
@@ -128,18 +124,27 @@ const isAuth = async (req, res, next) => {
     }
 
     // THERE IS A LOGGED IN USER
+    req.user = currentUser;
     res.locals.user = currentUser;
     next();
   } catch (err) {
     console.log(err);
   }
 };
-exports.restrictTo = (...roles) => {
+
+const logout = (req, res, next) => {
+  try {
+    res.clearCookie('jwt');
+    res.redirect('/');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      return next(
-        new AppError('You do not have permission to perform this action', 403),
-      );
+      return next(new AppError('You do not have permission to perform this action', 403));
     }
 
     next();
@@ -152,4 +157,6 @@ module.exports = {
   postSignUp,
   postLogin,
   isAuth,
+  restrictTo,
+  logout,
 };

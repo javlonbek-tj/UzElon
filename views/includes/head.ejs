@@ -45,7 +45,7 @@
           </div>
         </nav>
 
-        <div id="icons" class="icons d-flex align-items-center">
+        <div id="user_nav" class="user_nav d-flex align-items-center">
           <div class="add_product_link">
             <a href="/add-product">Add product</a>
           </div>
@@ -55,10 +55,10 @@
             <div class="drop">
               <a class="nav-link" href="/admin/profile"> Profilim</a>
               <a class="nav-link" href="/admin/savedPosters"> Tanlanganlar</a>
-              <a class="nav-link" href="/admin/add-poster"> E'lon qo'shish</a>
-              <a class="nav-link" href="/admin/posters">E'lonlarim</a>
+              <a class="nav-link" href="/add-product"> E'lon qo'shish</a>
+              <a class="nav-link" href="/user/products">E'lonlarim</a>
               <a class="nav-link" href="/balance">Balansim</a>
-              <form action="/logout" method="POST" class="nav-form">
+              <form action="/logout" method="GET" class="nav-form">
                 <button class="nav-link">Chiqish</button>
               </form>
             </div>
@@ -81,10 +81,19 @@
           <i class="fa-solid fa-plus d-flex justify-content-center mb-2"></i>
           <p>Add product</p>
         </a>
-        <a href="<%= false ? '/user/profile' : '/signup'%>" class="pt-3 mt-3">
+        <a href="<%= user ? '#' : '/signup'%>" class="pt-3 mt-3" id="<%= user ? 'user_footer_btn' : ''%>">
           <i class="fa fa-user d-flex justify-content-center mb-2"></i>
           <p>Profile</p>
         </a>
+        <div class="drop2">
+          <a class="nav-link" href="/admin/profile"> Profilim</a>
+          <a class="nav-link" href="/admin/savedPosters"> Tanlanganlar</a>
+          <a class="nav-link" href="/user/posters">E'lonlarim</a>
+          <a class="nav-link" href="/balance">Balansim</a>
+          <form action="/logout" method="GET" class="nav-form">
+            <button class="nav-link">Chiqish</button>
+          </form>
+        </div>
       </div>
     </header>
   </body>

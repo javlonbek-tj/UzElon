@@ -17,12 +17,14 @@ const AppError = require('../utils/appError');
 
 const getHomePage = async (req, res, next) => {
   try {
-    const prods = await General.find();
-    const price = prods.map(p => p.price.toLocaleString('fr'));
+    const products = await General.find();
+    const prods = products.map(p => {
+      p.price = p.price.toLocaleString('fr');
+      return p;
+    });
     res.render('home', {
       pageTitle: 'AvtoVodil',
       prods,
-      price,
     });
   } catch (err) {
     console.log(err);
@@ -135,10 +137,7 @@ const getOneProduct = async (req, res, next) => {
       });
     }
   } catch (err) {
-    const error = new AppError(
-      `Saytda texnik ishlar amalga oshirilmoqda. Noqulayliklar uchun uzr.`,
-      500,
-    );
+    const error = new AppError(`Saytda texnik ishlar amalga oshirilmoqda. Noqulayliklar uchun uzr.`, 500);
     return next(error);
   }
 };

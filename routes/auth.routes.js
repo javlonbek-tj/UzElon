@@ -4,12 +4,7 @@ const User = require('../models/user.model');
 
 const router = express.Router();
 
-const {
-  getLogin,
-  getSignUp,
-  postSignUp,
-  postLogin,
-} = require('../controllers/auth');
+const { getLogin, getSignUp, postSignUp, postLogin, logout } = require('../controllers/auth');
 
 router.get('/signup', getSignUp);
 router.get('/login', getLogin);
@@ -77,5 +72,6 @@ router.post(
   ],
   postLogin,
 );
+router.get('/logout', logout);
 
 module.exports = router;
