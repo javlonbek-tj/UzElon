@@ -146,28 +146,14 @@ section {
 }
 
 .cards .box-container .box img {
-  height: 20rem;
+  height: 18rem;
   width: 100%;
   object-fit: cover;
 }
 
-.cards .box-container .box .content .icons {
+.cards .box-container .box .content .info {
   border-bottom: var(--border);
   line-height: 1;
-}
-
-.cards .box-container .box .content .icons a {
-  color: var(--light-color);
-  font-size: 1.1rem;
-}
-
-.cards .box-container .box .content .icons a:hover {
-  color: var(--black);
-}
-
-.cards .box-container .box .content h3 {
-  color: var(--black);
-  height: 1.2rem;
 }
 
 /*  Filtering starts here */
@@ -381,6 +367,9 @@ section {
 }
 .form-group .invalidInput {
   border-bottom: 1px solid red;
+}
+.invalidInput {
+  border: 1px solid red;
 }
 .form-button input:hover {
   background-color: #bbb;

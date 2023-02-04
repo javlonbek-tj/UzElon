@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="/add-product" method="POST">
+  <form class="row g-3 fs-4" action="/adding-construction" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
@@ -8,11 +8,22 @@
     </div>
     <div class="col-md-6">
       <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
-      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Yevro remont qilamiz" />
+      <input
+        type="text"
+        class="form-control fs-3"
+        name="shortInfo"
+        maxlength="30"
+        placeholder="Yevro remont qilamiz"
+      />
     </div>
     <div class="col-md-6">
       <label for="serviceType" class="form-label">Xizmat ko'rsatish turi</label>
-      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="serviceType">
+      <select
+        class="form-select form-select-lg mb-3 fs-4"
+        aria-label=".form-select-lg example"
+        name="serviceType"
+      >
+        <option selected disabled>Xizmat ko'rsatish</option>
         <option value="Yevro remont">Yevro remont</option>
         <option value="Tom yopish">Tom yopish</option>
         <option value="Suvoq">Suvoq</option>
@@ -33,7 +44,12 @@
     </div>
     <div class="col-md-6">
       <label for="color" class="form-label">Manzilni tanlang</label>
-      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="address">
+      <select
+        class="form-select form-select-lg mb-3 fs-4"
+        aria-label=".form-select-lg example"
+        name="address"
+      >
+        <option selected disabled>Manzil</option>
         <option value="Vodil">Vodil</option>
         <option value="Yoshlarobod">Yoshlarobod</option>
         <option value="Novkent'k">Novkent</option>
@@ -52,15 +68,22 @@
       </select>
     </div>
     <div class="form-floating fs-4 mb-5">
-      <textarea class="form-control fs-3" name="extraInfo" style="height: 70px"></textarea>
+      <textarea
+        class="form-control fs-3"
+        name="extraInfo"
+        style="height: 70px"
+      ></textarea>
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
     <div class="col-md-6">
       <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
       <input type="number" class="form-control fs-3" name="phoneNumber" />
+      <p class="text-danger fs-6">
+        <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni
+        to'liq kiriting` : '' %>
+      </p>
     </div>
     <div>
-      <input type="hidden" name="productType" value="construction" />
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>

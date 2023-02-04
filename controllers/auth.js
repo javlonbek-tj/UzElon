@@ -126,10 +126,12 @@ const isAuth = async (req, res, next) => {
     // THERE IS A LOGGED IN USER
     req.user = currentUser;
     res.locals.user = currentUser;
-    next();
+    return next();
   } catch (err) {
     console.log(err);
   }
+  res.locals.user = false;
+  next();
 };
 
 const logout = (req, res, next) => {

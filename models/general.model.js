@@ -22,6 +22,10 @@ const generalSchema = new Schema({
   price: {
     type: Number,
   },
+  address: {
+    type: String,
+    required: true,
+  },
   dollar: {
     type: Boolean,
     default: false,

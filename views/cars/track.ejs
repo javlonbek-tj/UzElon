@@ -1,30 +1,60 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="/add-product" method="POST">
+  <form class="row g-3 fs-4" action="/adding-track" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
       <input type="file" id="img" class="d-none" multiple />
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Arenda" />
+      <input
+        class="form-check-input"
+        type="radio"
+        name="rentOrSell"
+        id="rentOrSell1"
+        value="Arenda"
+      />
       <label class="form-check-label" for="rentOrSell1"> Arendaga </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell2" checked value="Sotiladi" />
+      <input
+        class="form-check-input"
+        type="radio"
+        name="rentOrSell"
+        id="rentOrSell2"
+        checked
+        value="Sotiladi"
+      />
       <label class="form-check-label" for="rentOrSell2"> Sotiladi </label>
     </div>
     <div class="col-md-6">
       <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
-      <input type="text" class="form-control fs-3" name="shortInfo" maxlength="30" placeholder="Porter arendaga" />
+      <input
+        type="text"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'shortInfo') ? 'invalidInput' : '' %>"
+        name="shortInfo"
+        maxlength="30"
+        placeholder="Porter arendaga"
+        value="<%= oldInput.shortInfo %>"
+      />
     </div>
     <div class="col-md-6">
       <label for="model" class="form-label">Modeli</label>
-      <input type="text" class="form-control fs-3" name="model" />
+      <input
+        type="text"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'model') ? 'invalidInput' : '' %>"
+        name="model"
+        value="<%= oldInput.model %>"
+      />
     </div>
     <div class="col-md-6">
       <label for="fluel" class="form-label">Yoqilg'i turi</label>
-      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="fluel">
+      <select
+        class="form-select form-select-lg mb-3 fs-4 <%= validationErrors.find(e => e.param === 'fluel') ? 'invalidInput' : '' %>"
+        aria-label=".form-select-lg example"
+        name="fluel"
+      >
+        <option selected disabled>Yoqilg'i turi</option>
         <option value="Benzin">Benzin</option>
         <option value="Metan">Metan</option>
         <option value="Propan">Propan</option>
@@ -32,7 +62,12 @@
     </div>
     <div class="col-md-6">
       <label for="color" class="form-label">Rangi</label>
-      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="color">
+      <select
+        class="form-select form-select-lg mb-3 fs-4 <%= validationErrors.find(e => e.param === 'color') ? 'invalidInput' : '' %>"
+        aria-label=".form-select-lg example"
+        name="color"
+      >
+        <option selected disabled>Rangi</option>
         <option value="Oq">Oq</option>
         <option value="Qora">Qora</option>
         <option value="Sariq">Sariq</option>
@@ -45,15 +80,30 @@
     </div>
     <div class="col-md-6">
       <label for="year" class="form-label">Ishlab chiqarilgan yili</label>
-      <input type="number" class="form-control fs-3" name="year" />
+      <input
+        type="number"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'year') ? 'invalidInput' : '' %>"
+        name="year"
+        value="<%= oldInput.year %>"
+      />
     </div>
     <div class="col-md-6">
       <label for="kmRun" class="form-label">Yurgan kilometraji</label>
-      <input type="number" class="form-control fs-3" name="kmRun" />
+      <input
+        type="number"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'kmRun') ? 'invalidInput' : '' %>"
+        name="kmRun"
+        value="<%= oldInput.kmRun %>"
+      />
     </div>
     <div class="col-md-6">
       <label for="color" class="form-label">Manzilni tanlang</label>
-      <select class="form-select form-select-lg mb-3 fs-4" aria-label=".form-select-lg example" name="address">
+      <select
+        class="form-select form-select-lg mb-3 fs-4 <%= validationErrors.find(e => e.param === 'address') ? 'invalidInput' : '' %>"
+        aria-label=".form-select-lg example"
+        name="address"
+      >
+        <option selected disabled>Manzil</option>
         <option value="Vodil">Vodil</option>
         <option value="Yoshlarobod">Yoshlarobod</option>
         <option value="Novkent'k">Novkent</option>
@@ -72,19 +122,39 @@
       </select>
     </div>
     <div class="form-floating fs-4 mb-5">
-      <textarea class="form-control fs-3" name="extraInfo" style="height: 70px"></textarea>
+      <textarea
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'extraInfo') ? 'invalidInput' : '' %>"
+        name="extraInfo"
+        style="height: 70px"
+      >
+<%= oldInput.extraInfo %></textarea
+      >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
     <div class="col-md-6">
       <label for="price" class="form-label">Narxi($):</label>
-      <input type="number" class="form-control fs-3" name="price" />
+      <input
+        type="number"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
+        name="price"
+        value="<%= oldInput.price %>"
+      />
     </div>
     <div class="col-md-6">
       <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
-      <input type="number" class="form-control fs-3" name="phoneNumber" />
+      <input
+        type="number"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
+        name="phoneNumber"
+        placeholder="998901234567"
+        value="<%= oldInput.phoneNumber %>"
+      />
+      <p class="text-danger fs-6">
+        <%= validationErrors.find(e => e.param === 'phoneNumber') ? `Telefon raqamni
+        to'liq kiriting` : '' %>
+      </p>
     </div>
     <div>
-      <input type="hidden" name="productType" value="track" />
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>
