@@ -1,6 +1,10 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="/adding-vacancy" method="POST">
+  <form
+    class="row g-3 fs-4"
+    action="<% if (editing) { %>/user/edit-vacancy<% } else { %>/adding-vacancy<% } %>"
+    method="POST"
+  >
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
@@ -10,35 +14,47 @@
       <label for="shortInfo" class="form-label">Qisqa ta'rif</label>
       <input
         type="text"
-        class="form-control fs-3"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'shortInfo') ? 'invalidInput' : '' %>"
         name="shortInfo"
         maxlength="30"
         placeholder="Buxgalter kerak"
+        value="<%= product.shortInfo %>"
       />
     </div>
     <div class="col-md-6">
       <label for="gender" class="form-label">Jinsi</label>
       <select
-        class="form-select form-select-lg mb-3 fs-4"
+        class="form-select form-select-lg mb-3 fs-4 <%= validationErrors.find(e => e.param === 'gender') ? 'invalidInput' : '' %>"
         aria-label=".form-select-lg example"
         name="gender"
       >
+        <option selected disabled>Jinsi</option>
         <option value="Ayol">Ayol</option>
         <option value="Erkak">Erkak</option>
       </select>
     </div>
     <div class="col-md-6">
       <label for="specialization" class="form-label">Lavozimi</label>
-      <input type="text" class="form-control fs-3" name="position" />
+      <input
+        type="text"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'position') ? 'invalidInput' : '' %>"
+        name="position"
+        value="<%= product.position %>"
+      />
     </div>
     <div class="col-md-6">
       <label for="birthday" class="form-label">Yosh chegarasi</label>
-      <input type="text" class="form-control fs-3" name="requiredAge" />
+      <input
+        type="text"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'requiredAge') ? 'invalidInput' : '' %>"
+        name="requiredAge"
+        value="<%= product.requiredAge %>"
+      />
     </div>
     <div class="col-md-6">
       <label for="color" class="form-label">Manzilni tanlang</label>
       <select
-        class="form-select form-select-lg mb-3 fs-4"
+        class="form-select form-select-lg mb-3 fs-4 <%= validationErrors.find(e => e.param === 'address') ? 'invalidInput' : '' %>"
         aria-label=".form-select-lg example"
         name="address"
       >
@@ -62,25 +78,40 @@
     </div>
     <div class="form-floating fs-4 mb-5">
       <textarea
-        class="form-control fs-3"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'extraInfo') ? 'invalidInput' : '' %>"
         name="extraInfo"
         style="height: 70px"
-      ></textarea>
+      >
+<%= product.extraInfo %></textarea
+      >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
     <div class="col-md-6">
       <label for="price" class="form-label">Maosh(so'm):</label>
-      <input type="number" class="form-control fs-3" name="price" />
+      <input
+        type="number"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
+        name="price"
+        value="<%= product.price %>"
+      />
     </div>
     <div class="col-md-6">
       <label for="phoneNumber" class="form-label">Telefon raqamingizni kiriting</label>
-      <input type="number" class="form-control fs-3" name="phoneNumber" />
+      <input
+        type="number"
+        class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
+        name="phoneNumber"
+        value="<%= product.phoneNumber %>"
+      />
       <p class="text-danger fs-6">
-        <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni
-        to'liq kiriting` : '' %>
+        <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq
+        kiriting` : '' %>
       </p>
     </div>
     <div>
+      <% if (editing) { %>
+      <input type="hidden" value="<%= product._id %>" name="productId" />
+      <% } %>
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>

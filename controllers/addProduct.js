@@ -28,7 +28,7 @@ const getFlatCategory = (req, res, next) => {
   try {
     res.render('estate/flat', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         rooms: '',
         floors: '',
@@ -41,6 +41,8 @@ const getFlatCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -50,7 +52,7 @@ const getHouseCategory = (req, res, next) => {
   try {
     res.render('estate/house', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         applianceName: '',
         applianceCondition: '',
@@ -60,6 +62,8 @@ const getHouseCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -69,7 +73,7 @@ const getLandCategory = (req, res, next) => {
   try {
     res.render('estate/land', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         area: '',
         address: '',
@@ -78,6 +82,8 @@ const getLandCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -87,7 +93,7 @@ const getNonResidentialCategory = (req, res, next) => {
   try {
     res.render('estate/nonResidential', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         rooms: '',
         area: '',
@@ -97,6 +103,8 @@ const getNonResidentialCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -106,7 +114,7 @@ const getCarCategory = (req, res, next) => {
   try {
     res.render('cars/car', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         model: '',
         transmission: '',
@@ -120,6 +128,8 @@ const getCarCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      hasError: false,
+      editing: false,
     });
   } catch (err) {
     console.log(err);
@@ -129,7 +139,7 @@ const getTrackCategory = (req, res, next) => {
   try {
     res.render('cars/track', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         model: '',
         fluel: '',
@@ -142,6 +152,8 @@ const getTrackCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -151,7 +163,7 @@ const getMotoCategory = (req, res, next) => {
   try {
     res.render('cars/moto', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         model: '',
         motoCondition: '',
@@ -161,6 +173,8 @@ const getMotoCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -170,7 +184,7 @@ const getConstructionCategory = (req, res, next) => {
   try {
     res.render('jobs/construction', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         serviceType: '',
         experience: '',
@@ -181,6 +195,8 @@ const getConstructionCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -190,7 +206,7 @@ const getServiceCategory = (req, res, next) => {
   try {
     res.render('jobs/service', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         gender: '',
         serviceType: '',
@@ -201,6 +217,8 @@ const getServiceCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -210,7 +228,7 @@ const getVacancyCategory = (req, res, next) => {
   try {
     res.render('jobs/vacancy', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         gender: '',
         position: '',
@@ -221,6 +239,8 @@ const getVacancyCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -230,7 +250,7 @@ const getPhoneCategory = (req, res, next) => {
   try {
     res.render('electronics/phone', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         mark: '',
         model: '',
@@ -242,6 +262,8 @@ const getPhoneCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -251,7 +273,7 @@ const getLapTopCategory = (req, res, next) => {
   try {
     res.render('electronics/lap-top', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         mark: '',
         lapTopCondition: '',
@@ -263,6 +285,8 @@ const getLapTopCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -272,7 +296,7 @@ const getHouseAppliancesCategory = (req, res, next) => {
   try {
     res.render('electronics/houseAppliances', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         applianceName: '',
         applianceCondition: '',
@@ -282,6 +306,8 @@ const getHouseAppliancesCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -291,7 +317,7 @@ const getAnimalCategory = (req, res, next) => {
   try {
     res.render('electronics/animal', {
       pageTitle: 'Add product',
-      oldInput: {
+      product: {
         shortInfo: '',
         animalName: '',
         address: '',
@@ -300,6 +326,8 @@ const getAnimalCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
+      editing: false,
+      hasError: false,
     });
   } catch (err) {
     console.log(err);
@@ -309,23 +337,11 @@ const getAnimalCategory = (req, res, next) => {
 const postCarAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      shortInfo,
-      model,
-      transmission,
-      fluel,
-      color,
-      year,
-      kmRun,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { shortInfo, model, transmission, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber, rentOrSell } = req.body;
     if (!errors.isEmpty()) {
       return res.render('cars/car', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           model,
           transmission,
@@ -339,6 +355,8 @@ const postCarAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const car = new Car({
@@ -368,26 +386,19 @@ const postCarAdding = async (req, res, next) => {
     });
     const saved = await general.save();
     res.redirect('/');
-  } catch (error) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const postMotoadding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      rentOrSell,
-      shortInfo,
-      model,
-      motoCondition,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('cars/moto', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           model,
           motoCondition,
@@ -398,6 +409,8 @@ const postMotoadding = async (req, res, next) => {
           userId: req.user,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const moto = new Moto({
@@ -430,23 +443,11 @@ const postMotoadding = async (req, res, next) => {
 const postTrackAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      rentOrSell,
-      shortInfo,
-      model,
-      fluel,
-      color,
-      year,
-      kmRun,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('cars/track', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           model,
           fluel,
@@ -459,6 +460,8 @@ const postTrackAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const track = new Track({
@@ -499,7 +502,7 @@ const postAnimalAdding = async (req, res, next) => {
     if (!errors.isEmpty()) {
       return res.render('electronics/animal', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           animalName,
           address,
@@ -508,6 +511,8 @@ const postAnimalAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const animal = new Animal({
@@ -538,19 +543,11 @@ const postAnimalAdding = async (req, res, next) => {
 const postHouseApp = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      shortInfo,
-      applianceName,
-      applianceCondition,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('electronics/houseAppliances', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           applianceName,
           applianceCondition,
@@ -560,6 +557,8 @@ const postHouseApp = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const houseAppliances = new HouseAppliances({
@@ -591,21 +590,11 @@ const postHouseApp = async (req, res, next) => {
 const postLapTopAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      shortInfo,
-      mark,
-      lapTopCondition,
-      cpu,
-      ram,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('electronics/lap-top', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           mark,
           lapTopCondition,
@@ -617,6 +606,8 @@ const postLapTopAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const laptop = new LapTop({
@@ -650,21 +641,11 @@ const postLapTopAdding = async (req, res, next) => {
 const postPhoneAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      shortInfo,
-      mark,
-      model,
-      phoneCondition,
-      memory,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('electronics/phone', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           mark,
           model,
@@ -676,6 +657,8 @@ const postPhoneAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const phone = new Phone({
@@ -710,23 +693,11 @@ const postFlatAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const flatHas = [];
-    const {
-      rentOrSell,
-      shortInfo,
-      rooms,
-      floors,
-      floor,
-      area,
-      flatCondition,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { rentOrSell, shortInfo, rooms, floors, floor, area, flatCondition, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('estate/flat', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           rooms,
           floors,
@@ -739,6 +710,8 @@ const postFlatAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const { airConditioning, freeze, furniture, tv, washing } = req.body;
@@ -793,21 +766,11 @@ const postHouseAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const houseHas = [];
-    const {
-      rentOrSell,
-      shortInfo,
-      rooms,
-      area,
-      houseCondition,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('estate/house', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           rooms,
           area,
@@ -818,6 +781,8 @@ const postHouseAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const { gas, electricity } = req.body;
@@ -861,21 +826,11 @@ const postLandAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const landHas = [];
-    const {
-      rentOrSell,
-      shortInfo,
-      area,
-      address,
-      price,
-      extraInfo,
-      phoneNumber,
-      gas,
-      electricity,
-    } = req.body;
+    const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty()) {
       return res.render('estate/land', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           area,
           address,
@@ -884,6 +839,8 @@ const postLandAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     if (gas) {
@@ -924,22 +881,11 @@ const postNonResiAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const buildingHas = [];
-    const {
-      shortInfo,
-      rentOrSell,
-      rooms,
-      area,
-      address,
-      price,
-      extraInfo,
-      phoneNumber,
-      gas,
-      electricity,
-    } = req.body;
+    const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty()) {
       return res.render('estate/nonResidential', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           rooms,
           area,
@@ -949,6 +895,8 @@ const postNonResiAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     if (gas) {
@@ -989,20 +937,11 @@ const postNonResiAdding = async (req, res, next) => {
 const postConstructionAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      shortInfo,
-      serviceType,
-      experience,
-      numWorkers,
-      workTime,
-      extraInfo,
-      address,
-      phoneNumber,
-    } = req.body;
+    const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('jobs/construction', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           serviceType,
           experience,
@@ -1013,6 +952,8 @@ const postConstructionAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const construction = new Construction({
@@ -1044,20 +985,11 @@ const postConstructionAdding = async (req, res, next) => {
 const postServiceAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      shortInfo,
-      gender,
-      serviceType,
-      experience,
-      age,
-      address,
-      extraInfo,
-      phoneNumber,
-    } = req.body;
+    const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('jobs/service', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           gender,
           serviceType,
@@ -1068,6 +1000,8 @@ const postServiceAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: null,
+        hasError: true,
       });
     }
     const service = new Service({
@@ -1099,20 +1033,11 @@ const postServiceAdding = async (req, res, next) => {
 const postVacancyAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const {
-      shortInfo,
-      gender,
-      position,
-      requiredAge,
-      address,
-      extraInfo,
-      price,
-      phoneNumber,
-    } = req.body;
+    const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('jobs/vacancy', {
         pageTitle: 'Add product',
-        oldInput: {
+        product: {
           shortInfo,
           gender,
           position,
@@ -1123,6 +1048,8 @@ const postVacancyAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
+        editing: false,
+        hasError: true,
       });
     }
     const vacancy = new Vacancy({
@@ -1147,7 +1074,7 @@ const postVacancyAdding = async (req, res, next) => {
     });
     const saved = await general.save();
     res.redirect('/');
-  } catch (er) {
+  } catch (err) {
     console.log(err);
   }
 };

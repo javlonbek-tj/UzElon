@@ -1,6 +1,10 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="/adding-track" method="POST">
+  <form
+    class="row g-3 fs-4"
+    action="<% if (editing) { %>/user/edit-track<% } else { %>/adding-track<% } %>"
+    method="POST"
+  >
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
@@ -22,7 +26,6 @@
         type="radio"
         name="rentOrSell"
         id="rentOrSell2"
-        checked
         value="Sotiladi"
       />
       <label class="form-check-label" for="rentOrSell2"> Sotiladi </label>
@@ -35,7 +38,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="Porter arendaga"
-        value="<%= oldInput.shortInfo %>"
+        value="<%= product.shortInfo %>"
       />
     </div>
     <div class="col-md-6">
@@ -44,7 +47,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'model') ? 'invalidInput' : '' %>"
         name="model"
-        value="<%= oldInput.model %>"
+        value="<%= product.model %>"
       />
     </div>
     <div class="col-md-6">
@@ -84,7 +87,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'year') ? 'invalidInput' : '' %>"
         name="year"
-        value="<%= oldInput.year %>"
+        value="<% if (editing) { %><%= year %><% } else if (hasError) { %><%= product.year %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -93,7 +96,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'kmRun') ? 'invalidInput' : '' %>"
         name="kmRun"
-        value="<%= oldInput.kmRun %>"
+        value="<%= product.kmRun %>"
       />
     </div>
     <div class="col-md-6">
@@ -127,7 +130,7 @@
         name="extraInfo"
         style="height: 70px"
       >
-<%= oldInput.extraInfo %></textarea
+<%= product.extraInfo %></textarea
       >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
@@ -137,7 +140,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="price"
-        value="<%= oldInput.price %>"
+        value="<%= product.price %>"
       />
     </div>
     <div class="col-md-6">
@@ -147,14 +150,17 @@
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
         name="phoneNumber"
         placeholder="998901234567"
-        value="<%= oldInput.phoneNumber %>"
+        value="<%= product.phoneNumber %>"
       />
       <p class="text-danger fs-6">
-        <%= validationErrors.find(e => e.param === 'phoneNumber') ? `Telefon raqamni
-        to'liq kiriting` : '' %>
+        <%= validationErrors.find(e => e.param === 'phoneNumber') ? `Telefon raqamni to'liq
+        kiriting` : '' %>
       </p>
     </div>
     <div>
+      <% if (editing) { %>
+      <input type="hidden" value="<%= product._id %>" name="productId" />
+      <% } %>
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>

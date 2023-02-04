@@ -1,6 +1,10 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="/adding-nonResidential" method="POST">
+  <form
+    class="row g-3 fs-4"
+    action="<% if (editing) { %>/user/edit-nonResidential<% } else { %>/adding-nonResidential<% } %>"
+    method="POST"
+  >
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
@@ -22,7 +26,6 @@
         type="radio"
         name="rentOrSell"
         id="rentOrSell2"
-        checked
         value="Sotiladi"
       />
       <label class="form-check-label" for="rentOrSell2"> Sotiladi </label>
@@ -35,6 +38,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="Magazin sotiladi"
+        value="<%= product.shortInfo %>"
       />
     </div>
     <div class="col-md-6">
@@ -43,6 +47,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'rooms') ? 'invalidInput' : '' %>"
         name="rooms"
+        value="<%= product.rooms %>"
       />
     </div>
     <div class="col-md-6">
@@ -51,6 +56,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'area') ? 'invalidInput' : '' %>"
         name="area"
+        value="<%= product.area %>"
       />
     </div>
     <div>
@@ -72,7 +78,7 @@
     <div class="col-md-6">
       <label for="color" class="form-label">Manzilni tanlang</label>
       <select
-        class="form-select form-select-lg mb-3 fs-4 address"
+        class="form-select form-select-lg mb-3 fs-4 <%= validationErrors.find(e => e.param === 'address') ? 'invalidInput' : '' %>"
         aria-label=".form-select-lg example"
         name="address"
       >
@@ -99,7 +105,9 @@
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'extraInfo') ? 'invalidInput' : '' %>"
         name="extraInfo"
         style="height: 70px"
-      ></textarea>
+      >
+<%= product.extraInfo %></textarea
+      >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
     <div class="col-md-6">
@@ -108,6 +116,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="price"
+        value="<%= product.price %>"
       />
     </div>
     <div class="col-md-6">
@@ -116,13 +125,17 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
         name="phoneNumber"
+        value="<%= product.phoneNumber %>"
       />
       <p class="text-danger fs-6">
-        <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni
-        to'liq kiriting` : '' %>
+        <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq
+        kiriting` : '' %>
       </p>
     </div>
     <div>
+      <% if (editing) { %>
+      <input type="hidden" value="<%= product._id %>" name="productId" />
+      <% } %>
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>

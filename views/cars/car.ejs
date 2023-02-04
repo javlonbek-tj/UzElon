@@ -1,29 +1,17 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="/adding-car" method="POST">
+  <form class="row g-3 fs-4" action="<% if (editing) { %>/user/edit-car<% } else { %>/adding-car<% } %>" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
       <input type="file" id="img" class="d-none" multiple />
     </div>
     <div class="form-check">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="rentOrSell"
-        id="rentOrSell1"
-        value="Arenda"
-      />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Arenda" />
       <label class="form-check-label" for="rentOrSell1"> Arendaga </label>
     </div>
     <div class="form-check">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="rentOrSell"
-        id="rentOrSell2"
-        value="Sotiladi"
-      />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell2" value="Sotiladi" />
       <label class="form-check-label" for="rentOrSell2"> Sotiladi </label>
     </div>
     <div class="col-md-6">
@@ -34,7 +22,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="Nexia sotiladi"
-        value="<%= oldInput.shortInfo %>"
+        value="<% if (editing || hasError) { %><%= product.shortInfo %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -43,7 +31,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'model') ? 'invalidInput' : '' %>"
         name="model"
-        value="<%= oldInput.model %>"
+        value="<% if (editing || hasError) { %><%= product.model %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -95,7 +83,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'year') ? 'invalidInput' : '' %>"
         name="year"
-        value="<%= oldInput.year %>"
+        value="<% if (editing) { %><%= year %><% } else if (hasError) { %><%= product.year %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -104,7 +92,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'kmRun') ? 'invalidInput' : '' %>"
         name="kmRun"
-        value="<%= oldInput.kmRun %>"
+        value="<% if (editing || hasError) { %><%= product.kmRun %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -138,7 +126,7 @@
         name="extraInfo"
         style="height: 70px"
       >
-<%= oldInput.extraInfo %></textarea
+<% if (editing || hasError) { %><%= product.extraInfo %><% } %></textarea
       >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
@@ -148,7 +136,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="price"
-        value="<%= oldInput.price %>"
+        value="<% if (editing || hasError) { %><%= product.price %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -157,14 +145,14 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
         name="phoneNumber"
-        value="<%= oldInput.phoneNumber %>"
+        value="<% if (editing || hasError) { %><%= product.phoneNumber %><% } %>"
       />
-      <p class="text-danger fs-6">
-        <%= validationErrors.find(e => e.param === 'phoneNumber') ? `Telefon raqamni
-        to'liq kiriting` : '' %>
-      </p>
+      <p class="text-danger fs-6"><%= validationErrors.find(e => e.param === 'phoneNumber') ? `Telefon raqamni to'liq kiriting` : '' %></p>
     </div>
     <div>
+      <% if (editing) { %>
+      <input type="hidden" value="<%= product._id %>" name="productId" />
+      <% } %>
       <button type="submit" class="btn btn-primary fs-4">Qo'shish</button>
     </div>
   </form>
