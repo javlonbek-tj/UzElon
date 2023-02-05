@@ -83,7 +83,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'year') ? 'invalidInput' : '' %>"
         name="year"
-        value="<% if (editing) { %><%= year %><% } else if (hasError) { %><%= product.year %><% } %>"
+        value="<% if (hasError || editing) { %><%= product.year %><% } %>"
       />
     </div>
     <div class="col-md-6">

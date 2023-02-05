@@ -1,33 +1,17 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form
-    class="row g-3 fs-4"
-    action="<% if (editing) { %>/user/edit-flat<% } else { %>/adding-flat<% } %>"
-    method="POST"
-  >
+  <form class="row g-3 fs-4" action="<% if (editing) { %>/user/edit-flat<% } else { %>/adding-flat<% } %>" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
       <input type="file" id="img" class="d-none" multiple />
     </div>
     <div class="form-check">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="rentOrSell"
-        id="rentOrSell1"
-        value="Ijara"
-      />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Ijara" />
       <label class="form-check-label" for="rentOrSell1"> Ijaraga </label>
     </div>
     <div class="form-check">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="rentOrSell"
-        id="rentOrSell2"
-        value="Sotiladi"
-      />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell2" value="Sotiladi" />
       <label class="form-check-label" for="rentOrSell2"> Sotiladi </label>
     </div>
     <div class="col-md-6">
@@ -38,7 +22,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="Kvartira sotiladi"
-        value="<%= product.shortInfo %>"
+        value="<% if (editing || hasError) { %><%= product.shortInfo %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -47,7 +31,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'rooms') ? 'invalidInput' : '' %>"
         name="rooms"
-        value="<%= product.rooms %>"
+        value="<% if (editing || hasError) { %><%= product.rooms %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -56,7 +40,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'floors') ? 'invalidInput' : '' %>"
         name="floors"
-        value="<%= product.floors %>"
+        value="<% if (editing || hasError) { %><%= product.floors %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -65,7 +49,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'floor') ? 'invalidInput' : '' %>"
         name="floor"
-        value="<%= product.floor %>"
+        value="<% if (editing || hasError) { %><%= product.floor %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -76,7 +60,7 @@
         id="square"
         step="0.01"
         name="area"
-        value="<%= product.area %>"
+        value="<% if (editing || hasError) { %><%= product.area %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -96,43 +80,19 @@
       <h4 class="mt-3">Kvartirada mavjud</h4>
     </div>
     <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        name="airConditioning"
-        value="Konditsioner"
-        id="air-conditioning"
-      />
+      <input class="form-check-input" type="checkbox" name="airConditioning" value="Konditsioner" id="air-conditioning" />
       <label class="form-check-label" for="air-conditioning"> Konditsioner </label>
     </div>
     <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        name="freeze"
-        value="Muzlatgich"
-        id="freeze"
-      />
+      <input class="form-check-input" type="checkbox" name="freeze" value="Muzlatgich" id="freeze" />
       <label class="form-check-label" for="freeze"> Muzlatgich </label>
     </div>
     <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        name="furniture"
-        value="Mebel"
-        id="furniture"
-      />
+      <input class="form-check-input" type="checkbox" name="furniture" value="Mebel" id="furniture" />
       <label class="form-check-label" for="furniture"> Mebel </label>
     </div>
     <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        name="washing"
-        value="Kir mashinasi"
-        id="washing"
-      />
+      <input class="form-check-input" type="checkbox" name="washing" value="Kir mashinasi" id="washing" />
       <label class="form-check-label" for="washing"> Kir yuvish mashinasi </label>
     </div>
     <div class="form-check">
@@ -170,7 +130,7 @@
         name="extraInfo"
         style="height: 70px"
       >
-<%= product.extraInfo %></textarea
+<% if (editing || hasError) { %><%= product.extraInfo %><% } %></textarea
       >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
@@ -180,7 +140,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="price"
-        value="<%= product.price %>"
+        value="<% if (editing || hasError) { %><%= product.price %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -190,12 +150,9 @@
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
         name="phoneNumber"
         placeholder="998901234567"
-        value="<%= product.phoneNumber %>"
+        value="<% if (editing || hasError) { %><%= product.phoneNumber %><% } %>"
       />
-      <p class="text-danger fs-6">
-        <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq
-        kiriting` : '' %>
-      </p>
+      <p class="text-danger fs-6"><%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq kiriting` : '' %></p>
     </div>
     <div>
       <% if (editing) { %>

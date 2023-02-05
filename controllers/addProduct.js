@@ -693,7 +693,24 @@ const postFlatAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const flatHas = [];
-    const { rentOrSell, shortInfo, rooms, floors, floor, area, flatCondition, address, extraInfo, price, phoneNumber } = req.body;
+    const {
+      rentOrSell,
+      shortInfo,
+      rooms,
+      floors,
+      floor,
+      area,
+      flatCondition,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      airConditioning,
+      freeze,
+      furniture,
+      tv,
+      washing,
+    } = req.body;
     if (!errors.isEmpty()) {
       return res.render('estate/flat', {
         pageTitle: 'Add product',
@@ -714,7 +731,7 @@ const postFlatAdding = async (req, res, next) => {
         hasError: true,
       });
     }
-    const { airConditioning, freeze, furniture, tv, washing } = req.body;
+
     if (airConditioning) {
       flatHas.push(airConditioning);
     }
@@ -766,7 +783,7 @@ const postHouseAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const houseHas = [];
-    const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber } = req.body;
+    const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty()) {
       return res.render('estate/house', {
         pageTitle: 'Add product',
@@ -785,7 +802,6 @@ const postHouseAdding = async (req, res, next) => {
         hasError: true,
       });
     }
-    const { gas, electricity } = req.body;
     if (gas) {
       houseHas.push(gas);
     }
@@ -1000,7 +1016,7 @@ const postServiceAdding = async (req, res, next) => {
           phoneNumber,
         },
         validationErrors: errors.array(),
-        editing: null,
+        editing: false,
         hasError: true,
       });
     }

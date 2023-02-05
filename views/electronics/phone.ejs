@@ -1,10 +1,6 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form
-    class="row g-3 fs-4"
-    action="<% if (editing) { %>/user/edit-phone<% } else { %>/adding-phone<% } %>"
-    method="POST"
-  >
+  <form class="row g-3 fs-4" action="<% if (editing) { %>/user/edit-phone<% } else { %>/adding-phone<% } %>" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
@@ -18,7 +14,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="SamSung A22 sotiladi"
-        value="<%= product.shortInfo %>"
+        value="<% if (editing || hasError) { %><%= product.shortInfo %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -27,7 +23,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'mark') ? 'invalidInput' : '' %>"
         name="mark"
-        value="<%= product.mark %>"
+        value="<% if (editing || hasError) { %><%= product.mark %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -36,7 +32,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'model') ? 'invalidInput' : '' %>"
         name="model"
-        value="<%= product.model %>"
+        value="<% if (editing || hasError) { %><%= product.model %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -57,7 +53,7 @@
         class="form-select form-select-lg mb-3 fs-4 <%= validationErrors.find(e => e.param === 'memory') ? 'invalidInput' : '' %>"
         aria-label=".form-select-lg example"
         name="memory"
-        value="<%= product.memory %>"
+        value="<% if (editing || hasError) { %><%= product.memory %><% } %>"
       >
         <option selected disabled>Xotira</option>
         <option value="16">16</option>
@@ -100,7 +96,7 @@
         name="extraInfo"
         style="height: 70px"
       >
-<%= product.extraInfo %></textarea
+      <% if (editing || hasError) { %><%= product.extraInfo %><% } %></textarea
       >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
@@ -110,7 +106,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="price"
-        value="<%= product.price %>"
+        value="<% if (editing || hasError) { %><%= product.price %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -119,12 +115,9 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
         name="phoneNumber"
-        value="<%= product.phoneNumber %>"
+        value="<% if (editing || hasError) { %><%= product.phoneNumber %><% } %>"
       />
-      <p class="text-danger fs-6">
-        <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq
-        kiriting` : '' %>
-      </p>
+      <p class="text-danger fs-6"><%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq kiriting` : '' %></p>
     </div>
     <div>
       <% if (editing) { %>

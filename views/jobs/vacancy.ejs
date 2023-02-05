@@ -1,10 +1,6 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form
-    class="row g-3 fs-4"
-    action="<% if (editing) { %>/user/edit-vacancy<% } else { %>/adding-vacancy<% } %>"
-    method="POST"
-  >
+  <form class="row g-3 fs-4" action="<% if (editing) { %>/user/edit-vacancy<% } else { %>/adding-vacancy<% } %>" method="POST">
     <div class="my-5 adding_file">
       <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
       <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
@@ -18,7 +14,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="Buxgalter kerak"
-        value="<%= product.shortInfo %>"
+        value="<% if (editing || hasError) { %><%= product.shortInfo %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -39,7 +35,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'position') ? 'invalidInput' : '' %>"
         name="position"
-        value="<%= product.position %>"
+        value="<% if (editing || hasError) { %><%= product.position %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -48,7 +44,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'requiredAge') ? 'invalidInput' : '' %>"
         name="requiredAge"
-        value="<%= product.requiredAge %>"
+        value="<% if (editing || hasError) { %><%= product.requiredAge %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -82,7 +78,7 @@
         name="extraInfo"
         style="height: 70px"
       >
-<%= product.extraInfo %></textarea
+      <% if (editing || hasError) { %><%= product.extraInfo %><% } %></textarea
       >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
@@ -92,7 +88,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="price"
-        value="<%= product.price %>"
+        value="<% if (editing || hasError) { %><%= product.price %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -101,12 +97,9 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
         name="phoneNumber"
-        value="<%= product.phoneNumber %>"
+        value="<% if (editing || hasError) { %><%= product.phoneNumber %><% } %>"
       />
-      <p class="text-danger fs-6">
-        <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq
-        kiriting` : '' %>
-      </p>
+      <p class="text-danger fs-6"><%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq kiriting` : '' %></p>
     </div>
     <div>
       <% if (editing) { %>

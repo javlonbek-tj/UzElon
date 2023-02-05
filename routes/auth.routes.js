@@ -55,14 +55,7 @@ router.post(
 router.post(
   '/login',
   [
-    check('email')
-      .trim()
-      .not()
-      .isEmpty()
-      .withMessage('Email kiritilmadi')
-      .isEmail()
-      .withMessage(`Mavjud bo'lmagan email kiritildi`)
-      .normalizeEmail(),
+    check('email').trim().not().isEmpty().withMessage('Email kiritilmadi').isEmail().withMessage(`Mavjud bo'lmagan email kiritildi`).normalizeEmail(),
     check('password')
       .not()
       .isEmpty()

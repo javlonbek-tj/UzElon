@@ -20,7 +20,7 @@ const getSignUp = (req, res, next) => {
     res.render('auth/signup', {
       pageTitle: 'AvtoVodil',
       errorMessage: false,
-      oldInput: {
+      product: {
         username: '',
         email: '',
         password: '',
@@ -41,7 +41,7 @@ const postSignUp = async (req, res, next) => {
       return res.status(422).render('auth/signup', {
         pageTitle: 'AvtoVodil',
         errorMessage: errors.array()[0].msg,
-        oldInput: {
+        product: {
           username,
           email,
           password,
@@ -67,7 +67,7 @@ const getLogin = (req, res, next) => {
     res.render('auth/login', {
       pageTitle: 'AvtoVodil',
       errorMessage: false,
-      oldInput: {
+      product: {
         username: '',
         email: '',
         password: '',
@@ -88,7 +88,7 @@ const postLogin = async (req, res, next) => {
       return res.status(422).render('auth/login', {
         pageTitle: 'AvtoVodil',
         errorMessage: 'Email yoki parol xato',
-        oldInput: {
+        product: {
           email,
           password,
         },
@@ -104,7 +104,6 @@ const postLogin = async (req, res, next) => {
 const isAuth = async (req, res, next) => {
   try {
     if (!req.cookies.jwt) {
-      res.locals.user = false;
       return next();
     }
     // 1) verify token
@@ -113,19 +112,16 @@ const isAuth = async (req, res, next) => {
     // 2) Check if user still exists
     const currentUser = await User.findById(decoded.id);
     if (!currentUser) {
-      res.locals.user = false;
       return next();
     }
 
     // 3) Check if user changed password after the token was issued
     if (currentUser.changedPasswordAfter(decoded.iat)) {
-      res.locals.user = false;
       return next();
     }
 
     // THERE IS A LOGGED IN USER
     req.user = currentUser;
-    res.locals.user = currentUser;
     return next();
   } catch (err) {
     console.log(err);
