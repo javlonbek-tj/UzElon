@@ -14,7 +14,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="Yevro remont qilamiz"
-        value="<%= product.shortInfo %>"
+        value="<% if (editing || hasError) { %><%= product.shortInfo %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -37,7 +37,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'experience') ? 'invalidInput' : '' %>"
         name="experience"
-        value="<%= product.experience %>"
+        value="<% if (editing || hasError) { %><%= product.experience %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -46,7 +46,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'numWorkers') ? 'invalidInput' : '' %>"
         name="numWorkers"
-        value="<%= product.numWorkers %>"
+        value="<% if (editing || hasError) { %><%= product.numWorkers %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -55,7 +55,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'workTime') ? 'invalidInput' : '' %>"
         name="workTime"
-        value="<%= product.workTime %>"
+        value="<% if (editing || hasError) { %><%= product.workTime %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -99,7 +99,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
         name="phoneNumber"
-        value="<%= product.phoneNumber %>"
+        value="<% if (editing || hasError) { %><%= product.phoneNumber %><% } %>"
       />
       <p class="text-danger fs-6"><%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq kiriting` : '' %></p>
     </div>

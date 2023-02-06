@@ -360,10 +360,8 @@ const postCarAdding = async (req, res, next) => {
         hasError: true,
       });
     }
-    const imageUrl = images.map(i => {
-      return i.path.replace('\\', '/');
-    });
-    console.log(imageUrl);
+    const imageUrl = 'dgergerg';
+    console.log(images);
     const car = new Car({
       imageUrl,
       shortInfo,

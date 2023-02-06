@@ -109,7 +109,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(upload.array('images'));
+app.use(upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }]));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

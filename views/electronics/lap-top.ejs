@@ -18,7 +18,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="Kompyuter sotiladi"
-        value="<%= product.shortInfo %>"
+        value="<% if (editing || hasError) { %><%= product.shortInfo %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -27,7 +27,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'mark') ? 'invalidInput' : '' %>"
         name="mark"
-        value="<%= product.mark %>"
+        value="<% if (editing || hasError) { %><%= product.mark %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -49,7 +49,7 @@
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'cpu') ? 'invalidInput' : '' %>"
         name="cpu"
         placeholder="Intel Core i5"
-        value="<%= product.cpu %>"
+        value="<% if (editing || hasError) { %><%= product.cpu %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -59,7 +59,7 @@
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'ram') ? 'invalidInput' : '' %>"
         name="ram"
         placeholder="8GB"
-        value="<%= product.ram %>"
+        value="<% if (editing || hasError) { %><%= product.ram %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -93,7 +93,7 @@
         name="extraInfo"
         style="height: 70px"
       >
-<%= product.extraInfo %></textarea
+      <% if (editing || hasError) { %><%= product.extraInfo %><% } %></textarea
       >
       <label for="address">Qo'shimcha ma'lumot</label>
     </div>
@@ -103,7 +103,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="price"
-        value="<%= product.price %>"
+        value="<% if (editing || hasError) { %><%= product.price %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -112,7 +112,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="phoneNumber"
-        value="<%= product.phoneNumber %>"
+        value="<% if (editing || hasError) { %><%= product.phoneNumber %><% } %>"
       />
       <p class="text-danger fs-6">
         <%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq

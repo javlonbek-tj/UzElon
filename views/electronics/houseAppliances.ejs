@@ -14,7 +14,7 @@
         name="shortInfo"
         maxlength="30"
         placeholder="Kir mashina sotiladi"
-        value="<%= product.shortInfo %>"
+        value="<% if (editing || hasError) { %><%= product.shortInfo %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -23,7 +23,7 @@
         type="text"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'applianceName') ? 'invalidInput' : '' %>"
         name="applianceName"
-        value="<%= product.applianceName %>"
+        value="<% if (editing || hasError) { %><%= product.applianceName %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -32,7 +32,7 @@
         class="form-select form-select-lg mb-3 fs-4 <%= validationErrors.find(e => e.param === 'applianceCondition') ? 'invalidInput' : '' %>"
         aria-label=".form-select-lg example"
         name="applianceCondition"
-        value="<%= product.applianceCondition %>"
+        value="<% if (editing || hasError) { %><%= product.applianceCondition %><% } %>"
       >
         <option selected disabled>Holati</option>
         <option value="Ishlatilgan">Ishlatilgan</option>
@@ -80,7 +80,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'price') ? 'invalidInput' : '' %>"
         name="price"
-        value="<%= product.price %>"
+        value="<% if (editing || hasError) { %><%= product.price %><% } %>"
       />
     </div>
     <div class="col-md-6">
@@ -89,7 +89,7 @@
         type="number"
         class="form-control fs-3 <%= validationErrors.find(e => e.param === 'phoneNumber') ? 'invalidInput' : '' %>"
         name="phoneNumber"
-        value="<%= product.phoneNumber %>"
+        value="<% if (editing || hasError) { %><%= product.phoneNumber %><% } %>"
       />
       <p class="text-danger fs-6"><%= validationErrors.find(e => e.param === 'phoneNumber') ? ` Telefon raqamni to'liq kiriting` : '' %></p>
     </div>
