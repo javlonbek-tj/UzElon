@@ -337,8 +337,9 @@ const getAnimalCategory = (req, res, next) => {
 const postCarAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, model, transmission, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber, rentOrSell } = req.body;
-    if (!errors.isEmpty()) {
+    if (!errors.isEmpty() || images.length <= 0) {
       return res.render('cars/car', {
         pageTitle: 'Add product',
         product: {
@@ -359,7 +360,12 @@ const postCarAdding = async (req, res, next) => {
         hasError: true,
       });
     }
+    const imageUrl = images.map(i => {
+      return i.path.replace('\\', '/');
+    });
+    console.log(imageUrl);
     const car = new Car({
+      imageUrl,
       shortInfo,
       model,
       transmission,
@@ -375,8 +381,10 @@ const postCarAdding = async (req, res, next) => {
       rentOrSell,
     });
     const newCar = await car.save();
+    console.log(newCar.imageUrl);
     const general = new General({
       _id: newCar._id,
+      imageUrl: newCar.imageUrl,
       shortInfo: newCar.shortInfo,
       price: newCar.price,
       address: newCar.address,
@@ -394,6 +402,9 @@ const postCarAdding = async (req, res, next) => {
 const postMotoadding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('cars/moto', {
@@ -443,6 +454,9 @@ const postMotoadding = async (req, res, next) => {
 const postTrackAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('cars/track', {
@@ -498,6 +512,9 @@ const postTrackAdding = async (req, res, next) => {
 const postAnimalAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { shortInfo, animalName, address, price, extraInfo, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('electronics/animal', {
@@ -543,6 +560,9 @@ const postAnimalAdding = async (req, res, next) => {
 const postHouseApp = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('electronics/houseAppliances', {
@@ -590,6 +610,9 @@ const postHouseApp = async (req, res, next) => {
 const postLapTopAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('electronics/lap-top', {
@@ -641,6 +664,9 @@ const postLapTopAdding = async (req, res, next) => {
 const postPhoneAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('electronics/phone', {
@@ -692,6 +718,9 @@ const postPhoneAdding = async (req, res, next) => {
 const postFlatAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const flatHas = [];
     const {
       rentOrSell,
@@ -782,6 +811,9 @@ const postFlatAdding = async (req, res, next) => {
 const postHouseAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const houseHas = [];
     const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty()) {
@@ -841,6 +873,9 @@ const postHouseAdding = async (req, res, next) => {
 const postLandAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const landHas = [];
     const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty()) {
@@ -896,6 +931,9 @@ const postLandAdding = async (req, res, next) => {
 const postNonResiAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const buildingHas = [];
     const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty()) {
@@ -953,6 +991,9 @@ const postNonResiAdding = async (req, res, next) => {
 const postConstructionAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('jobs/construction', {
@@ -1001,6 +1042,9 @@ const postConstructionAdding = async (req, res, next) => {
 const postServiceAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('jobs/service', {
@@ -1049,6 +1093,9 @@ const postServiceAdding = async (req, res, next) => {
 const postVacancyAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const image = req.file;
+    if (!image) {
+    }
     const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty()) {
       return res.render('jobs/vacancy', {

@@ -15,6 +15,10 @@ const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 
 const generalSchema = new Schema({
+  imageUrl: {
+    type: [String],
+    required: true,
+  },
   shortInfo: {
     type: String,
     required: true,

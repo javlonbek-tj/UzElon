@@ -15,6 +15,7 @@ const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const AppError = require('../utils/appError');
 const { validationResult } = require('express-validator');
+const deleteFile = require('../utils/deleteFile');
 
 const getUserProducts = async (req, res, next) => {
   try {
@@ -38,7 +39,8 @@ const postDeleteProduct = async (req, res, next) => {
     const deletedProd = await General.findByIdAndRemove(prodId);
     const prodType = deletedProd.productType;
     if (prodType === 'flat') {
-      await Flat.findByIdAndRemove(prodId);
+      const removedProd = await Flat.findByIdAndRemove(prodId);
+      deleteFile(removedProd.imageUrl);
     }
     if (prodType === 'house') {
       await House.findByIdAndRemove(prodId);
@@ -50,7 +52,8 @@ const postDeleteProduct = async (req, res, next) => {
       await NonResidential.findByIdAndRemove(prodId);
     }
     if (prodType === 'car') {
-      await Car.findByIdAndRemove(prodId);
+      const removedProd = await Car.findByIdAndRemove(prodId);
+      deleteFile(removedProd.imageUrl);
     }
     if (prodType === 'track') {
       await Track.findByIdAndRemove(prodId);

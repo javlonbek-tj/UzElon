@@ -1,10 +1,9 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="<% if (editing) { %>/user/edit-car<% } else { %>/adding-car<% } %>" method="POST">
+  <form class="row g-3 fs-4" action="<% if (editing) { %>/user/edit-car<% } else { %>/adding-car<% } %>" method="POST" enctype="multipart/form-data">
     <div class="my-5 adding_file">
-      <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
-      <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
-      <input type="file" id="img" class="d-none" multiple />
+      <label for="image" class="btn btn-success p-3">+ Rasm qo'shish</label>
+      <input type="file" id="images" name="images" multiple />
     </div>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Arenda" />

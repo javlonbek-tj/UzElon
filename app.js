@@ -9,6 +9,7 @@ const passport = require('passport');
 const MongoStore = require('connect-mongodb-session')(session);
 const User = require('./models/user.model');
 const { Strategy } = require('passport-google-oauth20');
+const upload = require('./utils/fileUpload');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -108,13 +109,15 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(upload.array('images'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // ROUTES
 app.use(
   '/auth/google',
   passport.authenticate('google', {
-    scope: ['profile'],
+    scope: ['email'],
   }),
 );
 

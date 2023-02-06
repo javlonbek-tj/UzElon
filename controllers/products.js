@@ -19,7 +19,7 @@ const getHomePage = async (req, res, next) => {
   try {
     const products = await General.find();
     const prods = products.map(p => {
-      p.price = p.price.toLocaleString('fr');
+      p.imageUrl = p.imageUrl[0];
       return p;
     });
     res.render('home', {
@@ -65,11 +65,16 @@ const getOneProduct = async (req, res, next) => {
     }
     if (productType == 'car') {
       const car = await Car.findById(prodId);
+      const images = car.imageUrl;
+      const image1 = images[0];
+      const image2 = images[1];
       const year = car.year.getFullYear();
       return res.render('products/car-details/product-car', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         car,
         year,
+        image1,
+        image2,
       });
     }
     if (productType == 'track') {
