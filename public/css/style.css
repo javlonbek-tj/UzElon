@@ -131,21 +131,29 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 1.5rem;
 }
-
-.cards .box-container .box {
+.cards .user_products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+}
+.user_products .box {
+  width: 25rem;
+}
+.cards .box {
   overflow: hidden;
   border-radius: 0.8rem;
   box-shadow: var(--box-shadow);
   background: #fff;
 }
 
-.cards .box-container .box img {
+.cards .box img {
   height: 18rem;
   width: 100%;
   object-fit: cover;
 }
 
-.cards .box-container .box .content .info {
+.cards .box .content .info {
   border-bottom: var(--border);
   line-height: 1;
 }

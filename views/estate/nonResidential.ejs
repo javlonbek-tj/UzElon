@@ -1,6 +1,11 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="<% if (editing) { %>/user/edit-nonResidential<% } else { %>/adding-nonResidential<% } %>" method="POST">
+  <form
+    class="row g-3 fs-4"
+    action="<% if (editing) { %>/user/edit-nonResidential<% } else { %>/adding-nonResidential<% } %>"
+    method="POST"
+    enctype="multipart/form-data"
+  >
     <h3 class="text-center d-lg-none">Fotosuratni qo'shing</h3>
     <div class="d-flex mb-5">
       <div class="d-lg-flex align-items-center d-none d-lg-block me-3"><h3>Fotosuratni qo'shing</h3></div>

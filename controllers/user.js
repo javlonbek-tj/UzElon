@@ -20,14 +20,14 @@ const { deleteFiles } = require('../utils/deleteFile');
 
 const getUserProducts = async (req, res, next) => {
   try {
-    const products = await General.find({ userId: req.user._id });
-    const prods = products.map(p => {
-      p.price = p.price.toLocaleString('fr');
-      return p;
-    });
+    const prods = await General.find();
+    const price = prods.map(p => p.price.toLocaleString('fr'));
+    const date = prods.map(p => p.createdAt.toLocaleString('en-GB'));
     res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
+      price,
+      date,
     });
   } catch (err) {
     console.log(err);
@@ -41,16 +41,35 @@ const postDeleteProduct = async (req, res, next) => {
     const prodType = deletedProd.productType;
     if (prodType === 'flat') {
       const removedProd = await Flat.findByIdAndRemove(prodId);
-      deleteFile(removedProd.imageUrl);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'house') {
-      await House.findByIdAndRemove(prodId);
+      const removedProd = await House.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'land') {
-      await Land.findByIdAndRemove(prodId);
+      const removedProd = await Land.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'nonResidential') {
-      await NonResidential.findByIdAndRemove(prodId);
+      const removedProd = await NonResidential.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'car') {
       const removedProd = await Car.findByIdAndRemove(prodId);
@@ -61,31 +80,76 @@ const postDeleteProduct = async (req, res, next) => {
       }
     }
     if (prodType === 'track') {
-      await Track.findByIdAndRemove(prodId);
+      const removedProd = await Track.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'moto') {
-      await Moto.findByIdAndRemove(prodId);
+      const removedProd = await Moto.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'construction') {
-      await Construction.findByIdAndRemove(prodId);
+      const removedProd = await Construction.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'service') {
-      await Service.findByIdAndRemove(prodId);
+      const removedProd = await Service.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'vacancy') {
-      await Vacancy.findByIdAndRemove(prodId);
+      const removedProd = await Vacancy.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'phone') {
-      await Phone.findByIdAndRemove(prodId);
+      const removedProd = await Phone.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'laptop') {
-      await LapTop.findByIdAndRemove(prodId);
+      const removedProd = await LapTop.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'houseAppliances') {
-      await HouseAppliances.findByIdAndRemove(prodId);
+      const removedProd = await HouseAppliances.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'animal') {
-      await Animal.findByIdAndRemove(prodId);
+      const removedProd = await Animal.findByIdAndRemove(prodId);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     res.redirect('/user/products');
   } catch (err) {
@@ -301,9 +365,26 @@ const getEditProduct = async (req, res, next) => {
   }
 };
 
+function getImageUrl(images) {
+  const image1 = images.image1[0].path;
+  const imageUrl = [image1];
+  let image2;
+  let image3;
+  if (images.image2) {
+    image2 = images.image2[0].path;
+    imageUrl.push(image2);
+  }
+  if (images.image3) {
+    image3 = images.image3[0].path;
+    imageUrl.push(image3);
+  }
+  return imageUrl;
+}
+
 const postEditCar = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, model, transmission, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber, rentOrSell, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -329,6 +410,16 @@ const postEditCar = async (req, res, next) => {
       });
     }
     const oldCar = await Car.findById(productId);
+    console.log(images);
+    if (!(images.length >= 0)) {
+      if (oldCar.imageUrl.length >= 2) {
+        deleteFiles(oldCar.imageUrl);
+      } else {
+        deleteFile(oldCar.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldCar.imageUrl = imageUrl;
+    }
     oldCar.shortInfo = shortInfo;
     oldCar.model = model;
     oldCar.transmission = transmission;
@@ -345,6 +436,7 @@ const postEditCar = async (req, res, next) => {
     }
     const updatedCar = await oldCar.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedCar.imageUrl[0];
     (oldGeneral.shortInfo = updatedCar.shortInfo),
       (oldGeneral.price = updatedCar.price),
       (oldGeneral.address = updatedCar.address),
@@ -358,6 +450,7 @@ const postEditCar = async (req, res, next) => {
 const postEditMoto = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -374,11 +467,20 @@ const postEditMoto = async (req, res, next) => {
           _id,
         },
         validationErrors: errors.array(),
-        editing: ftrue,
+        editing: true,
         hasError: true,
       });
     }
     const oldMoto = await Moto.findById(productId);
+    if (images) {
+      if (oldMoto.imageUrl.length >= 2) {
+        deleteFiles(oldMoto.imageUrl);
+      } else {
+        deleteFile(oldMoto.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldMoto.imageUrl = imageUrl;
+    }
     oldMoto.shortInfo = shortInfo;
     oldMoto.model = model;
     oldMoto.motoCondition = motoCondition;
@@ -386,8 +488,10 @@ const postEditMoto = async (req, res, next) => {
     oldMoto.extraInfo = extraInfo;
     oldMoto.price = price;
     oldMoto.phoneNumber = phoneNumber;
+
     const updatedMoto = await oldMoto.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedMoto.imageUrl[0];
     (oldGeneral.shortInfo = updatedMoto.shortInfo),
       (oldGeneral.price = updatedMoto.price),
       (oldGeneral.address = updatedMoto.address),
@@ -401,6 +505,7 @@ const postEditMoto = async (req, res, next) => {
 const postEditTrack = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -425,6 +530,15 @@ const postEditTrack = async (req, res, next) => {
       });
     }
     const oldTrack = await Track.findById(productId);
+    if (images) {
+      if (oldTrack.imageUrl.length >= 2) {
+        deleteFiles(oldTrack.imageUrl);
+      } else {
+        deleteFile(oldTrack.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldTrack.imageUrl = imageUrl;
+    }
     oldTrack.shortInfo = shortInfo;
     oldTrack.model = model;
     oldTrack.fluel = fluel;
@@ -440,6 +554,7 @@ const postEditTrack = async (req, res, next) => {
     }
     const updatedTrack = await oldTrack.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedTrack.imageUrl[0];
     (oldGeneral.shortInfo = updatedTrack.shortInfo),
       (oldGeneral.price = updatedTrack.price),
       (oldGeneral.address = updatedTrack.address),
@@ -453,6 +568,7 @@ const postEditTrack = async (req, res, next) => {
 const postEditAnimal = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, animalName, address, price, extraInfo, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -473,6 +589,15 @@ const postEditAnimal = async (req, res, next) => {
       });
     }
     const oldAnimal = await Animal.findById(productId);
+    if (images) {
+      if (oldAnimal.imageUrl.length >= 2) {
+        deleteFiles(oldAnimal.imageUrl);
+      } else {
+        deleteFile(oldAnimal.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldAnimal.imageUrl = imageUrl;
+    }
     oldAnimal.shortInfo = shortInfo;
     oldAnimal.address = address;
     oldAnimal.extraInfo = extraInfo;
@@ -481,6 +606,7 @@ const postEditAnimal = async (req, res, next) => {
 
     const updatedAnimal = await oldAnimal.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedAnimal.imageUrl[0];
     (oldGeneral.shortInfo = updatedAnimal.shortInfo),
       (oldGeneral.price = updatedAnimal.price),
       (oldGeneral.address = updatedAnimal.address),
@@ -494,6 +620,7 @@ const postEditAnimal = async (req, res, next) => {
 const postEditHouseApp = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -515,6 +642,15 @@ const postEditHouseApp = async (req, res, next) => {
       });
     }
     const oldHouseApp = await HouseAppliances.findById(productId);
+    if (images) {
+      if (oldHouseApp.imageUrl.length >= 2) {
+        deleteFiles(oldHouseApp.imageUrl);
+      } else {
+        deleteFile(oldHouseApp.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldHouseApp.imageUrl = imageUrl;
+    }
     oldHouseApp.shortInfo = shortInfo;
     oldHouseApp.applianceName = applianceName;
     oldHouseApp.applianceCondition = applianceCondition;
@@ -522,8 +658,10 @@ const postEditHouseApp = async (req, res, next) => {
     oldHouseApp.extraInfo = extraInfo;
     oldHouseApp.price = price;
     oldHouseApp.phoneNumber = phoneNumber;
+
     const updatedHouseApp = await oldHouseApp.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedHouseApp.imageUrl[0];
     (oldGeneral.shortInfo = updatedHouseApp.shortInfo),
       (oldGeneral.price = updatedHouseApp.price),
       (oldGeneral.address = updatedHouseApp.address),
@@ -537,6 +675,7 @@ const postEditHouseApp = async (req, res, next) => {
 const postEditLapTop = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -560,6 +699,15 @@ const postEditLapTop = async (req, res, next) => {
       });
     }
     const oldLapTop = await LapTop.findById(productId);
+    if (images) {
+      if (oldLapTop.imageUrl.length >= 2) {
+        deleteFiles(oldLapTop.imageUrl);
+      } else {
+        deleteFile(oldLapTop.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldLapTop.imageUrl = imageUrl;
+    }
     oldLapTop.shortInfo = shortInfo;
     oldLapTop.mark = mark;
     oldLapTop.lapTopCondition = lapTopCondition;
@@ -567,8 +715,10 @@ const postEditLapTop = async (req, res, next) => {
     oldLapTop.extraInfo = extraInfo;
     oldLapTop.price = price;
     oldLapTop.phoneNumber = phoneNumber;
-    const updatedHouseApp = await oldLapTop.save();
+
+    const updatedLapTop = await oldLapTop.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedLapTop.imageUrl[0];
     (oldGeneral.shortInfo = updatedHouseApp.shortInfo),
       (oldGeneral.price = updatedHouseApp.price),
       (oldGeneral.address = updatedHouseApp.address),
@@ -582,6 +732,7 @@ const postEditLapTop = async (req, res, next) => {
 const postEditPhone = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -605,6 +756,15 @@ const postEditPhone = async (req, res, next) => {
       });
     }
     const oldPhone = await Phone.findById(productId);
+    if (images) {
+      if (oldPhone.imageUrl.length >= 2) {
+        deleteFiles(oldPhone.imageUrl);
+      } else {
+        deleteFile(oldPhone.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldPhone.imageUrl = imageUrl;
+    }
     oldPhone.shortInfo = shortInfo;
     oldPhone.mark = mark;
     oldPhone.model = model;
@@ -617,6 +777,7 @@ const postEditPhone = async (req, res, next) => {
 
     const updatedPhone = await oldPhone.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedPhone.imageUrl[0];
     (oldGeneral.shortInfo = updatedPhone.shortInfo),
       (oldGeneral.price = updatedPhone.price),
       (oldGeneral.address = updatedPhone.address),
@@ -630,6 +791,7 @@ const postEditPhone = async (req, res, next) => {
 const postEditFlat = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const flatHas = [];
     const {
       rentOrSell,
@@ -688,6 +850,15 @@ const postEditFlat = async (req, res, next) => {
       flatHas.push(washing);
     }
     const oldFlat = await Flat.findById(productId);
+    if (images) {
+      if (oldFlat.imageUrl.length >= 2) {
+        deleteFiles(oldFlat.imageUrl);
+      } else {
+        deleteFile(oldFlat.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldFlat.imageUrl = imageUrl;
+    }
     oldFlat.shortInfo = shortInfo;
     oldFlat.rooms = rooms;
     oldFlat.floors = floors;
@@ -701,6 +872,7 @@ const postEditFlat = async (req, res, next) => {
     }
     const updatedFlat = await oldFlat.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedFlat.imageUrl[0];
     (oldGeneral.shortInfo = updatedFlat.shortInfo),
       (oldGeneral.price = updatedFlat.price),
       (oldGeneral.address = updatedFlat.address),
@@ -713,6 +885,7 @@ const postEditFlat = async (req, res, next) => {
 const postEditHouse = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const houseHas = [];
     const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber, gas, electricity, productId } = req.body;
     if (!errors.isEmpty()) {
@@ -742,6 +915,15 @@ const postEditHouse = async (req, res, next) => {
       houseHas.push(electricity);
     }
     const oldHouse = await House.findById(productId);
+    if (images) {
+      if (oldHouse.imageUrl.length >= 2) {
+        deleteFiles(oldHouse.imageUrl);
+      } else {
+        deleteFile(oldHouse.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldHouse.imageUrl = imageUrl;
+    }
     oldHouse.shortInfo = shortInfo;
     oldHouse.rooms = rooms;
     oldHouse.area = area;
@@ -755,6 +937,7 @@ const postEditHouse = async (req, res, next) => {
     }
     const updatedHouse = await oldHouse.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedHouse.imageUrl[0];
     (oldGeneral.shortInfo = updatedHouse.shortInfo),
       (oldGeneral.price = updatedHouse.price),
       (oldGeneral.address = updatedHouse.address),
@@ -767,6 +950,7 @@ const postEditHouse = async (req, res, next) => {
 const postEditLand = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const landHas = [];
     const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity, productId } = req.body;
     if (!errors.isEmpty()) {
@@ -794,6 +978,15 @@ const postEditLand = async (req, res, next) => {
       landHas.push(electricity);
     }
     const oldLand = await Land.findById(productId);
+    if (images) {
+      if (oldLand.imageUrl.length >= 2) {
+        deleteFiles(oldLand.imageUrl);
+      } else {
+        deleteFile(oldLand.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldLand.imageUrl = imageUrl;
+    }
     oldLand.shortInfo = shortInfo;
     oldLand.area = area;
     oldLand.address = address;
@@ -805,6 +998,7 @@ const postEditLand = async (req, res, next) => {
     }
     const updatedLand = await oldLand.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedLand.imageUrl[0];
     (oldGeneral.shortInfo = updatedLand.shortInfo),
       (oldGeneral.price = updatedLand.price),
       (oldGeneral.address = updatedLand.address),
@@ -818,6 +1012,7 @@ const postEditLand = async (req, res, next) => {
 const postEditNonResidential = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const buildingHas = [];
     const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity, productId } = req.body;
     if (!errors.isEmpty()) {
@@ -846,6 +1041,15 @@ const postEditNonResidential = async (req, res, next) => {
       buildingHas.push(electricity);
     }
     const oldNonResi = await NonResidential.findById(productId);
+    if (images) {
+      if (oldNonResi.imageUrl.length >= 2) {
+        deleteFiles(oldNonResi.imageUrl);
+      } else {
+        deleteFile(oldNonResi.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldNonResi.imageUrl = imageUrl;
+    }
     oldNonResi.shortInfo = shortInfo;
     oldNonResi.rooms = rooms;
     oldNonResi.area = area;
@@ -858,6 +1062,7 @@ const postEditNonResidential = async (req, res, next) => {
     }
     const updatedNonResi = await oldNonResi.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedNonResi.imageUrl[0];
     (oldGeneral.shortInfo = updatedNonResi.shortInfo),
       (oldGeneral.price = updatedNonResi.price),
       (oldGeneral.address = updatedNonResi.address),
@@ -871,6 +1076,7 @@ const postEditNonResidential = async (req, res, next) => {
 const postEditConstruction = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -893,6 +1099,15 @@ const postEditConstruction = async (req, res, next) => {
       });
     }
     const oldConstruction = await Construction.findById(productId);
+    if (images) {
+      if (oldConstruction.imageUrl.length >= 2) {
+        deleteFiles(oldConstruction.imageUrl);
+      } else {
+        deleteFile(oldConstruction.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldConstruction.imageUrl = imageUrl;
+    }
     oldConstruction.shortInfo = shortInfo;
     oldConstruction.serviceType = serviceType;
     oldConstruction.experience = experience;
@@ -904,7 +1119,10 @@ const postEditConstruction = async (req, res, next) => {
 
     const updatedConstruction = await oldConstruction.save();
     const oldGeneral = await General.findById(productId);
-    (oldGeneral.shortInfo = updatedConstruction.shortInfo), (oldGeneral.address = updatedConstruction.address), await oldGeneral.save();
+    (oldGeneral.shortInfo = updatedConstruction.shortInfo),
+      (oldGeneral.imageUrl = updatedConstruction.imageUrl[0]),
+      (oldGeneral.address = updatedConstruction.address),
+      await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
     console.log(err);
@@ -914,6 +1132,7 @@ const postEditConstruction = async (req, res, next) => {
 const postEditService = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -936,6 +1155,15 @@ const postEditService = async (req, res, next) => {
       });
     }
     const oldService = await Service.findById(productId);
+    if (images) {
+      if (oldService.imageUrl.length >= 2) {
+        deleteFiles(oldService.imageUrl);
+      } else {
+        deleteFile(oldService.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldService.imageUrl = imageUrl;
+    }
     oldService.shortInfo = shortInfo;
     oldService.gender = gender;
     oldService.serviceType = serviceType;
@@ -947,6 +1175,7 @@ const postEditService = async (req, res, next) => {
 
     const updatedService = await oldService.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedService.imageUrl[0];
     (oldGeneral.shortInfo = updatedService.shortInfo),
       (oldGeneral.price = updatedService.price),
       (oldGeneral.address = updatedService.address),
@@ -960,6 +1189,7 @@ const postEditService = async (req, res, next) => {
 const postEditVacancy = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+    const images = req.files;
     const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber, productId } = req.body;
     if (!errors.isEmpty()) {
       const _id = productId;
@@ -982,6 +1212,15 @@ const postEditVacancy = async (req, res, next) => {
       });
     }
     const oldVacancy = await Vacancy.findById(productId);
+    if (images) {
+      if (oldVacancy.imageUrl.length >= 2) {
+        deleteFiles(oldVacancy.imageUrl);
+      } else {
+        deleteFile(oldVacancy.imageUrl[0]);
+      }
+      imageUrl = getImageUrl(images);
+      oldVacancy.imageUrl = imageUrl;
+    }
     oldVacancy.shortInfo = shortInfo;
     oldVacancy.gender = gender;
     oldVacancy.position = position;
@@ -993,6 +1232,7 @@ const postEditVacancy = async (req, res, next) => {
 
     const updatedVacancy = await oldVacancy.save();
     const oldGeneral = await General.findById(productId);
+    oldGeneral.imageUrl = updatedVacancy.imageUrl[0];
     (oldGeneral.shortInfo = updatedVacancy.shortInfo),
       (oldGeneral.price = updatedVacancy.price),
       (oldGeneral.address = updatedVacancy.address),

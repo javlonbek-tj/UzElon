@@ -477,7 +477,6 @@ const postTrackAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    console.log(images);
     let imageError = null;
     if (!images.image1) {
       imageError = true;

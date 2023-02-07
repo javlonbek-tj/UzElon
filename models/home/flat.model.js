@@ -14,20 +14,14 @@ const flatSchema = new Schema(
     rooms: {
       type: Number,
       required: true,
-      min: 1,
-      max: 10,
     },
     floors: {
       type: Number,
       required: true,
-      min: 1,
-      max: 50,
     },
     floor: {
       type: Number,
       required: true,
-      min: 1,
-      max: 50,
     },
     area: {
       type: Number,

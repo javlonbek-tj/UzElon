@@ -14,32 +14,37 @@ const LapTop = require('../models/electronics/lap-top.model');
 const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 
-const generalSchema = new Schema({
-  imageUrl: {
-    type: [String],
-    required: true,
+const generalSchema = new Schema(
+  {
+    imageUrl: {
+      type: [String],
+      required: true,
+    },
+    shortInfo: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    dollar: {
+      type: Boolean,
+      default: false,
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+    productType: String,
   },
-  shortInfo: {
-    type: String,
-    required: true,
+  {
+    timestamps: true,
   },
-  price: {
-    type: Number,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  dollar: {
-    type: Boolean,
-    default: false,
-  },
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'User',
-  },
-  productType: String,
-});
+);
 
 module.exports = model('General', generalSchema);

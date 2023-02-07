@@ -46,7 +46,7 @@
       <div class="content p-3">
         <div class="info pb-1 mb-3">
           <h4 href="#"><%= product.shortInfo %></h4>
-            <p class="text-muted fs-5"> 1st may, 2021 </p>
+            <p class="text-muted fs-5"> <%= product.createdAt %> </p>
         </div>
         <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
       </div>

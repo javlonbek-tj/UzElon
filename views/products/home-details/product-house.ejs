@@ -13,45 +13,25 @@
               aria-current="true"
               aria-label="Slide 1"
             ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="2"
-              aria-label="Slide 3"
-            ></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="/image/blog-2.jpg" class="d-block w-100" alt="..." />
+              <img src="/<%= house.imageUrl[0] %>" class="d-block w-100" alt="..." />
             </div>
             <div class="carousel-item">
-              <img src="/image/blog-2.jpg" class="d-block w-100" alt="..." />
+              <img src="/<%= house.imageUrl[1] %>" class="d-block w-100" alt="..." />
             </div>
             <div class="carousel-item">
-              <img src="/image/blog-3.jpg" class="d-block w-100" alt="..." />
+              <img src="/<%= house.imageUrl[2] %>" class="d-block w-100" alt="..." />
             </div>
           </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-          >
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -62,9 +42,7 @@
         <div class="card">
           <div class="card-body">
             <div class="d-md-flex justify-content-between mb-3">
-              <h2 class="main_info">
-                Hovli uy <%= house.rentOrSell %>, <%= house.rooms %> xonali, <%=house.area %> sotix
-              </h2>
+              <h2 class="main_info">Hovli uy <%= house.rentOrSell %>, <%= house.rooms %> xonali, <%=house.area %> sotix</h2>
               <p class="fs-5">E'lon qo'shilgan sana: 2023.01.27 20:39</p>
             </div>
             <p class="h1 py-2"><%= house.price %> $</p>
@@ -73,9 +51,7 @@
               <li><span> Xonalar soni:</span> &nbsp <%= house.rooms %></li>
               <li><span> Maydoni:</span> &nbsp <%= house.area %> sotix.</li>
               <li><span> Remont holati: &nbsp</span> <%= house.houseCondition %></li>
-              <li>
-                <span> Uyda mavjud: &nbsp </span><% for (let houseH of house.houseHas) { %> <%= houseH, %> <% } %>
-              </li>
+              <li><span> Uyda mavjud: &nbsp </span><% for (let houseH of house.houseHas) { %> <%= houseH, %> <% } %></li>
             </ul>
             <h3>Tavsif:</h3>
             <p class="fs-4 mb-5"><%= house.extraInfo %></p>
