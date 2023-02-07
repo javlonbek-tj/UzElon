@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const carSchema = new Schema(
   {
     imageUrl: {
-      type: [String],
+      type: [Object],
       required: true,
     },
     shortInfo: {

@@ -23,6 +23,9 @@
         </label>
       </div>
     </div>
+    <div class="my-3 text-center text-danger <%= (product.imageError) ? '' : 'd-none'%>">
+      <p>Fotosurat qo'shilmadi</p>
+    </div>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Arenda" />
       <label class="form-check-label" for="rentOrSell1"> Arendaga </label>

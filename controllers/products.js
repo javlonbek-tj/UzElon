@@ -65,16 +65,11 @@ const getOneProduct = async (req, res, next) => {
     }
     if (productType == 'car') {
       const car = await Car.findById(prodId);
-      const images = car.imageUrl;
-      const image1 = images[0];
-      const image2 = images[1];
       const year = car.year.getFullYear();
       return res.render('products/car-details/product-car', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         car,
         year,
-        image1,
-        image2,
       });
     }
     if (productType == 'track') {

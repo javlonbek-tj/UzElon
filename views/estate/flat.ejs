@@ -1,10 +1,35 @@
 <%- include('../includes/head.ejs') %>
 <div class="product_adding mtt">
-  <form class="row g-3 fs-4" action="<% if (editing) { %>/user/edit-flat<% } else { %>/adding-flat<% } %>" method="POST">
-    <div class="my-5 adding_file">
-      <h3 class="mb-4">Rasm qo'shish (maksimal 3ta)</h3>
-      <label for="img" class="btn btn-primary p-3">+ Rasm qo'shish</label>
-      <input type="file" id="img" class="d-none" multiple />
+  <form
+    class="row g-3 fs-4"
+    action="<% if (editing) { %>/user/edit-flat<% } else { %>/adding-flat<% } %>"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <h3 class="text-center d-lg-none">Fotosuratni qo'shing</h3>
+    <div class="d-flex mb-5">
+      <div class="d-lg-flex align-items-center d-none d-lg-block me-3"><h3>Fotosuratni qo'shing</h3></div>
+      <div class="form-element me-3">
+        <input type="file" id="file-1" accept="image/*" class="d-none" name="image1" />
+        <label for="file-1" id="file-1-preview">
+          <img src="https://bit.ly/3ubuq5o" alt="" />
+        </label>
+      </div>
+      <div class="form-element me-3">
+        <input type="file" id="file-2" accept="image/*" class="d-none" name="image2" />
+        <label for="file-2" id="file-2-preview">
+          <img src="https://bit.ly/3ubuq5o" alt="" />
+        </label>
+      </div>
+      <div class="form-element">
+        <input type="file" id="file-3" accept="image/*" class="d-none" name="image3" />
+        <label for="file-3" id="file-3-preview">
+          <img src="https://bit.ly/3ubuq5o" alt="" />
+        </label>
+      </div>
+    </div>
+    <div class="my-3 text-center text-danger <%= (product.imageError) ? '' : 'd-none'%>">
+      <p>Fotosurat qo'shilmadi</p>
     </div>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Ijara" />

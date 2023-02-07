@@ -15,7 +15,8 @@ const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const AppError = require('../utils/appError');
 const { validationResult } = require('express-validator');
-const deleteFile = require('../utils/deleteFile');
+const { deleteFile } = require('../utils/deleteFile');
+const { deleteFiles } = require('../utils/deleteFile');
 
 const getUserProducts = async (req, res, next) => {
   try {
@@ -53,7 +54,11 @@ const postDeleteProduct = async (req, res, next) => {
     }
     if (prodType === 'car') {
       const removedProd = await Car.findByIdAndRemove(prodId);
-      deleteFile(removedProd.imageUrl);
+      if (removedProd.imageUrl.length >= 2) {
+        deleteFiles(removedProd.imageUrl);
+      } else {
+        deleteFile(removedProd.imageUrl[0]);
+      }
     }
     if (prodType === 'track') {
       await Track.findByIdAndRemove(prodId);

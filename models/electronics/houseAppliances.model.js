@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 
 const houseAppliancesSchema = new Schema(
   {
+    imageUrl: {
+      type: [String],
+      required: true,
+    },
     shortInfo: {
       type: String,
       required: true,

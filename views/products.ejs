@@ -53,7 +53,7 @@
   <div class="box-container">
     <% for (let product of prods) { %>
     <div class="box">
-      <a href="/products/<%= product._id %>"><img src="/image/blog-1.jpg" alt="" /></a>
+      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"><img src="/<%= product.imageUrl %>" alt="" /></a>
       <div class="content p-3">
         <div class="info pb-1 mb-3">
           <h4 href="#"><%= product.shortInfo %></h4>

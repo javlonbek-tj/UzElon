@@ -128,14 +128,8 @@ section {
 
 .cards .box-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 1.5rem;
-}
-.cards .user-box-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: stretch;
 }
 
 .cards .box-container .box {
@@ -200,8 +194,8 @@ section {
 /* Product-deatil starts here */
 
 .carousel-inner .carousel-item img {
-  height: 400px;
-  width: 500px;
+  height: 300px;
+  width: 600px;
 }
 
 /* Add-product starts here */
@@ -457,12 +451,6 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     gap: 1.5rem;
-  }
-  .cards .user-box-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: stretch;
   }
 
   #header__for_adding,
