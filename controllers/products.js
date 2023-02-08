@@ -17,15 +17,15 @@ const AppError = require('../utils/appError');
 
 const getHomePage = async (req, res, next) => {
   try {
-    const prods = await General.find();
-    prods.forEach(p => (p.createdAt = p.createdAt.toLocaleString()));
-    /*  const price = prods.map(p => p.price.toLocaleString('fr'));
-    const date = prods.map(p => p.createdAt.toLocaleString('en-GB')); */
+    const prods = await General.find().lean();
+    prods.map(p => {
+      p.price = p.price.toLocaleString('fr');
+      p.createdAt = p.createdAt.toLocaleString('en-GB');
+    });
     res.render('home', {
       pageTitle: 'AvtoVodil',
       prods,
     });
-    console.log(prods);
   } catch (err) {
     console.log(err);
   }
