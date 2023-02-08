@@ -14,7 +14,7 @@ const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const General = require('../models/general.model');
 const { validationResult } = require('express-validator');
-const { deleteFile, deleteFiles } = require('../utils/deleteFile');
+const { deleteFile, deleteFiles, getImageUrl, deleteImageIfError } = require('../utils/file');
 
 const getAddProduct = (req, res, next) => {
   try {
@@ -44,6 +44,11 @@ const getFlatCategory = (req, res, next) => {
       validationErrors: [],
       editing: false,
       hasError: false,
+      airCond: '',
+      freeze: '',
+      furniture: '',
+      washing: '',
+      tv,
     });
   } catch (err) {
     console.log(err);
@@ -65,6 +70,8 @@ const getHouseCategory = (req, res, next) => {
       validationErrors: [],
       editing: false,
       hasError: false,
+      gas: '',
+      electricity: '',
     });
   } catch (err) {
     console.log(err);
@@ -85,6 +92,8 @@ const getLandCategory = (req, res, next) => {
       validationErrors: [],
       editing: false,
       hasError: false,
+      gas: '',
+      electricity: '',
     });
   } catch (err) {
     console.log(err);
@@ -106,6 +115,8 @@ const getNonResidentialCategory = (req, res, next) => {
       validationErrors: [],
       editing: false,
       hasError: false,
+      gas: '',
+      electricity: '',
     });
   } catch (err) {
     console.log(err);
@@ -335,26 +346,6 @@ const getAnimalCategory = (req, res, next) => {
   }
 };
 
-function getImageUrl(images) {
-  const imageUrl = [];
-  let image1;
-  let image2;
-  let image3;
-  if (images.image1) {
-    image1 = images.image1[0].path;
-    imageUrl.push(image1);
-  }
-  if (images.image2) {
-    image2 = images.image2[0].path;
-    imageUrl.push(image2);
-  }
-  if (images.image3) {
-    image3 = images.image3[0].path;
-    imageUrl.push(image3);
-  }
-  return imageUrl;
-}
-
 const postCarAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
@@ -365,12 +356,7 @@ const postCarAdding = async (req, res, next) => {
     }
     const { shortInfo, model, transmission, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber, rentOrSell } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
-      const imageUrl = getImageUrl(images);
-      if (imageUrl.length >= 2) {
-        deleteFiles(imageUrl);
-      } else {
-        deleteFile(imageUrl[0]);
-      }
+      deleteImageIfError(images);
       return res.render('cars/car', {
         pageTitle: 'Add product',
         product: {
@@ -437,6 +423,7 @@ const postMotoadding = async (req, res, next) => {
     }
     const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('cars/moto', {
         pageTitle: 'Add product',
         product: {
@@ -494,6 +481,7 @@ const postTrackAdding = async (req, res, next) => {
     }
     const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('cars/track', {
         pageTitle: 'Add product',
         product: {
@@ -558,6 +546,7 @@ const postAnimalAdding = async (req, res, next) => {
     }
     const { shortInfo, animalName, address, price, extraInfo, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('electronics/animal', {
         pageTitle: 'Add product',
         product: {
@@ -612,6 +601,7 @@ const postHouseApp = async (req, res, next) => {
     }
     const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('electronics/houseAppliances', {
         pageTitle: 'Add product',
         product: {
@@ -668,6 +658,8 @@ const postLapTopAdding = async (req, res, next) => {
     }
     const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      const imageUrl = getImageUrl(images);
+      deleteImageIfError(images);
       return res.render('electronics/lap-top', {
         pageTitle: 'Add product',
         product: {
@@ -728,6 +720,7 @@ const postPhoneAdding = async (req, res, next) => {
     }
     const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('electronics/phone', {
         pageTitle: 'Add product',
         product: {
@@ -806,6 +799,7 @@ const postFlatAdding = async (req, res, next) => {
       washing,
     } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('estate/flat', {
         pageTitle: 'Add product',
         product: {
@@ -888,6 +882,7 @@ const postHouseAdding = async (req, res, next) => {
     const houseHas = [];
     const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('estate/house', {
         pageTitle: 'Add product',
         product: {
@@ -956,6 +951,7 @@ const postLandAdding = async (req, res, next) => {
     const landHas = [];
     const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('estate/land', {
         pageTitle: 'Add product',
         product: {
@@ -1020,6 +1016,7 @@ const postNonResiAdding = async (req, res, next) => {
     const buildingHas = [];
     const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('estate/nonResidential', {
         pageTitle: 'Add product',
         product: {
@@ -1085,6 +1082,7 @@ const postConstructionAdding = async (req, res, next) => {
     }
     const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('jobs/construction', {
         pageTitle: 'Add product',
         product: {
@@ -1142,6 +1140,7 @@ const postServiceAdding = async (req, res, next) => {
     }
     const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('jobs/service', {
         pageTitle: 'Add product',
         product: {
@@ -1199,6 +1198,7 @@ const postVacancyAdding = async (req, res, next) => {
     }
     const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
+      deleteImageIfError(images);
       return res.render('jobs/vacancy', {
         pageTitle: 'Add product',
         product: {

@@ -32,11 +32,11 @@
       <p>Fotosurat qo'shilmadi</p>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Ijara" />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Ijara" <%= (product.rentOrSell === 'Ijara') ? 'checked' : '' %> />
       <label class="form-check-label" for="rentOrSell1"> Ijaraga </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell2" value="Sotiladi" />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell2" value="Sotiladi" <%= (product.rentOrSell === 'Sotiladi') ? 'checked' : '' %>/>
       <label class="form-check-label" for="rentOrSell2"> Sotiladi </label>
     </div>
     <div class="col-md-6">
@@ -105,23 +105,23 @@
       <h4 class="mt-3">Kvartirada mavjud</h4>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="airConditioning" value="Konditsioner" id="air-conditioning" />
+      <input class="form-check-input" type="checkbox" name="airConditioning" value="Konditsioner" id="air-conditioning" <%= (airCond) ? 'checked' : '' %>/>
       <label class="form-check-label" for="air-conditioning"> Konditsioner </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="freeze" value="Muzlatgich" id="freeze" />
+      <input class="form-check-input" type="checkbox" name="freeze" value="Muzlatgich" id="freeze" <%= (freeze) ? 'checked' : '' %>/>
       <label class="form-check-label" for="freeze"> Muzlatgich </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="furniture" value="Mebel" id="furniture" />
+      <input class="form-check-input" type="checkbox" name="furniture" value="Mebel" id="furniture" <%= (furniture) ? 'checked' : '' %>/>
       <label class="form-check-label" for="furniture"> Mebel </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="washing" value="Kir mashinasi" id="washing" />
+      <input class="form-check-input" type="checkbox" name="washing" value="Kir mashinasi" id="washing" <%= (washing) ? 'checked' : '' %>/>
       <label class="form-check-label" for="washing"> Kir yuvish mashinasi </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="tv" value="Televizor" id="tv" />
+      <input class="form-check-input" type="checkbox" name="tv" value="Televizor" id="tv" <%= (tv) ? 'checked' : '' %>/>
       <label class="form-check-label" for="tv"> Televizor </label>
     </div>
     <div class="col-md-6">

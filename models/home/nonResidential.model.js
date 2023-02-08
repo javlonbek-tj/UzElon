@@ -41,7 +41,11 @@ const nonResidentialSchema = new Schema(
       required: true,
     },
     rentOrSell: String,
-    buildingHas: [],
+    buildingHas: [String],
+    views: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

@@ -53,6 +53,10 @@ const trackSchema = new Schema(
       required: true,
     },
     rentOrSell: String,
+    views: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

@@ -47,6 +47,10 @@ const houseSchema = new Schema(
     },
     houseHas: [String],
     rentOrSell: String,
+    views: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

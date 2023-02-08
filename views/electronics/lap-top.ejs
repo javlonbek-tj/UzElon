@@ -58,7 +58,7 @@
         aria-label=".form-select-lg example"
         name="lapTopCondition"
       >
-      <option <% (editing || hasError) ? '' : 'selected' %> disabled>Holati</option>
+      <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Holati</option>
       <option value="Ishlatilgan" <% (product.lapTopCondition == 'Ishlatilgan') ? 'selected' : '' %>>Ishlatilgan</option>
       <option value="Yangi" <% (product.lapTopCondition == 'Yangi') ? 'selected' : '' %>>Yangi</option>
       </select>
@@ -90,7 +90,7 @@
         aria-label=".form-select-lg example"
         name="address"
       >
-        <option <% (editing || hasError) ? '' : 'selected' %> disabled>Manzil</option>
+        <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Manzil</option>
         <option value="Vodil" <% (product.adadress == 'Vodil') ? 'selected' : '' %>>Vodil</option>
         <option value="Yoshlarobod" <% (product.adadress == 'Yoshlarobod') ? 'selected' : '' %>>Yoshlarobod</option>
         <option value="Novkent'k" <% (product.adadress == 'Novkent') ? 'selected' : '' %>>Novkent</option>

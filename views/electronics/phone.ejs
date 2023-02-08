@@ -67,7 +67,7 @@
         aria-label=".form-select-lg example"
         name="phoneCondition"
       >
-      <option <% (editing || hasError) ? '' : 'selected' %> disabled>Holati</option>
+      <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Holati</option>
       <option value="Ishlatilgan" <% (product.phoneCondition == 'Ishlatilgan') ? 'selected' : '' %>>Ishlatilgan</option>
       <option value="Yangi" <% (product.phoneCondition == 'Yangi') ? 'selected' : '' %>>Yangi</option>
       </select>
@@ -80,7 +80,7 @@
         name="memory"
         value="<% if (editing || hasError) { %><%= product.memory %><% } %>"
       >
-        <option <% (editing || hasError) ? '' : 'selected' %> disabled>Xotira</option>
+        <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Xotira</option>
         <option value="16" <% (product.memory == '16') ? 'selected' : '' %>>16</option>
         <option value="32" <% (product.memory == '32') ? 'selected' : '' %>>32</option>
         <option value="64" <% (product.memory == '64') ? 'selected' : '' %>>64</option>
@@ -97,7 +97,7 @@
         aria-label=".form-select-lg example"
         name="address"
       >
-        <option <% (editing || hasError) ? '' : 'selected' %> disabled>Manzil</option>
+        <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Manzil</option>
         <option value="Vodil" <% (product.address == 'Vodil') ? 'selected' : '' %>>Vodil</option>
         <option value="Yoshlarobod" <% (product.address == 'Yoshlarobod') ? 'selected' : '' %>>Yoshlarobod</option>
         <option value="Novkent'k" <% (product.address == 'Novkent') ? 'selected' : '' %>>Novkent</option>

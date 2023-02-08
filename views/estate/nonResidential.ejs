@@ -32,11 +32,11 @@
       <p>Fotosurat qo'shilmadi</p>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Ijaraga" />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell1" value="Ijara" <%= (product.rentOrSell === 'Ijara') ? 'checked' : '' %> />
       <label class="form-check-label" for="rentOrSell1"> Ijaraga </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell2" value="Sotiladi" />
+      <input class="form-check-input" type="radio" name="rentOrSell" id="rentOrSell2" value="Sotiladi" <%= (product.rentOrSell === 'Sotiladi') ? 'checked' : '' %>/>
       <label class="form-check-label" for="rentOrSell2"> Sotiladi </label>
     </div>
     <div class="col-md-6">
@@ -72,11 +72,11 @@
       <h4 class="mt-3">Binoda mavjud</h4>
     </div>
     <div class="form-check">
-      <input class="form-check-input" name="gas" type="checkbox" value="Gaz" id="gas" />
+      <input class="form-check-input" name="gas" type="checkbox" value="Gaz" id="gas" <%= (gas) ? 'checked' : '' %>/>
       <label class="form-check-label" for="gas"> Gaz </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" name="electricity" type="checkbox" value="EelectricityheckChecked" />
+      <input class="form-check-input" name="electricity" type="checkbox" value="Elektr" <%= (electricity) ? 'checked' : '' %>/>
       <label class="form-check-label" for="electricity"> Elektr </label>
     </div>
     <div class="col-md-6">

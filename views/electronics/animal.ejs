@@ -58,7 +58,7 @@
         aria-label=".form-select-lg example"
         name="address"
       >
-        <option <% (editing || hasError) ? '' : 'selected' %> disabled>Manzil</option>
+        <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Manzil</option>
         <option value="Vodil" <% (product.address == 'Vodil') ? 'selected' : '' %>>Vodil</option>
         <option value="Yoshlarobod" <% (product.address == 'Yoshlarobod') ? 'selected' : '' %>>Yoshlarobod</option>
         <option value="Novkent'k" <% (product.address == 'Novkent') ? 'selected' : '' %>>Novkent</option>
