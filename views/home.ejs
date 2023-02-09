@@ -37,7 +37,8 @@
   <h1 class="text-center">E'lonlar mavjud emas</h1>
   <% } else { %>
   <div class="top-products d-flex justify-content-between">
-    <h2>Top products</h2>
+    <h2>Top e'lonlar</h2>
+    <a href="/products" class="h4 text-info">Barcha e'lonlar <i class="fa-solid fa-arrow-right"></i></a>
   </div>
   <div class="box-container">
     <% for (let product of prods) { %>
@@ -58,6 +59,5 @@
     <% } %>
   </div>
   <% } %>
-</section>
-  
+</section> 
   <%- include('./includes/end.ejs') %>

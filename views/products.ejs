@@ -1,4 +1,4 @@
-<%- include('../includes/head.ejs') %>
+<%- include('./includes/head.ejs') %>
 <section class="filter fs-4 d-flex justify-content-center mx-auto">
   <div class="filter_items">
     <div class="filtering">
@@ -45,15 +45,14 @@
 </section>
 <section class="cards container-lg" id="cards">
   <% if(prods.length <= 0) { %>
-  <h1 class="text-center">E'lonlar mavjud emas</h1>
+  <h1 class="text-center">E'lon topilmadi</h1>
   <% } else { %>
-  <div class="top-products d-flex justify-content-between">
-    <h2>Top products</h2>
-  </div>
-  <div class="box-container">
+  <div class="<%= (querySearch) ? 'user_products' : 'box-container'%>">
     <% for (let product of prods) { %>
     <div class="box">
-      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"><img src="/<%= product.imageUrl %>" alt="" /></a>
+      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
+        ><img src="/<%= product.imageUrl %>" alt=""
+      /></a>
       <div class="content p-3">
         <div class="info pb-1 mb-3">
           <h4 href="#"><%= product.shortInfo %></h4>
@@ -70,4 +69,4 @@
   </div>
   <% } %>
 </section>
-<%- include('../includes/end.ejs') %>
+<%- include('./includes/end.ejs') %>

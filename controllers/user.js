@@ -19,7 +19,7 @@ const { deleteFile, deleteFiles, getImageUrl, deleteImageIfError, deleteImage } 
 
 const getUserProducts = async (req, res, next) => {
   try {
-    const prods = await General.find().lean();
+    const prods = await General.find({ userId: req.user._id }).lean();
     prods.map(p => {
       p.price = p.price.toLocaleString('fr');
       p.createdAt = p.createdAt.toLocaleString('en-GB');
@@ -27,6 +27,7 @@ const getUserProducts = async (req, res, next) => {
     res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
+      isMe: true,
     });
   } catch (err) {
     console.log(err);
@@ -334,7 +335,21 @@ const postEditCar = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, model, transmission, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber, rentOrSell, productId } = req.body;
+    const {
+      shortInfo,
+      model,
+      transmission,
+      fluel,
+      color,
+      year,
+      kmRun,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      rentOrSell,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -448,7 +463,20 @@ const postEditTrack = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber, productId } = req.body;
+    const {
+      rentOrSell,
+      shortInfo,
+      model,
+      fluel,
+      color,
+      year,
+      kmRun,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -557,7 +585,8 @@ const postEditHouseApp = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber, productId } = req.body;
+    const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber, productId } =
+      req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -663,7 +692,8 @@ const postEditPhone = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber, productId } = req.body;
+    const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber, productId } =
+      req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -812,7 +842,20 @@ const postEditHouse = async (req, res, next) => {
     const errors = validationResult(req);
     const images = req.files;
     const houseHas = [];
-    const { rentOrSell, shortInfo, rooms, area, houseCondition, address, extraInfo, price, phoneNumber, gas, electricity, productId } = req.body;
+    const {
+      rentOrSell,
+      shortInfo,
+      rooms,
+      area,
+      houseCondition,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      gas,
+      electricity,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -875,7 +918,8 @@ const postEditLand = async (req, res, next) => {
     const errors = validationResult(req);
     const landHas = [];
     const images = req.files;
-    const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity, productId } = req.body;
+    const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity, productId } =
+      req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -935,7 +979,8 @@ const postEditNonResidential = async (req, res, next) => {
     const errors = validationResult(req);
     const images = req.files;
     const buildingHas = [];
-    const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity, productId } = req.body;
+    const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity, productId } =
+      req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -996,7 +1041,8 @@ const postEditConstruction = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber, productId } = req.body;
+    const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber, productId } =
+      req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;

@@ -3,10 +3,14 @@
   <% if(prods.length <= 0) { %>
   <h1 class="text-center">Sizda e'lonlar mavjud emas</h1>
   <% } else { %>
+  <h1 class="text-center mb-5 <%= (isMe) ? '' : 'd-none' %>">Mening barcha e'lonlarim</h1>
+  <h1 class="text-center mb-5 <%= (isMe) ? 'd-none' : '' %>">Muallifning barcha e'lonlari</h1>
   <div class="user_products">
     <% for (let product of prods) { %>
     <div class="box mb-4">
-      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"><img src="/<%= product.imageUrl%>" alt="" /></a>
+      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
+        ><img src="/<%= product.imageUrl%>" alt=""
+      /></a>
       <div class="content p-2">
         <div class="info pb-1 mb-4">
           <h4 href="#"><%= product.shortInfo %></h4>
@@ -15,7 +19,11 @@
         <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
       </div>
       <div class="card_footer d-flex justify-content-between px-3 py-3">
-        <a href="/user/edit-product/<%= product._id %>?edit=true&&productType=<%= product.productType %>" class="btn btn-success fs-4">O'zartirish</a>
+        <a
+          href="/user/edit-product/<%= product._id %>?edit=true&&productType=<%= product.productType %>"
+          class="btn btn-success fs-4"
+          >O'zartirish</a
+        >
         <form method="POST" action="/user/delete/product">
           <input type="hidden" name="productId" value="<%= product._id %>" />
           <button type="submit" class="btn btn-danger fs-4">O'chirish</button>

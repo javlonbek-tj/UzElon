@@ -41,10 +41,23 @@ const generalSchema = new Schema(
       ref: 'User',
     },
     productType: String,
+    category: {
+      type: String,
+      required: true,
+      enum: ['estate', 'avto', 'electronics', 'jobs'],
+    },
   },
   {
     timestamps: true,
   },
 );
+generalSchema.index({
+  shortInfo: 'text',
+});
 
+generalSchema.statics = {
+  searchPartial: function (q) {
+    return this.find({ shortInfo: new RegExp(q, 'gi') });
+  },
+};
 module.exports = model('General', generalSchema);

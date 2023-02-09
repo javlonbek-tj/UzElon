@@ -121,9 +121,13 @@ app.use(
   }),
 );
 
-app.use('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/error', successRedirect: '/' }), (req, res) => {
-  console.log('something');
-});
+app.use(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/error', successRedirect: '/' }),
+  (req, res) => {
+    console.log('something');
+  },
+);
 app.use(productsRoutes);
 app.use(addProductRoutes);
 app.use('/user', userRoutes);
