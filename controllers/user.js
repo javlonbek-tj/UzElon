@@ -130,7 +130,7 @@ const getEditProduct = async (req, res, next) => {
         product,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'moto') {
@@ -143,7 +143,7 @@ const getEditProduct = async (req, res, next) => {
         product: moto,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'track') {
@@ -158,7 +158,7 @@ const getEditProduct = async (req, res, next) => {
         product,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'animal') {
@@ -171,7 +171,7 @@ const getEditProduct = async (req, res, next) => {
         product: animal,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'houseAppliances') {
@@ -184,7 +184,7 @@ const getEditProduct = async (req, res, next) => {
         product: houseAppliances,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'laptop') {
@@ -197,7 +197,7 @@ const getEditProduct = async (req, res, next) => {
         product: laptop,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'phone') {
@@ -210,7 +210,7 @@ const getEditProduct = async (req, res, next) => {
         product: phone,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'flat') {
@@ -228,7 +228,7 @@ const getEditProduct = async (req, res, next) => {
         product: flat,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
         airCond,
         freeze,
         furniture,
@@ -248,7 +248,7 @@ const getEditProduct = async (req, res, next) => {
         product: house,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
         gas,
         electricity,
       });
@@ -265,7 +265,7 @@ const getEditProduct = async (req, res, next) => {
         product: land,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
         gas,
         electricity,
       });
@@ -282,7 +282,7 @@ const getEditProduct = async (req, res, next) => {
         product: nonResidential,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
         gas,
         electricity,
       });
@@ -297,7 +297,7 @@ const getEditProduct = async (req, res, next) => {
         product: service,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'vacancy') {
@@ -310,7 +310,7 @@ const getEditProduct = async (req, res, next) => {
         product: vacancy,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
     if (productType == 'construction') {
@@ -323,7 +323,7 @@ const getEditProduct = async (req, res, next) => {
         product: construction,
         validationErrors: [],
         editing: edit,
-        hasError: false,
+        hasError: null,
       });
     }
   } catch (err) {

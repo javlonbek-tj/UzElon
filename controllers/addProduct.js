@@ -42,8 +42,8 @@ const getFlatCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
       airConditioning: '',
       freeze: '',
       furniture: '',
@@ -68,8 +68,8 @@ const getHouseCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
       gas: '',
       electricity: '',
     });
@@ -90,8 +90,8 @@ const getLandCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
       gas: '',
       electricity: '',
     });
@@ -113,8 +113,8 @@ const getNonResidentialCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
       gas: '',
       electricity: '',
     });
@@ -140,8 +140,8 @@ const getCarCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      hasError: false,
-      editing: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -164,8 +164,8 @@ const getTrackCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -185,8 +185,8 @@ const getMotoCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -207,8 +207,8 @@ const getConstructionCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -229,8 +229,8 @@ const getServiceCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -251,8 +251,8 @@ const getVacancyCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -274,8 +274,8 @@ const getPhoneCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -297,8 +297,8 @@ const getLapTopCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -318,8 +318,8 @@ const getHouseAppliancesCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -338,8 +338,8 @@ const getAnimalCategory = (req, res, next) => {
         phoneNumber: '',
       },
       validationErrors: [],
-      editing: false,
-      hasError: false,
+      editing: null,
+      hasError: null,
     });
   } catch (err) {
     console.log(err);
@@ -389,7 +389,7 @@ const postCarAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -455,7 +455,7 @@ const postMotoadding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -520,7 +520,7 @@ const postTrackAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -584,7 +584,7 @@ const postAnimalAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -643,7 +643,7 @@ const postHouseApp = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -705,7 +705,7 @@ const postLapTopAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -769,7 +769,7 @@ const postPhoneAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -836,7 +836,6 @@ const postFlatAdding = async (req, res, next) => {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
       }
-      console.log(address, flatCondition);
       return res.render('estate/flat', {
         pageTitle: 'Add product',
         product: {
@@ -853,7 +852,7 @@ const postFlatAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
         airConditioning,
         freeze,
@@ -954,7 +953,7 @@ const postHouseAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -1024,7 +1023,7 @@ const postLandAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -1093,8 +1092,10 @@ const postNonResiAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
+        gas,
+        electricity,
       });
     }
     if (gas) {
@@ -1163,7 +1164,7 @@ const postConstructionAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -1224,7 +1225,7 @@ const postServiceAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
@@ -1285,7 +1286,7 @@ const postVacancyAdding = async (req, res, next) => {
           imageError,
         },
         validationErrors: errors.array(),
-        editing: false,
+        editing: null,
         hasError: true,
       });
     }
