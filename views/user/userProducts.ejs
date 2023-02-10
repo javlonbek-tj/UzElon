@@ -5,9 +5,9 @@
   <% } else { %>
   <h1 class="text-center mb-5 <%= (isMe) ? '' : 'd-none' %>">Mening barcha e'lonlarim</h1>
   <h1 class="text-center mb-5 <%= (isMe) ? 'd-none' : '' %>">Muallifning barcha e'lonlari</h1>
-  <div class="user_products">
+  <div class="box_container">
     <% for (let product of prods) { %>
-    <div class="box mb-4">
+    <div class="box mb-5">
       <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
         ><img src="/<%= product.imageUrl%>" alt=""
       /></a>
@@ -18,17 +18,21 @@
         </div>
         <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
       </div>
-      <div class="card_footer d-flex justify-content-between px-3 py-3">
-        <a
-          href="/user/edit-product/<%= product._id %>?edit=true&&productType=<%= product.productType %>"
-          class="btn btn-success fs-4"
-          >O'zartirish</a
-        >
+      <% if(isMe) { %>
+      <div class="card_footer d-flex justify-content-between px-5 py-3">
+        <a href="/user/edit-product/<%= product._id %>?edit=true&&productType=<%= product.productType %>"
+          ><i class="fa-solid fa-pen-to-square fs-4 text-info"></i
+        ></a>
         <form method="POST" action="/user/delete/product">
           <input type="hidden" name="productId" value="<%= product._id %>" />
-          <button type="submit" class="btn btn-danger fs-4">O'chirish</button>
+          <button type="submit" class="bg-white"><i class="fa-solid fa-trash text-danger fs-4"></i></button>
         </form>
       </div>
+      <% } else { %>
+      <div class="card_footer d-flex justify-content-between px-5 p-2">
+        <p class="me-5 text-secondary fs-5"><%= product.address %></p>
+      </div>
+      <% } %>
     </div>
     <% } %>
   </div>

@@ -16,14 +16,12 @@ const Animal = require('../models/electronics/animal.model');
 const AppError = require('../utils/appError');
 const { validationResult } = require('express-validator');
 const { deleteFile, deleteFiles, getImageUrl, deleteImageIfError, deleteImage } = require('../utils/file');
+const { formatProd } = require('./products');
 
 const getUserProducts = async (req, res, next) => {
   try {
     const prods = await General.find({ userId: req.user._id }).lean();
-    prods.map(p => {
-      p.price = p.price.toLocaleString('fr');
-      p.createdAt = p.createdAt.toLocaleString('en-GB');
-    });
+    formatProd(prods);
     res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
@@ -215,7 +213,7 @@ const getEditProduct = async (req, res, next) => {
     }
     if (productType == 'flat') {
       const flat = await Flat.findById(prodId);
-      const airCond = flat.flatHas.includes('Konditsioner');
+      const airConditioning = flat.flatHas.includes('Konditsioner');
       const freeze = flat.flatHas.includes('Muzlatgich');
       const furniture = flat.flatHas.includes('Mebel');
       const washing = flat.flatHas.includes('Kir mashinasi');
@@ -229,7 +227,7 @@ const getEditProduct = async (req, res, next) => {
         validationErrors: [],
         editing: edit,
         hasError: null,
-        airCond,
+        airConditioning,
         freeze,
         furniture,
         washing,

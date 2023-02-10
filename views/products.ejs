@@ -1,53 +1,54 @@
 <%- include('./includes/head.ejs') %>
 <section class="filter fs-4 d-flex justify-content-center mx-auto">
-  <div class="filter_items">
+  <form class="filter_items" action="/products" method="GET">
     <div class="filtering">
-      <select name="filtering" id="filtering">
-        <option value="">Category</option>
-        <option value="">Home</option>
-        <option value="">Restaurant</option>
-        <option value="">Hotel</option>
-        <option value="">Something</option>
+      <select name="category" id="category">
+        <option selected disabled>Kategoriya</option>
+        <option value="avto">Transport</option>
+        <option value="electronics">Elektronika</option>
+        <option value="estate">Uy-joy</option>
+        <option value="jobs">Ish va xizmatlar</option>
       </select>
     </div>
     <div class="filtering">
-      <input type="text" class="filtering-input" placeholder="min price" id="from" />
+      <input type="text" class="filtering-input" placeholder="min narx" name="from" />
     </div>
     <div class="filtering">
-      <input type="text" class="filtering-input" placeholder="max price" id="to" />
+      <input type="text" class="filtering-input" placeholder="max narx" name="to" />
     </div>
     <div class="filtering">
       <select name="address" id="address">
-        <option value="">Address</option>
-        <option value="">Toshkent shahar</option>
-        <option value="">Toshkent viloyati</option>
-        <option value="">Andijon viloyati</option>
-        <option value="">Namangan viloyati</option>
-        <option value="">Farg'ona viloyati</option>
-        <option value="">Sirdaryo viloyati</option>
-        <option value="">Jizzax viloyati</option>
-        <option value="">Samarqand viloyati</option>
-        <option value="">Buxoro viloyati</option>
-        <option value="">Navoiy viloyati</option>
-        <option value="">Qashqadaryo viloyati</option>
-        <option value="">Surxondaryo viloyati</option>
-        <option value="">Xorazm viloyati</option>
-        <option value="">Qoraqalpog'iston</option>
+        <option selected disabled>Manzil</option>
+        <option value="Vodil">Vodil</option>
+        <option value="Yoshlarobod">Yoshlarobod</option>
+        <option value="Novkent">Novkent</option>
+        <option value="Yangiobod">Yangiobod</option>
+        <option value="Mindonobod">Mindonobod</option>
+        <option value="Avval">Avval</option>
+        <option value="Kaptarxona">Kaptarxona</option>
+        <option value="Log'on">Log'on</option>
+        <option value="Mindon">Mindon</option>
+        <option value="Chimyon">Chimyon</option>
+        <option value="Xonqiz">Xonqiz</option>
+        <option value="Oqtom">Oqtom</option>
+        <option value="Satkak">Satkak</option>
+        <option value="Damko'l">Damko'l</option>
+        <option value="Shoximardon">Shoximardon</option>
       </select>
     </div>
     <div class="filtering">
       <button type="submit">Qidirish</button>
     </div>
     <div class="filtering d-flex align-items-center">
-      <a href="products.html" class="text-center"><i class="fa-solid fa-arrows-rotate"></i></a>
+      <a href="/products" class="text-center"><i class="fa-solid fa-arrows-rotate"></i></a>
     </div>
-  </div>
+  </form>
 </section>
 <section class="cards container-lg" id="cards">
   <% if(prods.length <= 0) { %>
   <h1 class="text-center">E'lon topilmadi</h1>
-  <% } else { %>
-  <div class="<%= (querySearch) ? 'user_products' : 'box-container'%>">
+  <% } else { %> <% if(prods.length > 4) { %>
+  <div class="box-container">
     <% for (let product of prods) { %>
     <div class="box">
       <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
@@ -58,15 +59,38 @@
           <h4 href="#"><%= product.shortInfo %></h4>
           <p class="text-muted fs-5"><%= product.createdAt %></p>
         </div>
+        <% if(product.price) { %>
         <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+        <% } %>
       </div>
       <div class="card_footer d-flex justify-content-between px-5 py-2">
         <h5 class="me-5 text-secondary"><%= product.address %></h5>
-        <i class="fa-regular fa-heart fs-4"></i>
       </div>
     </div>
     <% } %>
   </div>
-  <% } %>
+  <% } else { %>
+  <div class="box_container">
+    <% for (let product of prods) { %>
+    <div class="box mb-5">
+      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
+        ><img src="/<%= product.imageUrl %>" alt=""
+      /></a>
+      <div class="content p-3">
+        <div class="info pb-1 mb-3">
+          <h4 href="#"><%= product.shortInfo %></h4>
+          <p class="text-muted fs-5"><%= product.createdAt %></p>
+        </div>
+        <% if(product.price) { %>
+        <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+        <% } %>
+      </div>
+      <div class="card_footer d-flex justify-content-between px-5 pt-2">
+        <p class="me-5 text-secondary fs-5"><%= product.address %></p>
+      </div>
+    </div>
+    <% } %>
+  </div>
+  <% } %> <% } %>
 </section>
 <%- include('./includes/end.ejs') %>

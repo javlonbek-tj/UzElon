@@ -48,11 +48,8 @@ section {
 .first__header {
   background-color: rgb(58, 58, 95);
   width: 100%;
-  height: 4rem;
-  padding: 0 2rem;
-}
-.first__header a {
-  padding-top: 1.4rem;
+  height: 3.5rem;
+  padding: 0.8rem 2rem;
 }
 .header {
   position: sticky;
@@ -94,14 +91,14 @@ section {
 
 /* Showcase starts here */
 #home {
-  width: 60rem;
+  width: 80%;
   margin: auto;
 }
 .home_categories a {
   background: lightblue;
   padding: 1.5rem 6rem;
   margin-right: 4rem;
-  border-radius: 15px;
+  border-radius: 12px;
   color: var(--black);
   font-size: 1.7rem;
 }
@@ -127,13 +124,13 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 1.5rem;
 }
-.cards .user_products {
+.cards .box_container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: stretch;
 }
-.user_products .box {
+.box_container .box {
   width: 25rem;
 }
 .cards .box {
@@ -224,10 +221,6 @@ section {
 .choosing_category_items button:hover {
   background: rgb(209, 230, 236);
   color: rgb(49, 48, 48);
-}
-.footer {
-  margin-top: 800px;
-  text-align: center;
 }
 
 /* Authenticated User */
@@ -452,9 +445,6 @@ input:-webkit-autofill:active {
 }
 
 @media (max-width: 768px) {
-  #home {
-    display: none;
-  }
   #cards {
     margin: 30px auto;
   }
@@ -465,7 +455,6 @@ input:-webkit-autofill:active {
   }
 
   #header__for_adding,
-  .header_logo,
   .add_product_link a,
   #user_btn {
     display: none;
@@ -534,6 +523,17 @@ input:-webkit-autofill:active {
     width: 90px;
     height: 90px;
   }
+  #home {
+    width: 100%;
+    margin: auto;
+  }
+  .home_categories a {
+    padding: 1.5rem 2.6rem;
+    margin-right: 1.8rem;
+    border-radius: 10px;
+    color: var(--black);
+    font-size: 1.5rem;
+  }
 }
 @media (max-width: 500px) {
   html {
@@ -582,6 +582,16 @@ input:-webkit-autofill:active {
     width: 70px;
     height: 70px;
   }
+  .first__header a span {
+    display: none;
+  }
+  .home_categories a {
+    padding: 1.5rem 2rem;
+    margin-right: 1.5rem;
+    border-radius: 8px;
+    color: var(--black);
+    font-size: 1.2rem;
+  }
 }
 @media (max-width: 359px) {
   #cards {
@@ -605,9 +615,11 @@ input:-webkit-autofill:active {
     width: 50px;
     height: 50px;
   }
-
   .form-element img {
     width: 50px;
     height: 50px;
+  }
+  .header_logo {
+    display: none;
   }
 }

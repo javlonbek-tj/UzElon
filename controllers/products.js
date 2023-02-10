@@ -15,7 +15,7 @@ const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const filtering = require('../utils/filtering');
 
-function formatProd(prods) {
+const formatProd = prods => {
   if (prods.length) {
     prods.map(p => {
       if (p.price) {
@@ -36,14 +36,12 @@ function formatProd(prods) {
     }
   }
   return prods;
-}
+};
 
 const getHomePage = async (req, res, next) => {
   try {
     const prods = await General.find().lean();
-    if (!prods.length == 0) {
-      formatProd(prods);
-    }
+    formatProd(prods);
     res.render('home', {
       pageTitle: 'AvtoVodil',
       prods,
@@ -61,13 +59,12 @@ const getOneProduct = async (req, res, next) => {
       const flat = await Flat.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
         .lean();
-      const allFlat = await General.find({ productType: 'car' }).lean();
+      formatProd(flat);
+      const allFlat = await General.find({ category: 'estate' }).lean();
       const prods = formatProd(allFlat);
-      const date = flat.createdAt.toLocaleString('en-GB');
       return res.render('products/home-details/product-flat', {
         pageTitle: 'Kvartira oldi-sotdisi',
         flat,
-        date,
         prods,
       });
     }
@@ -76,7 +73,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(land);
-      const prods = await General.find({ productType: 'land', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'estate', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -91,7 +88,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(house);
-      const prods = await General.find({ productType: 'house', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'estate', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -106,7 +103,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(nonResidential);
-      const prods = await General.find({ productType: 'nonResidential', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'estate', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -121,7 +118,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(car);
-      const prods = await General.find({ productType: 'car', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'avto', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -136,7 +133,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(track);
-      const prods = await General.find({ productType: 'track', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'avto', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -151,7 +148,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(moto);
-      const prods = await General.find({ productType: 'moto', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'avto', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -166,7 +163,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(vacancy);
-      const prods = await General.find({ productType: 'vacancy', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'jobs', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -181,7 +178,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(service);
-      const prods = await General.find({ productType: 'service', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'jobs', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -196,7 +193,7 @@ const getOneProduct = async (req, res, next) => {
         'userId',
       );
       formatProd(construction);
-      const prods = await General.find({ productType: 'construction', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'jobs', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -211,7 +208,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(phone);
-      const prods = await General.find({ productType: 'phone', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'electronics', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -226,7 +223,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(houseAppliances);
-      const prods = await General.find({ productType: 'houseAppliances', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'electronics', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -241,7 +238,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(lapTop);
-      const prods = await General.find({ productType: 'lapTop', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'electronics', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -256,7 +253,7 @@ const getOneProduct = async (req, res, next) => {
         .populate('userId')
         .lean();
       formatProd(animal);
-      const prods = await General.find({ productType: 'animal', _id: { $ne: prodId } }).lean();
+      const prods = await General.find({ category: 'electronics', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
         formatProd(prods);
       }
@@ -285,9 +282,14 @@ const getAllProducts = async (req, res, next) => {
       });
     }
     if (!req.query.page || !req.query.limit) {
-      const { category, from, to, region } = req.query;
-      const filterings = filtering(category, from, to, region);
+      let { category, from, to, address } = req.query;
+      from = parseInt(from);
+      to = parseInt(to);
+      const filterings = filtering(category, from, to, address);
       const prods = await General.find(filterings).lean();
+      if (prods.length > 0) {
+        formatProd(prods);
+      }
       return res.render('products', {
         pageTitle: "Qidirilgan e'lonlar",
         prods,
@@ -295,7 +297,9 @@ const getAllProducts = async (req, res, next) => {
       });
     }
     const prods = await General.find().lean();
-    formatProd(prods);
+    if (prods.length > 0) {
+      formatProd(prods);
+    }
     res.render('products', {
       pageTitle: "AvtoVodil barcha e'lonlar",
       prods,
@@ -312,11 +316,10 @@ const getAuthorProducts = async (req, res, next) => {
     if (!userId) {
       return console.log('Xatolik');
     }
-    let isMe = false;
-    if (userId == req.user._id) {
-      isMe = true;
+    let isMe = null;
+    if (req.user._id) {
+      isMe = userId == req.user._id.toString();
     }
-    console.log(isMe);
     const prods = await General.find({ userId }).lean();
     formatProd(prods);
     res.render('user/userProducts', {
@@ -334,4 +337,5 @@ module.exports = {
   getOneProduct,
   getAllProducts,
   getAuthorProducts,
+  formatProd,
 };

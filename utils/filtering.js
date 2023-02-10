@@ -1,125 +1,125 @@
-const filtering = (category, from, to, region) => {
+const filtering = (category, from, to, address) => {
   let filtering;
   //If exists all of them
-  if (category && from && to && region) {
+  if (category && from && to && address) {
     filtering = {
       category,
-      amount: { $gte: from, $lte: to },
-      region,
+      price: { $gte: from, $lte: to },
+      address,
     };
   }
 
   //If exists only category
-  if (category && !from && !to && !region) {
+  if (category && !from && !to && !address) {
     filtering = {
       category,
     };
   }
 
-  //If existe category and region
-  if (category && !from && !to && region) {
+  //If existe category and address
+  if (category && !from && !to && address) {
     filtering = {
       category,
-      region,
+      address,
     };
   }
 
-  //If exist category region and from
-  if (category && from && !to && region) {
+  //If exist category address and from
+  if (category && from && !to && address) {
     filtering = {
       category,
-      region,
-      amount: { $gte: from },
+      address,
+      price: { $gte: from },
     };
   }
 
-  //If exist category region and to
-  if (category && !from && to && region) {
+  //If exist category address and to
+  if (category && !from && to && address) {
     filtering = {
       category,
-      region,
-      amount: { $lte: to },
+      address,
+      price: { $lte: to },
     };
   }
 
   //If exist only category and from
-  if (category && from && !to && !region) {
+  if (category && from && !to && !address) {
     filtering = {
       category,
-      amount: { $gte: from },
+      price: { $gte: from },
     };
   }
 
   //If exist category and to
-  if (category && !from && to && !region) {
+  if (category && !from && to && !address) {
     filtering = {
       category,
-      amount: { $lte: to },
+      price: { $lte: to },
     };
   }
 
   //If exist category  from and to
-  if (category && from && to && !region) {
+  if (category && from && to && !address) {
     filtering = {
       category,
-      amount: { $gte: from, $lte: to },
+      price: { $gte: from, $lte: to },
     };
   }
 
   //If exist only from
-  if (!category && from && !to && !region) {
+  if (!category && from && !to && !address) {
     filtering = {
-      amount: { $gte: from },
+      price: { $gte: from },
     };
   }
 
   //If exist from and to
-  if (!category && from && to && !region) {
+  if (!category && from && to && !address) {
     filtering = {
-      amount: { $gte: from, $lte: to },
+      price: { $gte: from, $lte: to },
     };
   }
 
-  //If exist from and to and region
-  if (!category && from && to && region) {
+  //If exist from and to and address
+  if (!category && from && to && address) {
     filtering = {
-      region,
-      amount: { $gte: from, $lte: to },
+      address,
+      price: { $gte: from, $lte: to },
     };
   }
 
-  //If exist from and region
-  if (!category && from && !to && region) {
+  //If exist from and address
+  if (!category && from && !to && address) {
     filtering = {
-      region,
-      amount: { $gte: from },
+      address,
+      price: { $gte: from },
     };
   }
 
   //If exist only to
-  if (!category && !from && to && !region) {
+  if (!category && !from && to && !address) {
     filtering = {
-      amount: { $lte: to },
+      price: { $lte: to },
     };
   }
 
-  //If exist to and region
-  if (!category && !from && to && region) {
+  //If exist to and address
+  if (!category && !from && to && address) {
     filtering = {
-      region,
-      amount: { $lte: to },
+      address,
+      price: { $lte: to },
     };
   }
 
-  //If exist only region
-  if (!category && !from && !to && region) {
+  //If exist only address
+  if (!category && !from && !to && address) {
     filtering = {
-      region,
+      address,
     };
   }
 
   //If not exist any of them
-  if (!category && !from && !to && !region) {
+  if (!category && !from && !to && !address) {
     filtering = {};
   }
 

@@ -66,10 +66,10 @@
         aria-label=".form-select-lg example"
         name="motoCondition"
       >
-        <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Holati</option>
-        <option value="Yangi" <% (product.motoCondition == 'Yangi') ? 'selected' : '' %>>Yangi</option>
-        <option value="Foydalanilgan" <% (product.motoCondition == 'Foydalanilgan') ? 'selected' : '' %>>Foydalanilgan</option>
-        <option value="Ta'mirtalab" <% (product.motoCondition == "Ta'mirtalab") ? 'selected' : '' %>>Ta'mirtalab</option>
+        <option <%= (editing || hasError && product.motoCondition) ? '' : 'selected' %> disabled>Holati</option>
+        <option value="Yangi" <%= (product.motoCondition == 'Yangi') ? 'selected' : '' %>>Yangi</option>
+        <option value="Foydalanilgan" <%= (product.motoCondition == 'Foydalanilgan') ? 'selected' : '' %>>Foydalanilgan</option>
+        <option value="Ta'mirtalab" <%= (product.motoCondition == "Ta'mirtalab") ? 'selected' : '' %>>Ta'mirtalab</option>
       </select>
     </div>
     <div class="col-md-6">
@@ -79,22 +79,22 @@
         aria-label=".form-select-lg example"
         name="address"
       >
-        <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Manzil</option>
-        <option value="Vodil" <% (product.address == 'Vodil') ? 'selected' : '' %>>Vodil</option>
-        <option value="Yoshlarobod" <% (product.addres == 'Yoshlarobod') ? 'selected' : '' %>>Yoshlarobod</option>
-        <option value="Novkent'k" <% (product.addres == 'Novkent') ? 'selected' : '' %>>Novkent</option>
-        <option value="Yangiobod" <% (product.addres == 'Yangiobod') ? 'selected' : '' %>>Yangiobod</option>
-        <option value="Mindonobod" <% (product.addres == 'Mindonobod') ? 'selected' : '' %>>Mindonobod</option>
-        <option value="Avval" <% (product.addres == 'Avval') ? 'selected' : '' %>>Avval</option>
-        <option value="Kaptarxona" <% (product.addres == 'Kaptarxona') ? 'selected' : '' %>>Kaptarxona</option>
-        <option value="Log'on" <% (product.addres == "Log'on") ? 'selected' : '' %>>Log'on</option>
-        <option value="Mindon" <% (product.addres == 'Mindon') ? 'selected' : '' %>>Mindon</option>
-        <option value="Chimyon" <% (product.addres == 'Chimyon') ? 'selected' : '' %>>Chimyon</option>
-        <option value="Xonqiz" <% (product.addres == 'Xonqiz') ? 'selected' : '' %>>Xonqiz</option>
-        <option value="Oqtom" <% (product.addres == 'Oqtom') ? 'selected' : '' %>>Oqtom</option>
-        <option value="Satkak" <% (product.addres == 'Satkak') ? 'selected' : '' %>>Satkak</option>
-        <option value="Damko'l" <% (product.addres == "Damko'l") ? 'selected' : '' %>>Damko'l</option>
-        <option value="Shoximardon" <% (product.addres == 'Shoximardon') ? 'selected' : '' %>>Shoximardon</option>
+        <option <%= (editing || hasError && product.address) ? '' : 'selected' %> disabled>Manzil</option>
+        <option value="Vodil" <%= (product.address == 'Vodil') ? 'selected' : '' %>>Vodil</option>
+        <option value="Yoshlarobod" <%= (product.addres == 'Yoshlarobod') ? 'selected' : '' %>>Yoshlarobod</option>
+        <option value="Novkent'k" <%= (product.addres == 'Novkent') ? 'selected' : '' %>>Novkent</option>
+        <option value="Yangiobod" <%= (product.addres == 'Yangiobod') ? 'selected' : '' %>>Yangiobod</option>
+        <option value="Mindonobod" <%= (product.addres == 'Mindonobod') ? 'selected' : '' %>>Mindonobod</option>
+        <option value="Avval" <%= (product.addres == 'Avval') ? 'selected' : '' %>>Avval</option>
+        <option value="Kaptarxona" <%= (product.addres == 'Kaptarxona') ? 'selected' : '' %>>Kaptarxona</option>
+        <option value="Log'on" <%= (product.addres == "Log'on") ? 'selected' : '' %>>Log'on</option>
+        <option value="Mindon" <%= (product.addres == 'Mindon') ? 'selected' : '' %>>Mindon</option>
+        <option value="Chimyon" <%= (product.addres == 'Chimyon') ? 'selected' : '' %>>Chimyon</option>
+        <option value="Xonqiz" <%= (product.addres == 'Xonqiz') ? 'selected' : '' %>>Xonqiz</option>
+        <option value="Oqtom" <%= (product.addres == 'Oqtom') ? 'selected' : '' %>>Oqtom</option>
+        <option value="Satkak" <%= (product.addres == 'Satkak') ? 'selected' : '' %>>Satkak</option>
+        <option value="Damko'l" <%= (product.addres == "Damko'l") ? 'selected' : '' %>>Damko'l</option>
+        <option value="Shoximardon" <%= (product.addres == 'Shoximardon') ? 'selected' : '' %>>Shoximardon</option>
       </select>
     </div>
     <div class="form-floating fs-4 mb-5">

@@ -67,9 +67,9 @@
         aria-label=".form-select-lg example"
         name="phoneCondition"
       >
-      <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Holati</option>
-      <option value="Ishlatilgan" <% (product.phoneCondition == 'Ishlatilgan') ? 'selected' : '' %>>Ishlatilgan</option>
-      <option value="Yangi" <% (product.phoneCondition == 'Yangi') ? 'selected' : '' %>>Yangi</option>
+      <option <%= (editing || hasError && product.phoneCondition) ? '' : 'selected' %> disabled>Holati</option>
+      <option value="Ishlatilgan" <%= (product.phoneCondition == 'Ishlatilgan') ? 'selected' : '' %>>Ishlatilgan</option>
+      <option value="Yangi" <%= (product.phoneCondition == 'Yangi') ? 'selected' : '' %>>Yangi</option>
       </select>
     </div>
     <div class="col-md-6">
@@ -80,14 +80,14 @@
         name="memory"
         value="<% if (editing || hasError) { %><%= product.memory %><% } %>"
       >
-        <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Xotira</option>
-        <option value="16" <% (product.memory == '16') ? 'selected' : '' %>>16</option>
-        <option value="32" <% (product.memory == '32') ? 'selected' : '' %>>32</option>
-        <option value="64" <% (product.memory == '64') ? 'selected' : '' %>>64</option>
-        <option value="128" <% (product.memory == '128') ? 'selected' : '' %>>128</option>
-        <option value="256" <% (product.memory == '256') ? 'selected' : '' %>>256</option>
-        <option value="512" <% (product.memory == '512') ? 'selected' : '' %>>512</option>
-        <option value="1024" <% (product.memory == '1024') ? 'selected' : '' %>>1024</option>
+        <option <%= (editing || hasError && product.memory) ? '' : 'selected' %> disabled>Xotira</option>
+        <option value="16" <%= (product.memory == '16') ? 'selected' : '' %>>16</option>
+        <option value="32" <%= (product.memory == '32') ? 'selected' : '' %>>32</option>
+        <option value="64" <%= (product.memory == '64') ? 'selected' : '' %>>64</option>
+        <option value="128" <%= (product.memory == '128') ? 'selected' : '' %>>128</option>
+        <option value="256" <%= (product.memory == '256') ? 'selected' : '' %>>256</option>
+        <option value="512" <%= (product.memory == '512') ? 'selected' : '' %>>512</option>
+        <option value="1024" <%= (product.memory == '1024') ? 'selected' : '' %>>1024</option>
       </select>
     </div>
     <div class="col-md-6">
@@ -97,22 +97,22 @@
         aria-label=".form-select-lg example"
         name="address"
       >
-        <option <%= (editing || hasError) ? '' : 'selected' %> disabled>Manzil</option>
-        <option value="Vodil" <% (product.address == 'Vodil') ? 'selected' : '' %>>Vodil</option>
-        <option value="Yoshlarobod" <% (product.address == 'Yoshlarobod') ? 'selected' : '' %>>Yoshlarobod</option>
-        <option value="Novkent'k" <% (product.address == 'Novkent') ? 'selected' : '' %>>Novkent</option>
-        <option value="Yangiobod" <% (product.address == 'Yangiobod') ? 'selected' : '' %>>Yangiobod</option>
-        <option value="Mindonobod" <% (product.address == 'Mindonobod') ? 'selected' : '' %>>Mindonobod</option>
-        <option value="Avval" <% (product.address == 'Avval') ? 'selected' : '' %>>Avval</option>
-        <option value="Kaptarxona" <% (product.address == 'Kaptarxona') ? 'selected' : '' %>>Kaptarxona</option>
-        <option value="Log'on" <% (product.address == "Log'on") ? 'selected' : '' %>>Log'on</option>
-        <option value="Mindon" <% (product.address == 'Mindon') ? 'selected' : '' %>>Mindon</option>
-        <option value="Chimyon" <% (product.address == 'Chimyon') ? 'selected' : '' %>>Chimyon</option>
-        <option value="Xonqiz" <% (product.address == 'Xonqiz') ? 'selected' : '' %>>Xonqiz</option>
-        <option value="Oqtom" <% (product.address == 'Oqtom') ? 'selected' : '' %>>Oqtom</option>
-        <option value="Satkak" <% (product.address == 'Satkak') ? 'selected' : '' %>>Satkak</option>
-        <option value="Damko'l" <% (product.address == "Damko'l") ? 'selected' : '' %>>Damko'l</option>
-        <option value="Shoximardon" <% (product.address == 'Shoximardon') ? 'selected' : '' %>>Shoximardon</option>
+        <option <%= (editing || hasError && product.address) ? '' : 'selected' %> disabled>Manzil</option>
+        <option value="Vodil" <%= (product.address == 'Vodil') ? 'selected' : '' %>>Vodil</option>
+        <option value="Yoshlarobod" <%= (product.address == 'Yoshlarobod') ? 'selected' : '' %>>Yoshlarobod</option>
+        <option value="Novkent'k" <%= (product.address == 'Novkent') ? 'selected' : '' %>>Novkent</option>
+        <option value="Yangiobod" <%= (product.address == 'Yangiobod') ? 'selected' : '' %>>Yangiobod</option>
+        <option value="Mindonobod" <%= (product.address == 'Mindonobod') ? 'selected' : '' %>>Mindonobod</option>
+        <option value="Avval" <%= (product.address == 'Avval') ? 'selected' : '' %>>Avval</option>
+        <option value="Kaptarxona" <%= (product.address == 'Kaptarxona') ? 'selected' : '' %>>Kaptarxona</option>
+        <option value="Log'on" <%= (product.address == "Log'on") ? 'selected' : '' %>>Log'on</option>
+        <option value="Mindon" <%= (product.address == 'Mindon') ? 'selected' : '' %>>Mindon</option>
+        <option value="Chimyon" <%= (product.address == 'Chimyon') ? 'selected' : '' %>>Chimyon</option>
+        <option value="Xonqiz" <%= (product.address == 'Xonqiz') ? 'selected' : '' %>>Xonqiz</option>
+        <option value="Oqtom" <%= (product.address == 'Oqtom') ? 'selected' : '' %>>Oqtom</option>
+        <option value="Satkak" <%= (product.address == 'Satkak') ? 'selected' : '' %>>Satkak</option>
+        <option value="Damko'l" <%= (product.address == "Damko'l") ? 'selected' : '' %>>Damko'l</option>
+        <option value="Shoximardon" <%= (product.address == 'Shoximardon') ? 'selected' : '' %>>Shoximardon</option>
       </select>
     </div>
     <div class="form-floating fs-4 mb-5">
