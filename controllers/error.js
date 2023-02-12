@@ -1,13 +1,13 @@
 const get404 = (req, res, next) => {
   res.status(404).render('404', {
-    pageTitle: 'Page Not Found',
+    pageTitle: 'Sahifa topilmadi',
   });
 };
 
 const sendErrorDev = (error, req, res) => {
   console.log(error);
   return res.status(error.statusCode).render('error', {
-    pageTitle: 'Something went wrong!',
+    pageTitle: 'Xatolik!',
     msg: error.message,
   });
 };
@@ -16,7 +16,7 @@ const sendErrorProd = (error, req, res) => {
   // A) Operational, trusted error: send message to client
   if (error.isOperational) {
     return res.status(error.statusCode).render('error', {
-      pageTitle: 'Something went wrong!',
+      pageTitle: 'Xatolik!',
       msg: error.message,
     });
   }
@@ -25,8 +25,8 @@ const sendErrorProd = (error, req, res) => {
   console.log(error);
   // 2) Send generic message
   res.status(error.statusCode).render('error', {
-    paheTitle: 'Something went wrong!',
-    msg: 'Please try again later.',
+    pageTitle: 'Xatolik!',
+    msg: "Xatolik sodir bo'ldi. Iltimos qaytadan urinib ko'ring",
   });
 };
 

@@ -14,6 +14,7 @@ const LapTop = require('../models/electronics/lap-top.model');
 const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const filtering = require('../utils/filtering');
+const AppError = require('../utils/appError');
 
 const formatProd = prods => {
   if (prods.length) {
@@ -41,13 +42,15 @@ const formatProd = prods => {
 const getHomePage = async (req, res, next) => {
   try {
     const prods = await General.find().lean();
-    formatProd(prods);
+    if (prods.length > 0) {
+      formatProd(prods);
+    }
     res.render('home', {
       pageTitle: 'AvtoVodil',
       prods,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -262,9 +265,11 @@ const getOneProduct = async (req, res, next) => {
         animal,
         prods,
       });
+    } else {
+      return next(new AppError("Ushbu e'lon topilmadi. Iltimos qaytadan urinib ko'ring.", 400));
     }
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getAllProducts = async (req, res, next) => {
@@ -306,7 +311,7 @@ const getAllProducts = async (req, res, next) => {
       querySearch: '',
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -328,7 +333,7 @@ const getAuthorProducts = async (req, res, next) => {
       isMe,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 

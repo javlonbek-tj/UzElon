@@ -1,0 +1,62 @@
+<%- include('../includes/head.ejs') %>
+<section class="signup container">
+  <div class="signup-content text-center">
+    <div class="signup-form">
+      <h2 class="text-success">Profilni o'zgartirish</h1>
+      <form method="POST" class="register-form fs-4 mt-5" id="register-form" action="/user/changeProfile" novalidate enctype="multipart/form-data">
+        <% if(errorMessage) { %>
+          <h3 class="text-center text-danger mb-5"><%= errorMessage %></h3>
+          <% } %>
+        <div class="form-group mb-5">
+          <label for="username"><i class="fa-solid fa-user me-4 fs-5"></i></label>
+          <input
+            class="<%= validationErrors.find(e => e.param === 'username') ? 'authError' : '' %>"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Ism Familiya"
+            value="<%= (hasError) ? oldInput.username : user.username %>"
+          />
+        </div>
+        <div class="form-group mb-5">
+          <label for="email"><i class="fa-solid fa-envelope me-4 fs-5"></i></label>
+          <input
+            class="<%= validationErrors.find(e => e.param === 'email') ? 'authError' : '' %>"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            value="<%= (hasError) ? oldInput.email : user.email %>"
+          />
+        </div>
+        <div class="form-group mb-5 d-flex align-items-center">
+        <div class="form-element">
+            <input type="file" id="file-1" accept="image/*" class="d-none" name="picture" />
+            <label for="file-1" id="file-1-preview"> 
+              <% if(oldInput.imageUrl) { %>
+                <img src="/<% oldInput.imageUrl%>" class="img-fluid"
+                style="width: 70px; height: 70px" alt="Profil"/>
+                <% } else { %>
+                <img src="<% if(user.photo) { %>  /<%= user.photo %> <% } else { %> /image/defaultUser.jpg <% } %>" class="img-fluid"
+                style="width: 70px; height: 70px" alt="Profil"/>
+                <% } %>
+            </label>
+            </div>
+            <h4 class="text-muted me-5 d-flex">Rasm qo'shish</h4>
+            <% if(user.photo) { %>
+            <form action="/user/deletePicture" method="POST">
+              <button type="submit" class="bg-white"><i class="fa-solid fa-trash text-danger fs-5 mb-3"></i></button>
+            </form>
+            <% } %>
+          </div>
+        <div class="form-button mt-5">
+          <input type="submit" name="signup" id="signup" class="form-submit py-3 px-5 fs-5" value="O'zgartirish" />
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- <div class="text-center singUp_google fs-4">
+  <a href="/auth/google" class="p-3"><i class="fa-brands fa-google text-danger"></i> Sign up with google</a>
+</div> -->
+<%- include('../includes/end.ejs') %>

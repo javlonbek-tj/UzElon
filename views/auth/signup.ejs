@@ -2,7 +2,7 @@
 <section class="signup container">
   <div class="signup-content text-center">
     <div class="signup-form">
-      <h1>Sign up</h1>
+      <h2 class="text-success">Ro'yxatdan o'tish</h1>
       <form method="POST" class="register-form fs-4 mt-5" id="register-form" action="/signup" novalidate>
         <% if(errorMessage) { %>
         <h3 class="text-center text-danger mb-5"><%= errorMessage %></h3>
@@ -14,7 +14,7 @@
             type="text"
             name="username"
             id="username"
-            placeholder="Username"
+            placeholder="Ism Familiya"
             value="<%= product.username %>"
           />
         </div>
@@ -25,7 +25,7 @@
             type="email"
             name="email"
             id="email"
-            placeholder="Your Email"
+            placeholder="Email"
             value="<%= (product.email === '@') ? ' ' : product.email %>"
           />
         </div>
@@ -36,7 +36,7 @@
             type="password"
             name="password"
             id="password"
-            placeholder="Password"
+            placeholder="Parol"
             value="<%= product.password %>"
           />
         </div>
@@ -47,22 +47,22 @@
             type="password"
             name="rePassword"
             id="rePassword"
-            placeholder="Repeat your password"
+            placeholder="Parolni tasdiqlash"
             value="<%= product.rePassword %>"
           />
         </div>
         <div class="form-button mt-5">
-          <input type="submit" name="signup" id="signup" class="form-submit py-3 px-5" value="Register" />
+          <input type="submit" name="signup" id="signup" class="form-submit py-3 px-5" value="Ro'yxatdan o'tish" />
         </div>
         <div class="d-flex pt-4 justify-content-center">
-          <p class="me-3">Already sign up?</p>
-          <a href="/login">Sign in</a>
+          <p class="me-3">Ro'yxatdan o'tganmisiz?</p>
+          <a href="/login">Kirish</a>
         </div>
       </form>
     </div>
   </div>
 </section>
-<div class="text-center singUp_google fs-4">
+<!-- <div class="text-center singUp_google fs-4">
   <a href="/auth/google" class="p-3"><i class="fa-brands fa-google text-danger"></i> Sign up with google</a>
-</div>
+</div> -->
 <%- include('../includes/end.ejs') %>

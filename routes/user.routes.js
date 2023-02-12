@@ -6,7 +6,6 @@ const router = express.Router();
 
 const {
   getUserProducts,
-  getUserProfile,
   getEditProduct,
   postDeleteProduct,
   postEditCar,
@@ -23,10 +22,33 @@ const {
   postEditConstruction,
   postEditService,
   postEditVacancy,
+  getUserProfile,
+  getUserChangeProfile,
+  postUserChangeProfile,
+  postUserDeletePicture
 } = require('../controllers/user');
 
 router.get('/products', isAuth, getUserProducts);
 router.get('/profile', isAuth, getUserProfile);
+router.post('/user/deletePicture', isAuth, postUserDeletePicture);
+router.get('/changeProfile', isAuth, getUserChangeProfile);
+router.post(
+  '/changeProfile',
+  isAuth,
+  [
+    check('email')
+      .trim()
+      .not()
+      .isEmpty()
+      .withMessage('Email kiritilmadi')
+      .isEmail()
+      .withMessage(`Mavjud bo'lmagan email kiritildi`)
+      .normalizeEmail(),
+    check('username').not().isEmpty().withMessage('Ism Familiya kiritilmadi'),
+  ],
+  isAuth,
+  postUserChangeProfile,
+);
 router.post('/delete/product', isAuth, postDeleteProduct);
 router.get('/edit-product/:productId', isAuth, getEditProduct);
 router.post(

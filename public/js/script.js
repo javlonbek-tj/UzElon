@@ -16,6 +16,7 @@ drop.addEventListener('click', () => {
 drop2.addEventListener('click', () => {
   drop2.classList.remove('active');
 });
+
 function previewBeforeUpload(id) {
   document.querySelector('#' + id).addEventListener('change', function (e) {
     if (e.target.files.length == 0) {

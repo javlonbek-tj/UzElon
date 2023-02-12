@@ -17,18 +17,21 @@ const AppError = require('../utils/appError');
 const { validationResult } = require('express-validator');
 const { deleteFile, deleteFiles, getImageUrl, deleteImageIfError, deleteImage } = require('../utils/file');
 const { formatProd } = require('./products');
+const { logout } = require('./auth');
 
 const getUserProducts = async (req, res, next) => {
   try {
     const prods = await General.find({ userId: req.user._id }).lean();
-    formatProd(prods);
+    if (prods.length > 0) {
+      formatProd(prods);
+    }
     res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
       isMe: true,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -92,20 +95,10 @@ const postDeleteProduct = async (req, res, next) => {
     if (prodType === 'animal') {
       const removedProd = await Animal.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
-    }
+    } 
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
-  }
-};
-
-const getUserProfile = async (req, res, next) => {
-  try {
-    res.render('user/profile', {
-      pageTitle: `Mening Profilim`,
-    });
-  } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -114,12 +107,12 @@ const getEditProduct = async (req, res, next) => {
     const { edit, productType } = req.query;
     const prodId = req.params.productId;
     if (!edit) {
-      return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+      throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
     }
     if (productType == 'car') {
       const car = await Car.findById(prodId);
       if (!car) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       const product = { ...car._doc };
       product.year = car._doc.year.getFullYear();
@@ -134,7 +127,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'moto') {
       const moto = await Moto.findById(prodId);
       if (!moto) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('cars/moto', {
         pageTitle: 'Add product',
@@ -147,7 +140,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'track') {
       const track = await Track.findById(prodId);
       if (!track) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       const product = { ...track._doc };
       product.year = track._doc.year.getFullYear();
@@ -162,7 +155,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'animal') {
       const animal = await Animal.findById(prodId);
       if (!animal) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('electronics/animal', {
         pageTitle: 'Add product',
@@ -175,7 +168,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'houseAppliances') {
       const houseAppliances = await HouseAppliances.findById(prodId);
       if (!houseAppliances) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('electronics/houseAppliances', {
         pageTitle: 'Add product',
@@ -188,7 +181,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'laptop') {
       const laptop = await LapTop.findById(prodId);
       if (!laptop) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('electronics/lap-top', {
         pageTitle: 'Add product',
@@ -201,7 +194,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'phone') {
       const phone = await Phone.findById(prodId);
       if (!phone) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('electronics/phone', {
         pageTitle: 'Add product',
@@ -219,7 +212,7 @@ const getEditProduct = async (req, res, next) => {
       const washing = flat.flatHas.includes('Kir mashinasi');
       const tv = flat.flatHas.includes('Televizor');
       if (!flat) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('estate/flat', {
         pageTitle: 'Add product',
@@ -239,7 +232,7 @@ const getEditProduct = async (req, res, next) => {
       const gas = house.houseHas.includes('Gaz');
       const electricity = house.houseHas.includes('Elektr');
       if (!house) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('estate/house', {
         pageTitle: 'Add product',
@@ -256,7 +249,7 @@ const getEditProduct = async (req, res, next) => {
       const gas = land.landHas.includes('Gaz');
       const electricity = land.landHas.includes('Elektr');
       if (!land) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('estate/land', {
         pageTitle: 'Add product',
@@ -273,7 +266,7 @@ const getEditProduct = async (req, res, next) => {
       const gas = nonResidential.buildingHas.includes('Gaz');
       const electricity = nonResidential.buildingHas.includes('Elektr');
       if (!nonResidential) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('estate/nonResidential', {
         pageTitle: 'Add product',
@@ -288,7 +281,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'service') {
       const service = await Service.findById(prodId);
       if (!service) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('jobs/service', {
         pageTitle: 'Add product',
@@ -301,7 +294,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'vacancy') {
       const vacancy = await Vacancy.findById(prodId);
       if (!vacancy) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('jobs/vacancy', {
         pageTitle: 'Add product',
@@ -314,7 +307,7 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'construction') {
       const construction = await Construction.findById(prodId);
       if (!construction) {
-        return new AppError(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib koring`, 400);
+        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
       }
       res.render('jobs/construction', {
         pageTitle: 'Add product',
@@ -325,7 +318,7 @@ const getEditProduct = async (req, res, next) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -401,7 +394,7 @@ const postEditCar = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -453,7 +446,7 @@ const postEditMoto = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -526,7 +519,7 @@ const postEditTrack = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -575,7 +568,7 @@ const postEditAnimal = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -628,7 +621,7 @@ const postEditHouseApp = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -682,7 +675,7 @@ const postEditLapTop = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -739,7 +732,7 @@ const postEditPhone = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -832,7 +825,7 @@ const postEditFlat = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const postEditHouse = async (req, res, next) => {
@@ -908,7 +901,7 @@ const postEditHouse = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const postEditLand = async (req, res, next) => {
@@ -968,7 +961,7 @@ const postEditLand = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1031,7 +1024,7 @@ const postEditNonResidential = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1085,7 +1078,7 @@ const postEditConstruction = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1139,7 +1132,7 @@ const postEditService = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1193,7 +1186,85 @@ const postEditVacancy = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
+  }
+};
+
+const getUserProfile = async (req, res, next) => {
+  try {
+    const date = req.user.createdAt.toLocaleString('en-GB');
+    res.render('user/profile', {
+      pageTitle: `Mening Profilim`,
+      date,
+      user: req.user,
+    });
+  } catch (err) {
+    next(new AppError(err, 500));
+  }
+};
+
+const getUserChangeProfile = async (req, res, next) => {
+  try {
+    res.render('user/changeProfile', {
+      pageTitle: `Profilni o'zgartirish`,
+      user: req.user,
+      errorMessage: '',
+      oldInput: {
+        email: '',
+        username: '',
+        imageUrl: '',
+      },
+      validationErrors: [],
+      hasError: null,
+    });
+  } catch (err) {
+    next(new AppError(err, 500));
+  }
+};
+
+const postUserChangeProfile = async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    const images = req.files;
+    let imageUrl = null;
+    if (images.picture) {
+      imageUrl = images.picture[0].path;
+    }
+    const { email, username } = req.body;
+    if (!errors.isEmpty()) {
+      return res.render('user/changeProfile', {
+        pageTitle: "Profilni o'zgartirish",
+        errorMessage: errors.array()[0].msg,
+        oldInput: {
+          email,
+          username,
+          imageUrl,
+        },
+        validationErrors: errors.array(),
+        hasError: true,
+      });
+    }
+    if (req.user.photo) {
+      deleteFile(req.user.photo);
+    }
+    req.user.photo = imageUrl;
+    req.user.email = email;
+    req.user.username = username;
+    await req.user.save();
+    res.redirect('/user/profile');
+  } catch (err) {
+    next(new AppError(err, 500));
+  }
+};
+
+const postUserDeletePicture = async (req, res, next) => {
+  try {
+    req.user.photo = '';
+    await req.user.save();
+    res.redirect('/user/changeProfile');
+    deleteFile(req.user.imageUrl);
+  } catch (err) {
+    next(new AppError('err', 500));
   }
 };
 
@@ -1216,4 +1287,7 @@ module.exports = {
   postEditConstruction,
   postEditService,
   postEditVacancy,
+  getUserChangeProfile,
+  postUserChangeProfile,
+  postUserDeletePicture
 };

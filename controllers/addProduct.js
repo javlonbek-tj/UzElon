@@ -15,6 +15,7 @@ const Animal = require('../models/electronics/animal.model');
 const General = require('../models/general.model');
 const { validationResult } = require('express-validator');
 const { deleteFile, deleteFiles, getImageUrl, deleteImageIfError } = require('../utils/file');
+const AppError = require('../utils/appError');
 
 const getAddProduct = (req, res, next) => {
   try {
@@ -51,7 +52,7 @@ const getFlatCategory = (req, res, next) => {
       tv: '',
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getHouseCategory = (req, res, next) => {
@@ -74,7 +75,7 @@ const getHouseCategory = (req, res, next) => {
       electricity: '',
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getLandCategory = (req, res, next) => {
@@ -96,7 +97,7 @@ const getLandCategory = (req, res, next) => {
       electricity: '',
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getNonResidentialCategory = (req, res, next) => {
@@ -119,7 +120,7 @@ const getNonResidentialCategory = (req, res, next) => {
       electricity: '',
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getCarCategory = (req, res, next) => {
@@ -144,7 +145,7 @@ const getCarCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getTrackCategory = (req, res, next) => {
@@ -168,7 +169,7 @@ const getTrackCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getMotoCategory = (req, res, next) => {
@@ -189,7 +190,7 @@ const getMotoCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getConstructionCategory = (req, res, next) => {
@@ -211,7 +212,7 @@ const getConstructionCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getServiceCategory = (req, res, next) => {
@@ -233,7 +234,7 @@ const getServiceCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getVacancyCategory = (req, res, next) => {
@@ -255,7 +256,7 @@ const getVacancyCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getPhoneCategory = (req, res, next) => {
@@ -278,7 +279,7 @@ const getPhoneCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getLapTopCategory = (req, res, next) => {
@@ -301,7 +302,7 @@ const getLapTopCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getHouseAppliancesCategory = (req, res, next) => {
@@ -322,7 +323,7 @@ const getHouseAppliancesCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getAnimalCategory = (req, res, next) => {
@@ -342,7 +343,7 @@ const getAnimalCategory = (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -426,7 +427,7 @@ const postCarAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -487,7 +488,7 @@ const postMotoadding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -557,7 +558,7 @@ const postTrackAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -615,7 +616,7 @@ const postAnimalAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -675,7 +676,7 @@ const postHouseApp = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -739,7 +740,7 @@ const postLapTopAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -803,7 +804,7 @@ const postPhoneAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -912,7 +913,7 @@ const postFlatAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -997,7 +998,7 @@ const postHouseAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1066,7 +1067,7 @@ const postLandAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1139,7 +1140,7 @@ const postNonResiAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1200,7 +1201,7 @@ const postConstructionAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1261,7 +1262,7 @@ const postServiceAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -1323,7 +1324,7 @@ const postVacancyAdding = async (req, res, next) => {
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 

@@ -2,7 +2,7 @@
 <section class="signup container">
   <div class="signup-content text-center">
     <div class="signup-form">
-      <h1 class="mb-5">Sign in</h1>
+      <h2 class="mb-5 text-success">Kirish</h1>
       <form method="POST" class="register-form fs-4" id="register-form" action="/login" novalidate>
         <% if(errorMessage) { %>
         <h3 class="text-center text-danger mb-5"><%= errorMessage %></h3>
@@ -13,26 +13,26 @@
             type="email"
             name="email"
             id="email"
-            placeholder="Your Email"
+            placeholder="Email"
             value="<%= (product.email === '@') ? ' ' : product.email %>"
           />
         </div>
         <div class="form-group mb-5">
           <label for="pass"><i class="fa-solid fa-lock me-4 fs-5"></i></label>
-          <input type="password" name="password" id="pass" placeholder="Password" value="<%= product.password %>" />
+          <input type="password" name="password" id="pass" placeholder="Parol" value="<%= product.password %>" />
         </div>
         <div class="form-button">
-          <input type="submit" name="signup" id="signup" class="form-submit py-3 px-5" value="Login" />
+          <input type="submit" name="signup" id="signup" class="form-submit py-3 px-5" value="Kirish" />
         </div>
         <div class="d-flex pt-4 justify-content-center">
-          <p class="me-3">Have not you sign up?</p>
-          <a href="/signup">Sign up</a>
+          <p class="me-3 fs-5">Ro'yxatdan o'tmaganmisiz?</p>
+          <a href="/signup" class="fs-5">Ro'yxatdan o'tish</a>
         </div>
       </form>
     </div>
   </div>
 </section>
-<div class="text-center singUp_google fs-4">
+<!-- <div class="text-center singUp_google fs-4">
   <a href="#" class="p-3"><i class="fa-brands fa-google text-danger"></i> Sign in with google</a>
-</div>
+</div> -->
 <%- include('../includes/end.ejs') %>
