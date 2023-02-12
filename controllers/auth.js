@@ -29,7 +29,7 @@ const getSignUp = (req, res, next) => {
       validationErrors: [],
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -59,7 +59,7 @@ const postSignUp = async (req, res, next) => {
     createSendToken(savedUser, req, res);
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getLogin = (req, res, next) => {
@@ -76,7 +76,7 @@ const getLogin = (req, res, next) => {
       validationErrors: [],
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -97,7 +97,7 @@ const postLogin = async (req, res, next) => {
     createSendToken(user, req, res);
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
@@ -124,7 +124,7 @@ const isAuth = async (req, res, next) => {
     req.user = currentUser;
     return next();
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
   res.locals.user = false;
   next();
@@ -135,14 +135,14 @@ const logout = (req, res, next) => {
     res.clearCookie('jwt');
     res.redirect('/');
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 
 const restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      return next(new AppError('You do not have permission to perform this action', 403));
+      return next(new AppError('Sizda ushbu amalni bajarish huquqi mavjud emas', 403));
     }
 
     next();
