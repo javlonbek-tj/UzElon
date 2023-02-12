@@ -25,13 +25,15 @@ const {
   getUserProfile,
   getUserChangeProfile,
   postUserChangeProfile,
-  postUserDeletePicture
+  postUserDeletePicture,
+  getUserMessages
 } = require('../controllers/user');
 
 router.get('/products', isAuth, getUserProducts);
 router.get('/profile', isAuth, getUserProfile);
-router.post('/user/deletePicture', isAuth, postUserDeletePicture);
+router.post('/deletePicture', isAuth, postUserDeletePicture);
 router.get('/changeProfile', isAuth, getUserChangeProfile);
+router.get('/messages', isAuth, getUserMessages);
 router.post(
   '/changeProfile',
   isAuth,

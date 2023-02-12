@@ -1230,7 +1230,7 @@ const postUserChangeProfile = async (req, res, next) => {
     if (images.picture) {
       imageUrl = images.picture[0].path;
     }
-    const { email, username } = req.body;
+    const { email, username} = req.body;
     if (!errors.isEmpty()) {
       return res.render('user/changeProfile', {
         pageTitle: "Profilni o'zgartirish",
@@ -1244,10 +1244,12 @@ const postUserChangeProfile = async (req, res, next) => {
         hasError: true,
       });
     }
-    if (req.user.photo) {
-      deleteFile(req.user.photo);
+    if (imageUrl) {
+      if(req.user.photo) {
+        deleteFile(req.user.photo);
+      }
+      req.user.photo = imageUrl;
     }
-    req.user.photo = imageUrl;
     req.user.email = email;
     req.user.username = username;
     await req.user.save();
@@ -1259,14 +1261,24 @@ const postUserChangeProfile = async (req, res, next) => {
 
 const postUserDeletePicture = async (req, res, next) => {
   try {
+    deleteFile(req.user.photo);
     req.user.photo = '';
     await req.user.save();
-    res.redirect('/user/changeProfile');
-    deleteFile(req.user.imageUrl);
+    res.redirect('/user/profile');
   } catch (err) {
     next(new AppError('err', 500));
   }
 };
+
+const getUserMessages = async (req, res, next) => {
+  try {
+    res.render('user/messages', {
+      pageTitle: 'Mening xabarlarim',
+    });
+  } catch (err) {
+    next(new AppError(err, 500));
+  }
+}
 
 module.exports = {
   getUserProducts,
@@ -1289,5 +1301,6 @@ module.exports = {
   postEditVacancy,
   getUserChangeProfile,
   postUserChangeProfile,
-  postUserDeletePicture
+  postUserDeletePicture,
+  getUserMessages
 };

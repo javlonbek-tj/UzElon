@@ -3,7 +3,7 @@
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-8 mb-4 mb-lg-0">
-        <div class="card mb-3" style="border-radius: 0.5rem">
+        <div class="card mb-3">
           <div class="row g-0">
             <div
               class="col-md-4 bg-secondary gradient-custom text-center text-white"
@@ -12,9 +12,16 @@
               <img
                 src="<% if(user.photo) { %>  /<%= user.photo %> <% } else { %> /image/defaultUser.jpg <% } %>"
                 alt="Avatar"
-                class="img-fluid my-5 rounded-circle"
+                class="img-fluid mt-5 mb-2 rounded-circle"
                 style="width: 80px; height: 80px"
               />
+              <% if(user.photo) { %>
+              <form action="/user/deletePicture" method="POST">
+                <button type="submit" class="bg-secondary">
+                  <i class="fa-solid fa-trash text-warning fs-5 mb-3"></i>
+                </button>
+              </form>
+              <% } %>
               <h4 class="mb-3"><%= user.username %></h4>
               <a href="/user/changeProfile" class="text-white"><i class="far fa-edit mt-2 fs-3 mb-5"></i></a>
             </div>
@@ -38,9 +45,9 @@
                 </div>
                 <div class="d-flex justify-content-between fs-4">
                   <a href="/user/products">E'lonlar</a>
-                  <a href="/user/messages">Xabarlar</a>
-                  <a href="/user/changeProfile">Profilni o'zgartirish</a>
-                  <a href="/user/logout">Chiqish</a>
+                  <a href="/user/messages">Xabarlarim</a>
+                  <a href="/user/changeProfile">Sozlamalar</a>
+                  <a href="/logout">Chiqish</a>
                 </div>
                 <hr class="mt-0 mb-4" />
               </div>
