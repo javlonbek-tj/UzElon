@@ -41,13 +41,18 @@ const formatProd = prods => {
 
 const getHomePage = async (req, res, next) => {
   try {
-    const prods = await General.find().lean();
+    const topProds = await General.find({ top: { $ne: false } }).lean();
+    if (topProds.length > 0) {
+      formatProd(topProds);
+    }
+    const prods = await General.find({ top: { $ne: true } }).lean();
     if (prods.length > 0) {
       formatProd(prods);
     }
     res.render('home', {
       pageTitle: 'AvtoVodil',
       prods,
+      topProds,
     });
   } catch (err) {
     next(new AppError(err, 500));

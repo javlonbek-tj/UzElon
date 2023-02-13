@@ -38,9 +38,9 @@ const buildingSchema = new Schema(
     },
     rentOrSell: String,
     landHas: [String],
-    views: {
-      type: Number,
-      default: 0,
+    top: {
+      type: Boolean,
+      default: false,
     },
   },
   {

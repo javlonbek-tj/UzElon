@@ -41,6 +41,10 @@ const generalSchema = new Schema(
       ref: 'User',
     },
     productType: String,
+    top: {
+      type: Boolean,
+      default: false,
+    },
     category: {
       type: String,
       required: true,

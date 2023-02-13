@@ -54,9 +54,9 @@ const flatSchema = new Schema(
     },
     rentOrSell: String,
     flatHas: [String],
-    views: {
-      type: Number,
-      default: 0,
+    top: {
+      type: Boolean,
+      default: false,
     },
   },
   {

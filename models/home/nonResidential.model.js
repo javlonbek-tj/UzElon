@@ -42,9 +42,9 @@ const nonResidentialSchema = new Schema(
     },
     rentOrSell: String,
     buildingHas: [String],
-    views: {
-      type: Number,
-      default: 0,
+    top: {
+      type: Boolean,
+      default: false,
     },
   },
   {

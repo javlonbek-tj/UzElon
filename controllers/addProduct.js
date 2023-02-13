@@ -424,6 +424,9 @@ const postCarAdding = async (req, res, next) => {
       productType: 'car',
       category: 'avto',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -485,6 +488,9 @@ const postMotoadding = async (req, res, next) => {
       productType: 'moto',
       category: 'avto',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -555,6 +561,9 @@ const postTrackAdding = async (req, res, next) => {
       productType: 'track',
       category: 'avto',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -613,6 +622,9 @@ const postAnimalAdding = async (req, res, next) => {
       productType: 'animal',
       category: 'electronics',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -673,6 +685,9 @@ const postHouseApp = async (req, res, next) => {
       productType: 'houseAppliances',
       category: 'electronics',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -737,6 +752,9 @@ const postLapTopAdding = async (req, res, next) => {
       productType: 'laptop',
       category: 'electronics',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -801,6 +819,9 @@ const postPhoneAdding = async (req, res, next) => {
       productType: 'phone',
       category: 'electronics',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -910,6 +931,9 @@ const postFlatAdding = async (req, res, next) => {
       productType: 'flat',
       category: 'estate',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -995,6 +1019,9 @@ const postHouseAdding = async (req, res, next) => {
       productType: 'house',
       category: 'estate',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -1064,6 +1091,9 @@ const postLandAdding = async (req, res, next) => {
       productType: 'land',
       category: 'estate',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -1137,6 +1167,9 @@ const postNonResiAdding = async (req, res, next) => {
       productType: 'nonResidential',
       category: 'estate',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -1198,6 +1231,9 @@ const postConstructionAdding = async (req, res, next) => {
       productType: 'construction',
       category: 'jobs',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -1259,6 +1295,9 @@ const postServiceAdding = async (req, res, next) => {
       productType: 'service',
       category: 'jobs',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {
@@ -1321,6 +1360,9 @@ const postVacancyAdding = async (req, res, next) => {
       productType: 'vacancy',
       category: 'jobs',
     });
+    if (req.user.role === 'admin') {
+      general.top = true;
+    }
     const saved = await general.save();
     res.redirect('/');
   } catch (err) {

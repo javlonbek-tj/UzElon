@@ -30,14 +30,49 @@
   </section>
 
   <!-- products section starts  -->
-
-</section>
+  
+  <!-- Top products -->
 <section class="cards container-lg" id="cards">
-  <% if(prods.length <= 0) { %>
-  <h1 class="text-center">E'lonlar mavjud emas</h1>
+  <% if(topProds.length <= 0) { %>
+  <h1 class="text-center">Top E'lonlar mavjud emas</h1>
   <% } else { %>
   <div class="top-products d-flex justify-content-between">
     <h2>Top e'lonlar</h2>
+  </div>
+  <div class="box-container">
+    <% for (let product of topProds) { %>
+    <div class="box">
+      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"><img src="/<%= product.imageUrl %>" alt="" /></a>
+      <div class="content p-3">
+        <div class="info pb-1 mb-3">
+          <h4 href="#"><%= product.shortInfo %></h4>
+            <p class="text-muted fs-5"> <%= product.createdAt %> </p>
+        </div>
+        <% if(product.price) { %>
+        <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+        <% } else { %>
+          <h4 class="text-center"><%= product.address %> </h4>
+          <% } %>
+      </div>
+      <% if(product.price) { %>
+      <div class="card_footer d-flex justify-content-between px-5 pt-2">
+        <p class="me-5 text-secondary fs-5"><%= product.address %> </p>
+      </div>
+      <% } %>
+    </div>
+    <% } %>
+  </div>
+  <% } %>
+</section>
+
+  <!-- New products -->
+
+<section class="cards container-lg" id="cards">
+  <% if(prods.length <= 0) { %>
+  <h1 class="text-center">Yangi E'lonlar mavjud emas</h1>
+  <% } else { %>
+  <div class="top-products d-flex justify-content-between">
+    <h2>Yangi e'lonlar</h2>
     <a href="/products" class="h4 text-info">Barcha e'lonlar <i class="fa-solid fa-arrow-right"></i></a>
   </div>
   <div class="box-container">

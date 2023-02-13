@@ -44,9 +44,9 @@ const vacancySchema = new Schema(
       ref: 'User',
       required: true,
     },
-    views: {
-      type: Number,
-      default: 0,
+    top: {
+      type: Boolean,
+      default: false,
     },
   },
   {

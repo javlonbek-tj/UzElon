@@ -44,6 +44,9 @@
     </div>
   </form>
 </section>
+
+<!-- All products -->
+
 <section class="cards container-lg" id="cards">
   <% if(prods.length <= 0) { %>
   <h1 class="text-center">E'lon topilmadi</h1>
@@ -83,11 +86,15 @@
         </div>
         <% if(product.price) { %>
         <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+        <% } else { %>
+        <h4 class="text-center"><%= product.address %></h4>
         <% } %>
       </div>
+      <% if(product.price) { %>
       <div class="card_footer d-flex justify-content-between px-5 pt-2">
         <p class="me-5 text-secondary fs-5"><%= product.address %></p>
       </div>
+      <% } %>
     </div>
     <% } %>
   </div>
