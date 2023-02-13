@@ -5,9 +5,6 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { isAuth } = require('./controllers/auth');
 const upload = require('./utils/fileUpload');
-const helmet = require('helmet');
-const compression = require('compression');
-const xss = require('xss-clean');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -23,26 +20,21 @@ const app = express();
 
 // EJS
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+app.set('views', path.join(__dirname, 'views'));
 
-// Set security HTTP headers
-app.use(helmet());
-
-// Body parser
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-// Data sanitization against XSS
-app.use(xss());
-
-app.use(compression());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // MIDDLEWARES
 
 /* if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 } */
+
+// Body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.use(isAuth);
 
@@ -52,9 +44,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }, { name: 'picture' }]));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(
+  upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }, { name: 'picture' }]),
+);
 
 // ROUTES
 app.use(productsRoutes);
