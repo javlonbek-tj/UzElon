@@ -578,7 +578,7 @@ input:-webkit-autofill:active {
 }
 @media (max-width: 359px) {
   #home {
-    display: none:
+    display: none;
   }
   #cards {
     width: 78%;
