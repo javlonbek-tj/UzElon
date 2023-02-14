@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { isAuth } = require('./controllers/auth');
 const upload = require('./utils/fileUpload');
+const compression = require('compression');
+const helmet = require('helmet');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -35,6 +37,13 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  }),
+);
+app.use(compression());
 
 app.use(isAuth);
 
