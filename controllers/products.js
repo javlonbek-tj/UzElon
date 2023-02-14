@@ -107,7 +107,11 @@ const getOneProduct = async (req, res, next) => {
       });
     }
     if (productType == 'nonResidential') {
-      const nonResidential = await NonResidential.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
+      const nonResidential = await NonResidential.findByIdAndUpdate(
+        prodId,
+        { $inc: { views: 1 } },
+        { new: true },
+      )
         .populate('userId')
         .lean();
       formatProd(nonResidential);
@@ -197,9 +201,11 @@ const getOneProduct = async (req, res, next) => {
       });
     }
     if (productType == 'construction') {
-      const construction = await Construction.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true }).populate(
-        'userId',
-      );
+      const construction = await Construction.findByIdAndUpdate(
+        prodId,
+        { $inc: { views: 1 } },
+        { new: true },
+      ).populate('userId');
       formatProd(construction);
       const prods = await General.find({ category: 'jobs', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
@@ -227,7 +233,11 @@ const getOneProduct = async (req, res, next) => {
       });
     }
     if (productType == 'houseAppliances') {
-      const houseAppliances = await HouseAppliances.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
+      const houseAppliances = await HouseAppliances.findByIdAndUpdate(
+        prodId,
+        { $inc: { views: 1 } },
+        { new: true },
+      )
         .populate('userId')
         .lean();
       formatProd(houseAppliances);
@@ -324,18 +334,18 @@ const getAuthorProducts = async (req, res, next) => {
   try {
     const userId = req.params.authorId;
     if (!userId) {
-      return console.log('Xatolik');
+      throw new Error("Muallif e'lonlarini topishda xatolik", 400);
     }
-    let isMe = null;
-    if (req.user._id) {
-      isMe = userId == req.user._id.toString();
+    let isMeOrAdmin = null;
+    if (req.user) {
+      isMeOrAdmin = userId == req.user._id.toString() || req.user.role === 'admin';
     }
     const prods = await General.find({ userId }).lean();
     formatProd(prods);
     res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
-      isMe,
+      isMeOrAdmin,
     });
   } catch (err) {
     next(new AppError(err, 500));

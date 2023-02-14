@@ -15,7 +15,13 @@ const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const AppError = require('../utils/appError');
 const { validationResult } = require('express-validator');
-const { deleteFile, deleteFiles, getImageUrl, deleteImageIfError, deleteImage } = require('../utils/file');
+const {
+  deleteFile,
+  deleteFiles,
+  getImageUrl,
+  deleteImageIfError,
+  deleteImage,
+} = require('../utils/file');
 const { formatProd } = require('./products');
 const { logout } = require('./auth');
 
@@ -28,7 +34,7 @@ const getUserProducts = async (req, res, next) => {
     res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
-      isMe: true,
+      isMeOrAdmin: true,
     });
   } catch (err) {
     next(new AppError(err, 500));
@@ -95,7 +101,7 @@ const postDeleteProduct = async (req, res, next) => {
     if (prodType === 'animal') {
       const removedProd = await Animal.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
-    } 
+    }
     res.redirect('/user/products');
   } catch (err) {
     next(new AppError(err, 500));
@@ -107,12 +113,18 @@ const getEditProduct = async (req, res, next) => {
     const { edit, productType } = req.query;
     const prodId = req.params.productId;
     if (!edit) {
-      throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+      throw new Error(
+        `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+        400,
+      );
     }
     if (productType == 'car') {
       const car = await Car.findById(prodId);
       if (!car) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       const product = { ...car._doc };
       product.year = car._doc.year.getFullYear();
@@ -127,7 +139,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'moto') {
       const moto = await Moto.findById(prodId);
       if (!moto) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('cars/moto', {
         pageTitle: 'Add product',
@@ -140,7 +155,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'track') {
       const track = await Track.findById(prodId);
       if (!track) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       const product = { ...track._doc };
       product.year = track._doc.year.getFullYear();
@@ -155,7 +173,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'animal') {
       const animal = await Animal.findById(prodId);
       if (!animal) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('electronics/animal', {
         pageTitle: 'Add product',
@@ -168,7 +189,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'houseAppliances') {
       const houseAppliances = await HouseAppliances.findById(prodId);
       if (!houseAppliances) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('electronics/houseAppliances', {
         pageTitle: 'Add product',
@@ -181,7 +205,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'laptop') {
       const laptop = await LapTop.findById(prodId);
       if (!laptop) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('electronics/lap-top', {
         pageTitle: 'Add product',
@@ -194,7 +221,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'phone') {
       const phone = await Phone.findById(prodId);
       if (!phone) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('electronics/phone', {
         pageTitle: 'Add product',
@@ -212,7 +242,10 @@ const getEditProduct = async (req, res, next) => {
       const washing = flat.flatHas.includes('Kir mashinasi');
       const tv = flat.flatHas.includes('Televizor');
       if (!flat) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('estate/flat', {
         pageTitle: 'Add product',
@@ -232,7 +265,10 @@ const getEditProduct = async (req, res, next) => {
       const gas = house.houseHas.includes('Gaz');
       const electricity = house.houseHas.includes('Elektr');
       if (!house) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('estate/house', {
         pageTitle: 'Add product',
@@ -249,7 +285,10 @@ const getEditProduct = async (req, res, next) => {
       const gas = land.landHas.includes('Gaz');
       const electricity = land.landHas.includes('Elektr');
       if (!land) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('estate/land', {
         pageTitle: 'Add product',
@@ -266,7 +305,10 @@ const getEditProduct = async (req, res, next) => {
       const gas = nonResidential.buildingHas.includes('Gaz');
       const electricity = nonResidential.buildingHas.includes('Elektr');
       if (!nonResidential) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('estate/nonResidential', {
         pageTitle: 'Add product',
@@ -281,7 +323,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'service') {
       const service = await Service.findById(prodId);
       if (!service) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('jobs/service', {
         pageTitle: 'Add product',
@@ -294,7 +339,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'vacancy') {
       const vacancy = await Vacancy.findById(prodId);
       if (!vacancy) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('jobs/vacancy', {
         pageTitle: 'Add product',
@@ -307,7 +355,10 @@ const getEditProduct = async (req, res, next) => {
     if (productType == 'construction') {
       const construction = await Construction.findById(prodId);
       if (!construction) {
-        throw new Error(`E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`, 400);
+        throw new Error(
+          `E'lonni o'zgartirishda xatolik topildi. Iltimos qaytadan urinib ko'ring`,
+          400,
+        );
       }
       res.render('jobs/construction', {
         pageTitle: 'Add product',
@@ -402,7 +453,17 @@ const postEditMoto = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber, productId } = req.body;
+    const {
+      rentOrSell,
+      shortInfo,
+      model,
+      motoCondition,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -576,8 +637,16 @@ const postEditHouseApp = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber, productId } =
-      req.body;
+    const {
+      shortInfo,
+      applianceName,
+      applianceCondition,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -629,7 +698,18 @@ const postEditLapTop = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber, productId } = req.body;
+    const {
+      shortInfo,
+      mark,
+      lapTopCondition,
+      cpu,
+      ram,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -683,8 +763,18 @@ const postEditPhone = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber, productId } =
-      req.body;
+    const {
+      shortInfo,
+      mark,
+      model,
+      phoneCondition,
+      memory,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -909,8 +999,18 @@ const postEditLand = async (req, res, next) => {
     const errors = validationResult(req);
     const landHas = [];
     const images = req.files;
-    const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity, productId } =
-      req.body;
+    const {
+      rentOrSell,
+      shortInfo,
+      area,
+      address,
+      price,
+      extraInfo,
+      phoneNumber,
+      gas,
+      electricity,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -970,8 +1070,19 @@ const postEditNonResidential = async (req, res, next) => {
     const errors = validationResult(req);
     const images = req.files;
     const buildingHas = [];
-    const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity, productId } =
-      req.body;
+    const {
+      shortInfo,
+      rentOrSell,
+      rooms,
+      area,
+      address,
+      price,
+      extraInfo,
+      phoneNumber,
+      gas,
+      electricity,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -1032,8 +1143,17 @@ const postEditConstruction = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber, productId } =
-      req.body;
+    const {
+      shortInfo,
+      serviceType,
+      experience,
+      numWorkers,
+      workTime,
+      extraInfo,
+      address,
+      phoneNumber,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -1086,7 +1206,17 @@ const postEditService = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber, productId } = req.body;
+    const {
+      shortInfo,
+      gender,
+      serviceType,
+      experience,
+      age,
+      address,
+      extraInfo,
+      phoneNumber,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -1140,7 +1270,17 @@ const postEditVacancy = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
-    const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber, productId } = req.body;
+    const {
+      shortInfo,
+      gender,
+      position,
+      requiredAge,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+      productId,
+    } = req.body;
     if (!errors.isEmpty()) {
       deleteImageIfError(images);
       const _id = productId;
@@ -1230,7 +1370,7 @@ const postUserChangeProfile = async (req, res, next) => {
     if (images.picture) {
       imageUrl = images.picture[0].path;
     }
-    const { email, username} = req.body;
+    const { email, username } = req.body;
     if (!errors.isEmpty()) {
       return res.render('user/changeProfile', {
         pageTitle: "Profilni o'zgartirish",
@@ -1245,7 +1385,7 @@ const postUserChangeProfile = async (req, res, next) => {
       });
     }
     if (imageUrl) {
-      if(req.user.photo) {
+      if (req.user.photo) {
         deleteFile(req.user.photo);
       }
       req.user.photo = imageUrl;
@@ -1278,7 +1418,7 @@ const getUserMessages = async (req, res, next) => {
   } catch (err) {
     next(new AppError(err, 500));
   }
-}
+};
 
 module.exports = {
   getUserProducts,
@@ -1302,5 +1442,5 @@ module.exports = {
   getUserChangeProfile,
   postUserChangeProfile,
   postUserDeletePicture,
-  getUserMessages
+  getUserMessages,
 };
