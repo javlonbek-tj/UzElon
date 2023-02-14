@@ -48,9 +48,9 @@ const phoneSchema = new Schema(
       ref: 'User',
       required: true,
     },
-    top: {
-      type: Boolean,
-      default: false,
+    views: {
+      type: Number,
+      default: 0,
     },
   },
   {

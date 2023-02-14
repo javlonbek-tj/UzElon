@@ -534,6 +534,9 @@ input:-webkit-autofill:active {
   .cards .box-container .box img {
     height: 18rem;
   }
+  .box_container .box {
+    width: 24rem;
+  }
   .carousel-inner .carousel-item img {
     height: 200px;
     width: 400px;
@@ -565,7 +568,7 @@ input:-webkit-autofill:active {
     width: 70px;
     height: 70px;
   }
-  .first__header a span {
+  .first__header a > span {
     display: none;
   }
   .home_categories a {
@@ -577,6 +580,9 @@ input:-webkit-autofill:active {
   }
 }
 @media (max-width: 359px) {
+  #home {
+    display: none;
+  }
   #cards {
     width: 78%;
   }
