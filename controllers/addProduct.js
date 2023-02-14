@@ -23,7 +23,7 @@ const getAddProduct = (req, res, next) => {
       pageTitle: 'Add product',
     });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
   }
 };
 const getFlatCategory = (req, res, next) => {
@@ -442,7 +442,8 @@ const postMotoadding = async (req, res, next) => {
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;
     }
-    const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber } = req.body;
+    const { rentOrSell, shortInfo, model, motoCondition, address, extraInfo, price, phoneNumber } =
+      req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -506,8 +507,19 @@ const postTrackAdding = async (req, res, next) => {
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;
     }
-    const { rentOrSell, shortInfo, model, fluel, color, year, kmRun, address, extraInfo, price, phoneNumber } =
-      req.body;
+    const {
+      rentOrSell,
+      shortInfo,
+      model,
+      fluel,
+      color,
+      year,
+      kmRun,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+    } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -640,7 +652,8 @@ const postHouseApp = async (req, res, next) => {
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;
     }
-    const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber } = req.body;
+    const { shortInfo, applianceName, applianceCondition, address, extraInfo, price, phoneNumber } =
+      req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -703,7 +716,8 @@ const postLapTopAdding = async (req, res, next) => {
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;
     }
-    const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber } = req.body;
+    const { shortInfo, mark, lapTopCondition, cpu, ram, address, extraInfo, price, phoneNumber } =
+      req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -770,7 +784,17 @@ const postPhoneAdding = async (req, res, next) => {
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;
     }
-    const { shortInfo, mark, model, phoneCondition, memory, address, extraInfo, price, phoneNumber } = req.body;
+    const {
+      shortInfo,
+      mark,
+      model,
+      phoneCondition,
+      memory,
+      address,
+      extraInfo,
+      price,
+      phoneNumber,
+    } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -984,6 +1008,8 @@ const postHouseAdding = async (req, res, next) => {
         validationErrors: errors.array(),
         editing: null,
         hasError: true,
+        gas,
+        electricity,
       });
     }
     if (gas) {
@@ -1038,7 +1064,17 @@ const postLandAdding = async (req, res, next) => {
       imageError = true;
     }
     const landHas = [];
-    const { rentOrSell, shortInfo, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
+    const {
+      rentOrSell,
+      shortInfo,
+      area,
+      address,
+      price,
+      extraInfo,
+      phoneNumber,
+      gas,
+      electricity,
+    } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -1058,6 +1094,8 @@ const postLandAdding = async (req, res, next) => {
         validationErrors: errors.array(),
         editing: null,
         hasError: true,
+        gas,
+        electricity,
       });
     }
     if (gas) {
@@ -1110,7 +1148,18 @@ const postNonResiAdding = async (req, res, next) => {
       imageError = true;
     }
     const buildingHas = [];
-    const { shortInfo, rentOrSell, rooms, area, address, price, extraInfo, phoneNumber, gas, electricity } = req.body;
+    const {
+      shortInfo,
+      rentOrSell,
+      rooms,
+      area,
+      address,
+      price,
+      extraInfo,
+      phoneNumber,
+      gas,
+      electricity,
+    } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -1185,7 +1234,16 @@ const postConstructionAdding = async (req, res, next) => {
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;
     }
-    const { shortInfo, serviceType, experience, numWorkers, workTime, extraInfo, address, phoneNumber } = req.body;
+    const {
+      shortInfo,
+      serviceType,
+      experience,
+      numWorkers,
+      workTime,
+      extraInfo,
+      address,
+      phoneNumber,
+    } = req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -1249,7 +1307,8 @@ const postServiceAdding = async (req, res, next) => {
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;
     }
-    const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber } = req.body;
+    const { shortInfo, gender, serviceType, experience, age, address, extraInfo, phoneNumber } =
+      req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
@@ -1313,7 +1372,8 @@ const postVacancyAdding = async (req, res, next) => {
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;
     }
-    const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber } = req.body;
+    const { shortInfo, gender, position, requiredAge, address, extraInfo, price, phoneNumber } =
+      req.body;
     if (!errors.isEmpty() || (!images.image1 && !images.image2 && !images.image3)) {
       if (images.image1 || images.image2 || images.image3) {
         deleteImageIfError(images);
