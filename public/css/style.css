@@ -534,6 +534,9 @@ input:-webkit-autofill:active {
   .cards .box-container .box img {
     height: 18rem;
   }
+  .box_container .box {
+    width: 24rem;
+  }
   .carousel-inner .carousel-item img {
     height: 200px;
     width: 400px;
