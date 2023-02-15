@@ -44,7 +44,11 @@ const serviceSchema = new Schema(
       ref: 'User',
       required: true,
     },
+<<<<<<< HEAD
     views: {
+=======
+   views: {
+>>>>>>> 3081238ffc11823db34b1f948dad3e5f737a98c7
       type: Number,
       default: 0,
     },
