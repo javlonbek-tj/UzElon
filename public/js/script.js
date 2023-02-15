@@ -1,6 +1,8 @@
 let drop = document.querySelector('.drop');
 let drop2 = document.querySelector('.drop2');
 
+/* drop active */
+
 document.querySelector('#user_btn').addEventListener('click', () => {
   drop.classList.toggle('active');
 });
@@ -17,6 +19,7 @@ drop2.addEventListener('click', () => {
   drop2.classList.remove('active');
 });
 
+/* Image upload */
 function previewBeforeUpload(id) {
   document.querySelector('#' + id).addEventListener('change', function (e) {
     if (e.target.files.length == 0) {
@@ -31,3 +34,5 @@ function previewBeforeUpload(id) {
 previewBeforeUpload('file-1');
 previewBeforeUpload('file-2');
 previewBeforeUpload('file-3');
+
+/* default date */

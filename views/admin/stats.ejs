@@ -1,0 +1,121 @@
+<%- include('../includes/head.ejs') %>
+<section class="filter fs-4 d-flex justify-content-center mx-auto">
+  <form class="filter_items" action="/admin/statistics" method="GET">
+    <div class="filtering">
+      <select name="category" id="category">
+        <option selected disabled>Kategoriya</option>
+        <option value="avto">Transport</option>
+        <option value="electronics">Elektronika</option>
+        <option value="estate">Uy-joy</option>
+        <option value="jobs">Ish va xizmatlar</option>
+      </select>
+    </div>
+    <div class="filtering">
+      <input type="date" class="filtering-input" id="dateFrom" name="dateFrom" />
+    </div>
+    <div class="filtering">
+      <input type="date" class="filtering-input" id="dateTo" name="dateTo" />
+    </div>
+    <div class="filtering">
+      <select name="address" id="address">
+        <option selected disabled>Manzil</option>
+        <option value="Vodil">Vodil</option>
+        <option value="Yoshlarobod">Yoshlarobod</option>
+        <option value="Novkent">Novkent</option>
+        <option value="Yangiobod">Yangiobod</option>
+        <option value="Mindonobod">Mindonobod</option>
+        <option value="Avval">Avval</option>
+        <option value="Kaptarxona">Kaptarxona</option>
+        <option value="Log'on">Log'on</option>
+        <option value="Mindon">Mindon</option>
+        <option value="Chimyon">Chimyon</option>
+        <option value="Xonqiz">Xonqiz</option>
+        <option value="Oqtom">Oqtom</option>
+        <option value="Satkak">Satkak</option>
+        <option value="Damko'l">Damko'l</option>
+        <option value="Shoximardon">Shoximardon</option>
+      </select>
+    </div>
+    <div class="filtering">
+      <button type="submit">Filter</button>
+    </div>
+  </form>
+</section>
+
+<!-- All products -->
+<section class="cards container-lg" id="cards">
+  <% if(prods.length <= 0) { %>
+  <h1 class="text-center">E'lon topilmadi</h1>
+  <% } else { %> <% if(prods.length > 4) { %>
+  <div class="box-container">
+    <% for (let product of prods) { %>
+    <div class="box">
+      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
+        ><img src="/<%= product.imageUrl %>" alt=""
+      /></a>
+      <div class="content p-3">
+        <div class="info pb-1 mb-3">
+          <h4 href="#"><%= product.shortInfo %></h4>
+          <p class="text-muted fs-5"><%= product.createdAt %></p>
+        </div>
+        <% if(product.price) { %>
+        <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+        <% } %>
+      </div>
+      <div class="card_footer d-flex justify-content-between px-5 py-2">
+        <h5 class="me-5 text-secondary"><%= product.address %></h5>
+      </div>
+    </div>
+    <% } %>
+  </div>
+  <% } else { %>
+  <div class="box_container">
+    <% for (let product of prods) { %>
+    <div class="box mb-5">
+      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
+        ><img src="/<%= product.imageUrl %>" alt=""
+      /></a>
+      <div class="content p-3">
+        <div class="info pb-1 mb-3">
+          <h4 href="#"><%= product.shortInfo %></h4>
+          <p class="text-muted fs-5"><%= product.createdAt %></p>
+        </div>
+        <% if(product.price) { %>
+        <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+        <% } else { %>
+        <h4 class="text-center"><%= product.address %></h4>
+        <% } %>
+      </div>
+      <% if(product.price) { %>
+      <div class="card_footer d-flex justify-content-between px-5 pt-2">
+        <p class="me-5 text-secondary fs-5"><%= product.address %></p>
+      </div>
+      <% } %>
+    </div>
+    <% } %>
+  </div>
+  <% } %> <% } %>
+</section>
+<% if(isOverLimit) { %>
+<div class="pagination d-flex justify-content-center fs-4 mt-5">
+  <a href="?page=<%=previousPage %>" class="blocks <%= (currentPage == 1) ? 'disabled' : '' %>"
+    >&laquo;</a
+  >
+  <% if (currentPage !== 1 && previousPage !== 1) { %>
+  <a href="?page=1" class="blocks">1</a>
+  <% } %> <% if (hasPreviousPage) { %>
+  <a href="?page=<%= previousPage %>" class="blocks"><%= previousPage %></a>
+  <% } %>
+  <a href="?page=<%= currentPage %>" class="active blocks"><%= currentPage %></a>
+  <% if (hasNextPage) { %>
+  <a href="?page=<%= nextPage %>" class="blocks"><%= nextPage %></a>
+  <% } %> <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+  <a href="?page=<%= lastPage %>" class="blocks"><%= lastPage %></a>
+  <% } %>
+  <a href="?page=<%=nextPage %>" class="blocks <%= (currentPage == lastPage) ? 'disabled' : '' %>"
+    >&raquo;</a
+  >
+</div>
+<% } %>
+<section></section>
+<%- include('../includes/end.ejs') %>

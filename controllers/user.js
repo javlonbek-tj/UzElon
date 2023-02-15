@@ -22,8 +22,7 @@ const {
   deleteImageIfError,
   deleteImage,
 } = require('../utils/file');
-const { formatProd } = require('./products');
-const { logout } = require('./auth');
+const formatProd = require('../utils/formatProd');
 
 const getUserProducts = async (req, res, next) => {
   try {
@@ -1334,10 +1333,15 @@ const postEditVacancy = async (req, res, next) => {
 const getUserProfile = async (req, res, next) => {
   try {
     const date = req.user.createdAt.toLocaleString('en-GB');
+    let admin = null;
+    if (req.user.role === 'admin') {
+      admin = true;
+    }
     res.render('user/profile', {
       pageTitle: `Mening Profilim`,
       date,
       user: req.user,
+      admin,
     });
   } catch (err) {
     next(new AppError(err, 500));
