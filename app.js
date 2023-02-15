@@ -15,6 +15,7 @@ dotenv.config();
 const productsRoutes = require('./routes/products.routes');
 const addProductRoutes = require('./routes/addProduct.routes');
 const userRoutes = require('./routes/user.routes');
+const adminRoutes = require('./routes/admin.routes');
 const authRoutes = require('./routes/auth.routes');
 const { get404, globalError } = require('./controllers/error');
 
@@ -61,6 +62,7 @@ app.use(
 app.use(productsRoutes);
 app.use(addProductRoutes);
 app.use('/user', userRoutes);
+app.use('/admin', adminRoutes);
 app.use(authRoutes);
 
 app.use(get404);

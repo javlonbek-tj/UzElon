@@ -113,7 +113,8 @@ section {
   border-bottom: var(--border);
   margin-bottom: 3rem;
 }
-.top-products h2 {
+.top-products h2,
+h3 {
   font-style: oblique;
 }
 
@@ -423,10 +424,14 @@ input:-webkit-autofill:active {
   border-radius: 0 10px 10px 0;
 }
 .blocks:hover {
-  background-color: #dddddd;
+  background-color: aqua;
 }
 .pagination a.active {
-  background-color: #4caf50;
+  background-color: rgb(88, 88, 141);
+  color: #fff;
+}
+.disabled {
+  pointer-events: none;
 }
 
 /* media queries  */

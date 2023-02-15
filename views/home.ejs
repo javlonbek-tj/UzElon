@@ -73,7 +73,7 @@
   <% } else { %>
   <div class="top-products d-flex justify-content-between">
     <h2>Yangi e'lonlar</h2>
-    <a href="/products" class="h4 text-info">Barcha e'lonlar <i class="fa-solid fa-arrow-right"></i></a>
+    <a href="/products" class="h4 fst-italic">Barcha e'lonlar<i class="fa-solid fa-arrow-right ms-2"></i></a>
   </div>
   <div class="box-container">
     <% for (let product of prods) { %>
@@ -100,9 +100,9 @@
   </div>
   <% } %>
 </section>
+<div class="text-center mt-5">
+  <a href="/products" class="btn btn-outline-primary fs-4">Barcha e'lonlar</a>
+</div>
 <section></section>
-<<<<<<< HEAD
-  <%- include('./includes/end.ejs') %>
-=======
-  <%- include('./includes/end.ejs') %>
->>>>>>> 9265d5187f319532a0744664ad06aa9f2101c889
+<%- include('./includes/end.ejs') %>
+

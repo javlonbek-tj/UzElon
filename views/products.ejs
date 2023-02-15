@@ -1,4 +1,4 @@
-<%- include('./includes/head.ejs', {querySearch: querySearch}) %>
+<%- include('./includes/head.ejs') %>
 <section class="filter fs-4 d-flex justify-content-center mx-auto">
   <form class="filter_items" action="/products" method="GET">
     <div class="filtering">
@@ -100,6 +100,26 @@
   </div>
   <% } %> <% } %>
 </section>
-<div class="pagination d-flex justify-content-center"></div>
+<% if(isOverLimit) { %>
+<div class="pagination d-flex justify-content-center fs-4 mt-5">
+  <a href="?page=<%=previousPage %>" class="blocks <%= (currentPage == 1) ? 'disabled' : '' %>"
+    >&laquo;</a
+  >
+  <% if (currentPage !== 1 && previousPage !== 1) { %>
+  <a href="?page=1" class="blocks">1</a>
+  <% } %> <% if (hasPreviousPage) { %>
+  <a href="?page=<%= previousPage %>" class="blocks"><%= previousPage %></a>
+  <% } %>
+  <a href="?page=<%= currentPage %>" class="active blocks"><%= currentPage %></a>
+  <% if (hasNextPage) { %>
+  <a href="?page=<%= nextPage %>" class="blocks"><%= nextPage %></a>
+  <% } %> <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+  <a href="?page=<%= lastPage %>" class="blocks"><%= lastPage %></a>
+  <% } %>
+  <a href="?page=<%=nextPage %>" class="blocks <%= (currentPage == lastPage) ? 'disabled' : '' %>"
+    >&raquo;</a
+  >
+</div>
+<% } %>
 <section></section>
 <%- include('./includes/end.ejs') %>

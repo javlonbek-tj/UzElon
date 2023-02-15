@@ -15,6 +15,7 @@ const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const filtering = require('../utils/filtering');
 const AppError = require('../utils/appError');
+const { logout } = require('./auth');
 
 const formatProd = prods => {
   if (prods.length) {
@@ -45,7 +46,7 @@ const getHomePage = async (req, res, next) => {
     if (topProds.length > 0) {
       formatProd(topProds);
     }
-    const prods = await (await General.find({ top: { $ne: true } }).lean()).reverse().slice(0, 20);
+    const prods = await (await General.find({ top: { $ne: true } }).lean()).reverse().slice(0, 12);
     if (prods.length > 0) {
       formatProd(prods);
     }
@@ -287,6 +288,7 @@ const getOneProduct = async (req, res, next) => {
     next(new AppError(err, 500));
   }
 };
+
 const getAllProducts = async (req, res, next) => {
   try {
     if (req.query.search) {
@@ -298,7 +300,7 @@ const getAllProducts = async (req, res, next) => {
       return res.status(200).render('products', {
         pageTitle: "Qidirilgan e'lonlar",
         prods,
-        querySearch: req.query.search,
+        isOverLimit: null,
       });
     }
     if (req.query.category || req.query.from || req.query.to || req.query.address) {
@@ -313,14 +315,16 @@ const getAllProducts = async (req, res, next) => {
       return res.render('products', {
         pageTitle: "Qidirilgan e'lonlar",
         prods,
-        querySearch: req.query.search,
+        isOverLimit: null,
       });
     }
-
-    const limit = 4;
+    const limit = 12;
     const page = parseInt(req.query.page) || 1;
     const total = await General.countDocuments();
-
+    let isOverLimit = null;
+    if (total > limit) {
+      isOverLimit = true;
+    }
     const prods = await General.find()
       .sort({ createdAt: -1 })
       .skip(page * limit - limit)
@@ -332,14 +336,13 @@ const getAllProducts = async (req, res, next) => {
     res.render('products', {
       pageTitle: "AvtoVodil barcha e'lonlar",
       prods,
-      querySearch: '',
       currentPage: page,
       hasNextPage: limit * page < total,
       hasPreviousPage: page > 1,
-      total,
       nextPage: page + 1,
       previousPage: page - 1,
       lastPage: Math.ceil(total / limit),
+      isOverLimit,
     });
   } catch (err) {
     next(new AppError(err, 500));
@@ -352,16 +355,21 @@ const getAuthorProducts = async (req, res, next) => {
     if (!userId) {
       throw new Error("Muallif e'lonlarini topishda xatolik", 400);
     }
-    let isMeOrAdmin = null;
+    let isMe = null;
+    let admin = null;
+    if (req.user.role === 'admin') {
+      admin = true;
+    }
     if (req.user) {
-      isMeOrAdmin = userId == req.user._id.toString() || req.user.role === 'admin';
+      isMe = userId == req.user._id.toString();
     }
     const prods = await General.find({ userId }).lean();
     formatProd(prods);
     res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
-      isMeOrAdmin,
+      isMe,
+      admin,
     });
   } catch (err) {
     next(new AppError(err, 500));

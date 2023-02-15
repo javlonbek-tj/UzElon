@@ -3,10 +3,8 @@
   <% if(prods.length <= 0) { %>
   <h1 class="text-center">Sizda e'lonlar mavjud emas</h1>
   <% } else { %>
-  <h1 class="text-center mb-5 <%= (isMeOrAdmin) ? '' : 'd-none' %>">Mening barcha e'lonlarim</h1>
-  <h1 class="text-center mb-5 <%= (isMeOrAdmin) ? 'd-none' : '' %>">
-    Muallifning barcha e'lonlari
-  </h1>
+  <h1 class="text-center mb-5 <%= (isMe) ? '' : 'd-none' %>">Mening barcha e'lonlarim</h1>
+  <h1 class="text-center mb-5 <%= (isMe) ? 'd-none' : '' %>">Muallifning barcha e'lonlari</h1>
   <div class="box_container">
     <% for (let product of prods) { %>
     <div class="box mb-5">
@@ -24,7 +22,7 @@
         <h4 class="text-center"><%= product.address %></h4>
         <% } %>
       </div>
-      <% if(isMeOrAdmin) { %>
+      <% if(isMe || admin) { %>
       <div class="card_footer d-flex justify-content-between px-5 py-3">
         <a
           href="/user/edit-product/<%= product._id %>?edit=true&&productType=<%= product.productType %>"
@@ -36,6 +34,14 @@
             <i class="fa-solid fa-trash text-danger fs-4"></i>
           </button>
         </form>
+        <% if(admin) { %>
+        <form action="/admin/makeProductTop" method="POST">
+          <input type="hidden" name="productId" value="<%= product._id %>" />
+          <button type="submit" class="bg-white">
+            <i class="fa-brands fa-product-hunt fs-4 text-primary"></i>
+          </button>
+        </form>
+        <% } %>
       </div>
       <% } else { %>
       <div class="card_footer d-flex justify-content-between px-5 p-2">

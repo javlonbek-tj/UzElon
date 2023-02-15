@@ -34,7 +34,8 @@ const getUserProducts = async (req, res, next) => {
     res.render('user/userProducts', {
       pageTitle: `Mening e'lonlarim`,
       prods,
-      isMeOrAdmin: true,
+      isMe: true,
+      admin: null,
     });
   } catch (err) {
     next(new AppError(err, 500));
