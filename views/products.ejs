@@ -1,4 +1,4 @@
-<%- include('./includes/head.ejs') %>
+<%- include('./includes/head.ejs', {querySearch: querySearch}) %>
 <section class="filter fs-4 d-flex justify-content-center mx-auto">
   <form class="filter_items" action="/products" method="GET">
     <div class="filtering">
@@ -100,5 +100,6 @@
   </div>
   <% } %> <% } %>
 </section>
+<div class="pagination d-flex justify-content-center"></div>
 <section></section>
 <%- include('./includes/end.ejs') %>

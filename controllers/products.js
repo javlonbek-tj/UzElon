@@ -45,7 +45,7 @@ const getHomePage = async (req, res, next) => {
     if (topProds.length > 0) {
       formatProd(topProds);
     }
-    const prods = await General.find({ top: { $ne: true } }).lean();
+    const prods = await (await General.find({ top: { $ne: true } }).lean()).reverse().slice(0, 20);
     if (prods.length > 0) {
       formatProd(prods);
     }
@@ -301,7 +301,7 @@ const getAllProducts = async (req, res, next) => {
         querySearch: req.query.search,
       });
     }
-    if (!req.query.page || !req.query.limit) {
+    if (req.query.category || req.query.from || req.query.to || req.query.address) {
       let { category, from, to, address } = req.query;
       from = parseInt(from);
       to = parseInt(to);
@@ -316,7 +316,16 @@ const getAllProducts = async (req, res, next) => {
         querySearch: req.query.search,
       });
     }
-    const prods = await General.find().lean();
+
+    const limit = 4;
+    const page = parseInt(req.query.page) || 1;
+    const total = await General.countDocuments();
+
+    const prods = await General.find()
+      .sort({ createdAt: -1 })
+      .skip(page * limit - limit)
+      .limit(limit)
+      .lean();
     if (prods.length > 0) {
       formatProd(prods);
     }
@@ -324,6 +333,13 @@ const getAllProducts = async (req, res, next) => {
       pageTitle: "AvtoVodil barcha e'lonlar",
       prods,
       querySearch: '',
+      currentPage: page,
+      hasNextPage: limit * page < total,
+      hasPreviousPage: page > 1,
+      total,
+      nextPage: page + 1,
+      previousPage: page - 1,
+      lastPage: Math.ceil(total / limit),
     });
   } catch (err) {
     next(new AppError(err, 500));

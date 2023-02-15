@@ -402,6 +402,33 @@ input:-webkit-autofill:active {
   background-size: cover;
 }
 
+/* Pagination */
+
+.blocks {
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  border: 1px solid #dddddd;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+}
+.blocks:not(:first-child) {
+  margin-left: 5px;
+}
+.blocks:first-child {
+  border-radius: 10px 0 0 10px;
+}
+.blocks:last-child {
+  border-radius: 0 10px 10px 0;
+}
+.blocks:hover {
+  background-color: #dddddd;
+}
+.pagination a.active {
+  background-color: #4caf50;
+}
+
 /* media queries  */
 
 @media (max-width: 991px) {
