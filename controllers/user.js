@@ -1428,13 +1428,18 @@ const getUserMessages = async (req, res, next) => {
 const postUserFavourite = async (req, res, next) => {
   try {
     const prodId = req.body.prodId;
-    const userfav = req.user.myFavourite;
-    const t = userfav.map(u => u.toString());
-    const f = t.includes(prodId);
-    console.log(f, prodId);
-    await req.user.myFavourite.push(prodId);
+    const userFavProdItems = req.user.myFavourite.items;
+    const prodIndex = userFavProdItems.findIndex(fProd => fProd.toString() == prodId);
+    if (prodIndex > -1) {
+      userFavProdItems.splice(prodIndex, 1);
+      await req.user.save();
+      return res.status(204).json({
+        success: true,
+      });
+    }
+    userFavProdItems.push(prodId);
     await req.user.save();
-    res.json({
+    res.status(200).json({
       success: true,
     });
   } catch (err) {

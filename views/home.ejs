@@ -59,7 +59,7 @@
         <p class="me-5 text-secondary fs-5"><%= product.address %> </p>
         <form id="myFav">
           <input type="hidden" value="<%= product._id%>" id="prodId">
-          <button class="bg-white"><i class="fa-regular fa-heart fs-4 text-danger" id="my_fav"></i></button>
+          <button class="bg-white"><i class="fa-regular fa-heart fs-4" id="my_fav"></i></button>
         </form>
       </div>
       <% } else {%>
@@ -67,7 +67,7 @@
         <p class="fs-5 text-white">.</p>
         <form id="myFav">
           <input type="hidden" value="<%= product._id%>" id="prodId">
-          <button class="bg-white"><i class="fa-regular fa-heart fs-4 text-danger" id="my_fav"></i></button>
+          <button class="bg-white"><i class="fa-regular fa-heart fs-4" id="my_fav"></i></button>
         </form>
       </div>
       <% } %>
@@ -97,21 +97,33 @@
             <p class="text-muted fs-5"> <%= product.createdAt %> </p>
         </div>
         <% if(product.price) { %>
-        <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
-        <% } else { %>
-          <h4 class="text-center"><%= product.address %> </h4>
-          <% } %>
-      </div>
-      <% if(product.price) { %>
-      <div class="card_footer d-flex justify-content-between px-5 pt-2">
-        <p class="me-5 text-secondary fs-5"><%= product.address %> </p>
+          <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+          <% } else { %>
+            <h3 class="text-center"><%= product.address %> </h3>
+            <% } %>
+        </div>
+        <% if(product.price) { %>
+        <div class="card_footer d-flex justify-content-between px-5 pt-2 align-items-center">
+          <p class="me-5 text-secondary fs-5"><%= product.address %> </p>
+          <form id="myFav">
+            <input type="hidden" value="<%= product._id%>" id="prodId">
+            <button class="bg-white"><i class="fa-regular fa-heart fs-4" id="my_fav"></i></button>
+          </form>
+        </div>
+        <% } else {%>
+        <div class="d-flex justify-content-between px-5 pt-2 align-items-center">
+          <p class="fs-5 text-white">.</p>
+          <form id="myFav">
+            <input type="hidden" value="<%= product._id%>" id="prodId">
+            <button class="bg-white"><i class="fa-regular fa-heart fs-4" id="my_fav"></i></button>
+          </form>
+        </div>
+        <% } %>
       </div>
       <% } %>
     </div>
     <% } %>
-  </div>
-  <% } %>
-</section>
+  </section>
 <div class="text-center mt-5">
   <a href="/products" class="btn btn-outline-primary fs-4">Barcha e'lonlar</a>
 </div>

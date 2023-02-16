@@ -24,12 +24,14 @@ const userSchema = new Schema(
       enum: ['superAdmin', 'admin', 'user'],
       default: 'user',
     },
-    myFavourite: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'General',
-      },
-    ],
+    myFavourite: {
+      items: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'General',
+        },
+      ],
+    },
     passwordChangedAt: Date,
     photo: String,
   },

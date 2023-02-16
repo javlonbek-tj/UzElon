@@ -24,10 +24,6 @@ const getHomePage = async (req, res, next) => {
     if (topProds.length > 0) {
       formatProd(topProds);
     }
-    const userFava = req.user.myFavourite;
-    const myd = userFava.map(m => m.toString());
-    const tps = topProds.map(tp => tp._id.toString());
-    const intersection = tps.filter(element => myd.includes(element));
     const prods = await (await General.find({ top: { $ne: true } }).lean()).reverse().slice(0, 12);
     if (prods.length > 0) {
       formatProd(prods);

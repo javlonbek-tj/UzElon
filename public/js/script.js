@@ -51,7 +51,14 @@ myFavBtn.forEach(elem =>
         },
         body: JSON.stringify({ prodId: prodId }),
       });
+      if (res.status == 204) {
+        e.target.lastElementChild.classList.toggle('text-primary');
+        e.target.lastElementChild.classList.remove('text-warning');
+        return showAlert('error', "Tanlanganlardan o'chirildi");
+      }
       if (res.ok) {
+        e.target.lastElementChild.classList.toggle('text-warning');
+        e.target.lastElementChild.classList.toggle('text-primary');
         showAlert('success', "Tanlangan e'lonlarga saqlandi!");
       }
     } catch (err) {
