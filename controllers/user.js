@@ -1425,6 +1425,23 @@ const getUserMessages = async (req, res, next) => {
   }
 };
 
+const postUserFavourite = async (req, res, next) => {
+  try {
+    const prodId = req.body.prodId;
+    const userfav = req.user.myFavourite;
+    const t = userfav.map(u => u.toString());
+    const f = t.includes(prodId);
+    console.log(f, prodId);
+    await req.user.myFavourite.push(prodId);
+    await req.user.save();
+    res.json({
+      success: true,
+    });
+  } catch (err) {
+    next(new AppError(err, 500));
+  }
+};
+
 module.exports = {
   getUserProducts,
   getUserProfile,
@@ -1448,4 +1465,5 @@ module.exports = {
   postUserChangeProfile,
   postUserDeletePicture,
   getUserMessages,
+  postUserFavourite,
 };

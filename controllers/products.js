@@ -15,8 +15,8 @@ const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const filtering = require('../utils/filtering');
 const AppError = require('../utils/appError');
-const { logout } = require('./auth');
 const formatProd = require('../utils/formatProd');
+const { logout } = require('./auth');
 
 const getHomePage = async (req, res, next) => {
   try {
@@ -24,6 +24,10 @@ const getHomePage = async (req, res, next) => {
     if (topProds.length > 0) {
       formatProd(topProds);
     }
+    const userFava = req.user.myFavourite;
+    const myd = userFava.map(m => m.toString());
+    const tps = topProds.map(tp => tp._id.toString());
+    const intersection = tps.filter(element => myd.includes(element));
     const prods = await (await General.find({ top: { $ne: true } }).lean()).reverse().slice(0, 12);
     if (prods.length > 0) {
       formatProd(prods);

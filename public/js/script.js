@@ -5,6 +5,7 @@ let drop2 = document.querySelector('.drop2');
 
 document.querySelector('#user_btn').addEventListener('click', () => {
   drop.classList.toggle('active');
+  console.log(1);
 });
 
 document.querySelector('#user_footer_btn').addEventListener('click', () => {
@@ -18,6 +19,46 @@ drop.addEventListener('click', () => {
 drop2.addEventListener('click', () => {
   drop2.classList.remove('active');
 });
+
+/* my favourite */
+
+const hideAlert = () => {
+  const el = document.querySelector('.alert');
+  if (el) {
+    el.parentElement.removeChild(el);
+  }
+};
+
+// type is 'success' or 'error'
+const showAlert = (type, msg, time = 2) => {
+  hideAlert();
+  const markup = `<div class="alert alert--${type}">${msg}</div>`;
+  document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+  window.setTimeout(hideAlert, time * 1000);
+};
+
+const myFavBtn = document.querySelectorAll('#myFav');
+
+myFavBtn.forEach(elem =>
+  elem.addEventListener('submit', async e => {
+    try {
+      e.preventDefault();
+      const prodId = e.target.firstElementChild.value;
+      const res = await fetch(`/user/myFavourite`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prodId: prodId }),
+      });
+      if (res.ok) {
+        showAlert('success', "Tanlangan e'lonlarga saqlandi!");
+      }
+    } catch (err) {
+      showAlert('error', err.response.data.message);
+    }
+  }),
+);
 
 /* Image upload */
 function previewBeforeUpload(id) {
@@ -34,5 +75,3 @@ function previewBeforeUpload(id) {
 previewBeforeUpload('file-1');
 previewBeforeUpload('file-2');
 previewBeforeUpload('file-3');
-
-/* default date */
