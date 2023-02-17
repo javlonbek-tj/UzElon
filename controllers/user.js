@@ -1429,7 +1429,7 @@ const postUserFavourite = async (req, res, next) => {
   try {
     const prodId = req.body.prodId;
     const userFavProdItems = req.user.myFavourite.items;
-    const prodIndex = userFavProdItems.findIndex(fProd => fProd.toString() == prodId);
+    const prodIndex = userFavProdItems.findIndex(fProd => fProd.toString() === prodId.toString());
     if (prodIndex > -1) {
       userFavProdItems.splice(prodIndex, 1);
       await req.user.save();
@@ -1439,6 +1439,35 @@ const postUserFavourite = async (req, res, next) => {
     }
     userFavProdItems.push(prodId);
     await req.user.save();
+    res.status(200).json({
+      success: true,
+    });
+  } catch (err) {
+    next(new AppError(err, 500));
+  }
+};
+
+const getUserFavourite = async (req, res, next) => {
+  try {
+    const user = await req.user.populate('myFavourite.items');
+    const prodIds = user.myFavourite.items.map(p => p._id);
+    const prods = await General.find({ _id: { $in: prodIds } }).lean();
+    if (prods.length > 0) {
+      formatProd(prods);
+    }
+    res.render('user/userFavouriteProds', {
+      pageTitle: "Mening tanlangan e'lonlarim",
+      prods,
+    });
+  } catch (err) {
+    next(new AppError(err, 500));
+  }
+};
+
+const postDeleteFavourite = async (req, res, next) => {
+  try {
+    const prodId = req.body.prodId;
+    await req.user.removeFromFavourite(prodId);
     res.status(200).json({
       success: true,
     });
@@ -1471,4 +1500,6 @@ module.exports = {
   postUserDeletePicture,
   getUserMessages,
   postUserFavourite,
+  getUserFavourite,
+  postDeleteFavourite,
 };

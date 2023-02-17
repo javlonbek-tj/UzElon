@@ -66,5 +66,12 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 
   return false;
 };
+userSchema.methods.removeFromFavourite = function (productId) {
+  const updatedFavItems = this.myFavourite.items.filter(item => {
+    return item.toString() !== productId.toString();
+  });
+  this.myFavourite.items = updatedFavItems;
+  return this.save();
+};
 
 module.exports = model('User', userSchema);

@@ -52,13 +52,13 @@ myFavBtn.forEach(elem =>
         body: JSON.stringify({ prodId: prodId }),
       });
       if (res.status == 204) {
-        e.target.lastElementChild.classList.toggle('text-primary');
+        e.target.lastElementChild.classList.toggle('text-dark');
         e.target.lastElementChild.classList.remove('text-warning');
         return showAlert('error', "Tanlanganlardan o'chirildi");
       }
       if (res.ok) {
         e.target.lastElementChild.classList.toggle('text-warning');
-        e.target.lastElementChild.classList.toggle('text-primary');
+        e.target.lastElementChild.classList.remove('text-dark');
         showAlert('success', "Tanlangan e'lonlarga saqlandi!");
       }
     } catch (err) {
@@ -66,6 +66,30 @@ myFavBtn.forEach(elem =>
     }
   }),
 );
+
+const myDelFavBtn = document.querySelectorAll('#deleteFav');
+myDelFavBtn.forEach(elem => {
+  elem.addEventListener('submit', async e => {
+    try {
+      e.preventDefault();
+      console.log(e);
+      const prodId = e.target.firstElementChild.value;
+      const res = await fetch(`/user/deleteFavourite`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prodId: prodId }),
+      });
+      if (res.ok) {
+        e.target.parentElement.parentElement.remove();
+        showAlert('error', "Tanlangan e'lonlardan o'chirildi!");
+      }
+    } catch (err) {
+      showAlert('error', err.response.data.message);
+    }
+  });
+});
 
 /* Image upload */
 function previewBeforeUpload(id) {

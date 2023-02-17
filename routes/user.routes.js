@@ -28,13 +28,17 @@ const {
   postUserDeletePicture,
   getUserMessages,
   postUserFavourite,
+  getUserFavourite,
+  postDeleteFavourite,
 } = require('../controllers/user');
 
 router.get('/products', isAuth, getUserProducts);
 router.get('/profile', isAuth, getUserProfile);
 router.post('/deletePicture', isAuth, postUserDeletePicture);
 router.get('/changeProfile', isAuth, getUserChangeProfile);
+router.get('/myFavourite', isAuth, getUserFavourite);
 router.post('/myFavourite', isAuth, postUserFavourite);
+router.post('/deleteFavourite', isAuth, postDeleteFavourite);
 router.get('/messages', isAuth, getUserMessages);
 router.post(
   '/changeProfile',
