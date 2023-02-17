@@ -126,7 +126,6 @@ const isAuth = async (req, res, next) => {
   } catch (err) {
     next(new AppError(err, 500));
   }
-  res.locals.user = false;
   next();
 };
 
