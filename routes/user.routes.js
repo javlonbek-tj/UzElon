@@ -30,6 +30,7 @@ const {
   postUserFavourite,
   getUserFavourite,
   postDeleteFavourite,
+  postComment,
 } = require('../controllers/user');
 
 router.get('/products', isAuth, getUserProducts);
@@ -40,6 +41,7 @@ router.get('/myFavourite', isAuth, getUserFavourite);
 router.post('/myFavourite', isAuth, postUserFavourite);
 router.post('/deleteFavourite', isAuth, postDeleteFavourite);
 router.get('/messages', isAuth, getUserMessages);
+router.post('/addComment', isAuth, postComment);
 router.post(
   '/changeProfile',
   isAuth,

@@ -106,7 +106,7 @@ const getOneProduct = async (req, res, next) => {
     }
     if (productType == 'car') {
       const car = await Car.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
-        .populate('userId')
+        .populate('userId comments')
         .lean();
       formatProd(car);
       const prods = await General.find({ category: 'avto', _id: { $ne: prodId } }).lean();

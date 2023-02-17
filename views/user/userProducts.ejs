@@ -38,7 +38,13 @@
         <form action="/admin/makeProductTop" method="POST">
           <input type="hidden" name="productId" value="<%= product._id %>" />
           <button type="submit" class="bg-white">
-            <i class="fa-brands fa-product-hunt fs-4 text-primary"></i>
+            <i class="fa-solid fa-arrow-up fs-4 text-primary"></i>
+          </button>
+        </form>
+        <form action="/admin/makeProductBottom" method="POST">
+          <input type="hidden" name="productId" value="<%= product._id %>" />
+          <button type="submit" class="bg-white">
+            <i class="fa-solid fa-arrow-down fs-4 text-primary"></i>
           </button>
         </form>
         <% } %>

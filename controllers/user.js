@@ -14,6 +14,7 @@ const LapTop = require('../models/electronics/lap-top.model');
 const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const AppError = require('../utils/appError');
+const Comments = require('../models/comment.model');
 const { validationResult } = require('express-validator');
 const {
   deleteFile,
@@ -1475,6 +1476,25 @@ const postDeleteFavourite = async (req, res, next) => {
     next(new AppError(err, 500));
   }
 };
+const postComment = async (req, res, next) => {
+  try {
+    const { productId, commentBody, productType } = req.body;
+    let product;
+    if (productType === 'car') {
+      product = await Car.findById(productId);
+    }
+    const comment = new Comments({
+      comment: commentBody,
+      userId: req.user._id,
+    });
+    product.comments.push(comment);
+    await product.save();
+    await comment.save();
+    res.redirect(`/products/${productId}?productType=${productType}`);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 module.exports = {
   getUserProducts,
@@ -1502,4 +1522,5 @@ module.exports = {
   postUserFavourite,
   getUserFavourite,
   postDeleteFavourite,
+  postComment,
 };
