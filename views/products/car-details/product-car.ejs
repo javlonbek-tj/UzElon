@@ -103,53 +103,71 @@
   </div>
 </section>
 <section class="accordion" id="accordionExample">
-  <form action="/user/addComment" method="POST">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button
-          class="accordion-button fs-3"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseOne"
-          aria-expanded="true"
-          aria-controls="collapseOne"
-        >
-          Komment qoldirish
-        </button>
-      </h2>
-      <div
-        id="collapseOne"
-        class="accordion-collapse collapse"
-        aria-labelledby="headingOne"
-        data-bs-parent="#accordionExample"
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button
+        class="accordion-button fs-3"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
       >
+        Komment qoldirish
+      </button>
+    </h2>
+    <div
+      id="collapseOne"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingOne"
+      data-bs-parent="#accordionExample"
+    >
+      <form id="myComment">
         <div class="accordion-body">
-          <textarea name="commentBody" id="comment" rows="5" class="w-100 fs-3"></textarea>
+          <textarea
+            name="commentBody"
+            id="commentBody"
+            rows="5"
+            class="w-100 fs-3"
+            maxlength="500"
+          ></textarea>
         </div>
         <input type="hidden" name="productType" value="car" />
         <input type="hidden" name="productId" value="<%= car._id%>" />
-        <button type="submit" class="btn btn-primary m-3 fs-4 px-3">Submit</button>
-      </div>
+        <button class="btn btn-primary m-3 fs-4 px-3">Submit</button>
+      </form>
     </div>
-  </form>
+  </div>
 </section>
+<% if(car.comments.length > 0) { %><% for (let com of car.comments) { %>
 <section class="userComments">
-  <div class="mb-4 d-flex">
+  <div class="mb-4 d-flex user_comment">
     <img
       class="me-4 rounded-circle"
-      src="/image/commentUser.png"
+      src="<% if(com.userId.photo) { %>  /<%= com.userId.photo %> <% } else { %> /image/commentUser.png <% } %>"
       style="width: 40px; height: 40px"
       ;
       alt=""
     />
-    <% for (let com of car.comments) { %>
     <div>
-      <h4 class="mt-0 text-success">John Doe</h4>
+      <h4 class="mt-0 text-success"><%= com.userId.username %></h4>
       <p class="fs-4"><%= com.comment %></p>
+      <% if(admin || com.userId._id.toString() == user._id.toString()) { %>
+      <div class="d-flex align-items-center">
+        <form class="deleteComment">
+          <input type="hidden" value="<%= com._id%>" />
+          <input type="hidden" value="car" />
+          <input type="hidden" value="<%= car._id%>" />
+          <button>
+            <i class="fa-solid fa-trash text-danger fs-4"></i>
+          </button>
+        </form>
+      </div>
+      <% } %>
     </div>
-    <% } %>
   </div>
 </section>
+<% } %> <% } %>
 <section class="cards container-lg" id="cards">
   <div class="top-products d-flex justify-content-between">
     <h2>O'xshash e'lonlar</h2>

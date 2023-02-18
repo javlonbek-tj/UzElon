@@ -41,10 +41,20 @@ const getHomePage = async (req, res, next) => {
 const getOneProduct = async (req, res, next) => {
   try {
     const prodId = req.params.productId;
+    let admin = null;
+    if (req.user.role === 'admin') {
+      admin = true;
+    }
     const { productType } = req.query;
     if (productType == 'flat') {
       const flat = await Flat.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(flat);
       const allFlat = await General.find({ category: 'estate' }).lean();
@@ -52,12 +62,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/home-details/product-flat', {
         pageTitle: 'Kvartira oldi-sotdisi',
         flat,
+        admin,
         prods,
       });
     }
     if (productType == 'land') {
       const land = await Land.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(land);
       const prods = await General.find({ category: 'estate', _id: { $ne: prodId } }).lean();
@@ -67,12 +84,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/home-details/product-land', {
         pageTitle: 'Yer oldi-sotdisi',
         land,
+        admin,
         prods,
       });
     }
     if (productType == 'house') {
       const house = await House.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(house);
       const prods = await General.find({ category: 'estate', _id: { $ne: prodId } }).lean();
@@ -82,6 +106,7 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/home-details/product-house', {
         pageTitle: 'Hovli uy oldi-sotdisi',
         house,
+        admin,
         prods,
       });
     }
@@ -92,6 +117,12 @@ const getOneProduct = async (req, res, next) => {
         { new: true },
       )
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(nonResidential);
       const prods = await General.find({ category: 'estate', _id: { $ne: prodId } }).lean();
@@ -101,12 +132,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/home-details/product-nonResidential', {
         pageTitle: 'Noturar joy oldi-sotdisi',
         nonResidential,
+        admin,
         prods,
       });
     }
     if (productType == 'car') {
       const car = await Car.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
-        .populate('userId comments')
+        .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(car);
       const prods = await General.find({ category: 'avto', _id: { $ne: prodId } }).lean();
@@ -116,12 +154,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/car-details/product-car', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         car,
+        admin,
         prods,
       });
     }
     if (productType == 'track') {
       const track = await Track.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(track);
       const prods = await General.find({ category: 'avto', _id: { $ne: prodId } }).lean();
@@ -131,12 +176,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/car-details/product-track', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         track,
+        admin,
         prods,
       });
     }
     if (productType == 'moto') {
       const moto = await Moto.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(moto);
       const prods = await General.find({ category: 'avto', _id: { $ne: prodId } }).lean();
@@ -146,12 +198,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/car-details/product-moto', {
         pageTitle: 'Avtomobil oldi-sotdisi',
         moto,
+        admin,
         prods,
       });
     }
     if (productType == 'vacancy') {
       const vacancy = await Vacancy.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(vacancy);
       const prods = await General.find({ category: 'jobs', _id: { $ne: prodId } }).lean();
@@ -161,12 +220,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/job-details/product-vacancy', {
         pageTitle: `Bo'sh ish o'rinlari`,
         vacancy,
+        admin,
         prods,
       });
     }
     if (productType == 'service') {
       const service = await Service.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(service);
       const prods = await General.find({ category: 'jobs', _id: { $ne: prodId } }).lean();
@@ -176,6 +242,7 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/job-details/product-service', {
         pageTitle: `Xizmat ko'rsatish`,
         service,
+        admin,
         prods,
       });
     }
@@ -184,7 +251,15 @@ const getOneProduct = async (req, res, next) => {
         prodId,
         { $inc: { views: 1 } },
         { new: true },
-      ).populate('userId');
+      )
+        .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
+        .lean();
       formatProd(construction);
       const prods = await General.find({ category: 'jobs', _id: { $ne: prodId } }).lean();
       if (prods.length > 0) {
@@ -193,12 +268,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/job-details/product-construction', {
         pageTitle: `Qurilish xizmati`,
         construction,
+        admin,
         prods,
       });
     }
     if (productType == 'phone') {
       const phone = await Phone.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(phone);
       const prods = await General.find({ category: 'electronics', _id: { $ne: prodId } }).lean();
@@ -208,6 +290,7 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/electronic-details/product-phone', {
         pageTitle: `Telefonlar oldi-sotdisi`,
         phone,
+        admin,
         prods,
       });
     }
@@ -218,6 +301,12 @@ const getOneProduct = async (req, res, next) => {
         { new: true },
       )
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(houseAppliances);
       const prods = await General.find({ category: 'electronics', _id: { $ne: prodId } }).lean();
@@ -227,12 +316,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/electronic-details/product-houseApp', {
         pageTitle: `Uy jihozlari oldi-sotdisi`,
         houseAppliances,
+        admin,
         prods,
       });
     }
     if (productType == 'laptop') {
       const lapTop = await LapTop.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(lapTop);
       const prods = await General.find({ category: 'electronics', _id: { $ne: prodId } }).lean();
@@ -242,12 +338,19 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/electronic-details/product-lapTop', {
         pageTitle: `Kompyuterlar oldi-sotdisi`,
         lapTop,
+        admin,
         prods,
       });
     }
     if (productType == 'animal') {
       const animal = await Animal.findByIdAndUpdate(prodId, { $inc: { views: 1 } }, { new: true })
         .populate('userId')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        })
         .lean();
       formatProd(animal);
       const prods = await General.find({ category: 'electronics', _id: { $ne: prodId } }).lean();
@@ -257,6 +360,7 @@ const getOneProduct = async (req, res, next) => {
       return res.render('products/electronic-details/product-animal', {
         pageTitle: 'Uy hayvonlari oldi-sotdisi',
         animal,
+        admin,
         prods,
       });
     } else {

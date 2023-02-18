@@ -50,58 +50,100 @@ const postDeleteProduct = async (req, res, next) => {
     if (prodType === 'flat') {
       const removedProd = await Flat.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'house') {
       const removedProd = await House.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'land') {
       const removedProd = await Land.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'nonResidential') {
       const removedProd = await NonResidential.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'car') {
       const removedProd = await Car.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'track') {
       const removedProd = await Track.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'moto') {
       const removedProd = await Moto.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'construction') {
       const removedProd = await Construction.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'service') {
       const removedProd = await Service.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'vacancy') {
       const removedProd = await Vacancy.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'phone') {
       const removedProd = await Phone.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'laptop') {
       const removedProd = await LapTop.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'houseAppliances') {
       const removedProd = await HouseAppliances.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     if (prodType === 'animal') {
       const removedProd = await Animal.findByIdAndRemove(prodId);
       deleteImage(removedProd.imageUrl);
+      removedProd.comments.forEach(async com => {
+        await Comments.findByIdAndRemove(com);
+      });
     }
     res.redirect('/user/products');
   } catch (err) {
@@ -1478,21 +1520,136 @@ const postDeleteFavourite = async (req, res, next) => {
 };
 const postComment = async (req, res, next) => {
   try {
-    const { productId, commentBody, productType } = req.body;
-    let product;
-    if (productType === 'car') {
-      product = await Car.findById(productId);
+    const { productId, comment, productType } = req.body;
+    if (comment == '') {
+      return res.status(400).json({
+        success: false,
+        msg: 'empty body',
+      });
     }
-    const comment = new Comments({
-      comment: commentBody,
+    let product;
+    if (productType == 'car') {
+      product = await Car.findById(productId).populate('comments');
+    }
+    if (productType == 'moto') {
+      product = await Moto.findById(productId).populate('comments');
+    }
+    if (productType == 'track') {
+      product = await Track.findById(productId).populate('comments');
+    }
+    if (productType == 'flat') {
+      product = await Flat.findById(productId).populate('comments');
+    }
+    if (productType == 'house') {
+      product = await House.findById(productId).populate('comments');
+    }
+    if (productType == 'nonResidential') {
+      product = await NonResidential.findById(productId).populate('comments');
+    }
+    if (productType == 'land') {
+      product = await Land.findById(productId).populate('comments');
+    }
+    if (productType == 'service') {
+      product = await Service.findById(productId).populate('comments');
+    }
+    if (productType == 'vacancy') {
+      product = await Vacancy.findById(productId).populate('comments');
+    }
+    if (productType == 'construction') {
+      product = await Construction.findById(productId).populate('comments');
+    }
+    if (productType == 'phone') {
+      product = await Phone.findById(productId).populate('comments');
+    }
+    if (productType == 'houseAppliances') {
+      product = await HouseAppliances.findById(productId).populate('comments');
+    }
+    if (productType == 'laptop') {
+      product = await LapTop.findById(productId).populate('comments');
+    }
+    if (productType == 'animal') {
+      product = await Animal.findById(productId).populate('comments');
+    }
+    const oldComment = product.comments.find(
+      com => com.userId.toString() === req.user._id.toString(),
+    );
+    if (oldComment) {
+      return res.status(400).json({
+        success: false,
+        msg: 'something',
+      });
+    }
+    const newComment = new Comments({
+      comment,
       userId: req.user._id,
     });
-    product.comments.push(comment);
+    product.comments.push(newComment);
     await product.save();
-    await comment.save();
-    res.redirect(`/products/${productId}?productType=${productType}`);
+    await newComment.save();
+    res.status(200).json({
+      success: true,
+    });
   } catch (err) {
-    console.log(err);
+    next(new AppError(err, 500));
+  }
+};
+
+const postDeleteComment = async (req, res, next) => {
+  try {
+    const { commentId, prodId, productType } = req.body;
+    await Comments.findByIdAndRemove(commentId);
+    let product;
+    if (productType == 'car') {
+      product = await Car.findById(prodId);
+    }
+    if (productType == 'moto') {
+      product = await Moto.findById(prodId);
+    }
+    if (productType == 'track') {
+      product = await Track.findById(prodId);
+    }
+    if (productType == 'flat') {
+      product = await Flat.findById(prodId);
+    }
+    if (productType == 'house') {
+      product = await House.findById(prodId);
+    }
+    if (productType == 'nonResidential') {
+      product = await NonResidential.findById(prodId);
+    }
+    if (productType == 'land') {
+      product = await Land.findById(prodId);
+    }
+    if (productType == 'service') {
+      product = await Service.findById(prodId);
+    }
+    if (productType == 'vacancy') {
+      product = await Vacancy.findById(prodId);
+    }
+    if (productType == 'construction') {
+      product = await Construction.findById(prodId);
+    }
+    if (productType == 'phone') {
+      product = await Phone.findById(prodId);
+    }
+    if (productType == 'houseAppliances') {
+      product = await HouseAppliances.findById(prodId);
+    }
+    if (productType == 'laptop') {
+      product = await LapTop.findById(prodId);
+    }
+    if (productType == 'animal') {
+      product = await Animal.findById(prodId);
+    }
+    const comments = [...product.comments];
+    const updatedComments = comments.filter(com => com.toString() !== commentId.toString());
+    product.comments = updatedComments;
+    await product.save();
+    res.status(204).json({
+      success: true,
+    });
+  } catch (err) {
+    next(new AppError(err, 500));
   }
 };
 
@@ -1523,4 +1680,5 @@ module.exports = {
   getUserFavourite,
   postDeleteFavourite,
   postComment,
+  postDeleteComment,
 };

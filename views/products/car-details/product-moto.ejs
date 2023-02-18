@@ -96,57 +96,123 @@
       </div>
     </div>
   </div>
-</section>
-<section class="cards container-lg" id="cards">
-  <div class="top-products d-flex justify-content-between">
-    <h2>O'xshash e'lonlar</h2>
-  </div>
-  <% if(prods.length <= 0) { %>
-  <h1 class="text-center">O'xshash e'lonlar mavjud emas</h1>
-  <% } else { %> <% if(prods.length > 4) { %>
-  <div class="box-container">
-    <% for (let product of prods) { %>
-    <div class="box">
-      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
-        ><img src="/<%= product.imageUrl %>" alt=""
-      /></a>
-      <div class="content p-3">
-        <div class="info pb-1 mb-3">
-          <h4 href="#"><%= product.shortInfo %></h4>
-          <p class="text-muted fs-5"><%= product.createdAt %></p>
-        </div>
-        <% if(product.price) { %>
-        <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
-        <% } %>
-      </div>
-      <div class="card_footer d-flex justify-content-between px-5 py-2">
-        <h5 class="me-5 text-secondary"><%= product.address %></h5>
-      </div>
-    </div>
-    <% } %>
-  </div>
-  <% } else { %>
-  <div class="box_container">
-    <% for (let product of prods) { %>
-    <div class="box mb-5">
-      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
-        ><img src="/<%= product.imageUrl %>" alt=""
-      /></a>
-      <div class="content p-3">
-        <div class="info pb-1 mb-3">
-          <h4 href="#"><%= product.shortInfo %></h4>
-          <p class="text-muted fs-5"><%= product.createdAt %></p>
-        </div>
-        <% if(product.price) { %>
-        <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
-        <% } %>
-      </div>
-      <div class="card_footer d-flex justify-content-between px-5 py-2">
-        <h5 class="me-5 text-secondary"><%= product.address %></h5>
+  <section class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button
+          class="accordion-button fs-3"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          Komment qoldirish
+        </button>
+      </h2>
+      <div
+        id="collapseOne"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample"
+      >
+        <form id="myComment">
+          <div class="accordion-body">
+            <textarea
+              name="commentBody"
+              id="commentBody"
+              rows="5"
+              class="w-100 fs-3"
+              maxlength="500"
+            ></textarea>
+          </div>
+          <input type="hidden" name="productType" value="moto" />
+          <input type="hidden" name="productId" value="<%= moto._id%>" />
+          <button class="btn btn-primary m-3 fs-4 px-3">Submit</button>
+        </form>
       </div>
     </div>
-    <% } %>
-  </div>
+  </section>
+  <% if(moto.comments.length > 0){ %> <% for (let com of moto.comments) { %>
+  <section class="userComments">
+    <div class="mb-4 d-flex user_comment">
+      <img
+        class="me-4 rounded-circle"
+        src="<% if(com.userId.photo) { %>  /<%= com.userId.photo %> <% } else { %> /image/commentUser.png <% } %>"
+        style="width: 40px; height: 40px"
+        ;
+        alt=""
+      />
+      <div>
+        <h4 class="mt-0 text-success"><%= com.userId.username %></h4>
+        <p class="fs-4"><%= com.comment %></p>
+        <% if(admin || com.userId._id.toString() == user._id.toString()) { %>
+        <div class="d-flex align-items-center">
+          <form class="deleteComment">
+            <input type="hidden" value="<%= com._id%>" />
+            <input type="hidden" value="moto" />
+            <input type="hidden" value="<%= moto._id%>" />
+            <button>
+              <i class="fa-solid fa-trash text-danger fs-4"></i>
+            </button>
+          </form>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </section>
   <% } %> <% } %>
+  <section class="cards container-lg" id="cards">
+    <div class="top-products d-flex justify-content-between">
+      <h2>O'xshash e'lonlar</h2>
+    </div>
+    <% if(prods.length <= 0) { %>
+    <h1 class="text-center">O'xshash e'lonlar mavjud emas</h1>
+    <% } else { %> <% if(prods.length > 4) { %>
+    <div class="box-container">
+      <% for (let product of prods) { %>
+      <div class="box">
+        <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
+          ><img src="/<%= product.imageUrl %>" alt=""
+        /></a>
+        <div class="content p-3">
+          <div class="info pb-1 mb-3">
+            <h4 href="#"><%= product.shortInfo %></h4>
+            <p class="text-muted fs-5"><%= product.createdAt %></p>
+          </div>
+          <% if(product.price) { %>
+          <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+          <% } %>
+        </div>
+        <div class="card_footer d-flex justify-content-between px-5 py-2">
+          <h5 class="me-5 text-secondary"><%= product.address %></h5>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <% } else { %>
+    <div class="box_container">
+      <% for (let product of prods) { %>
+      <div class="box mb-5">
+        <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
+          ><img src="/<%= product.imageUrl %>" alt=""
+        /></a>
+        <div class="content p-3">
+          <div class="info pb-1 mb-3">
+            <h4 href="#"><%= product.shortInfo %></h4>
+            <p class="text-muted fs-5"><%= product.createdAt %></p>
+          </div>
+          <% if(product.price) { %>
+          <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
+          <% } %>
+        </div>
+        <div class="card_footer d-flex justify-content-between px-5 py-2">
+          <h5 class="me-5 text-secondary"><%= product.address %></h5>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <% } %> <% } %>
+  </section>
+  <%- include('../../includes/end.ejs') %>
 </section>
-<%- include('../../includes/end.ejs') %>

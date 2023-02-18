@@ -81,13 +81,15 @@
               <li><span> Xonalar soni:</span> &nbsp <%= nonResidential.rooms %></li>
               <li><span> Maydoni:</span> &nbsp <%= nonResidential.area %> kv m.</li>
               <li>
-                <span> Binoda mavjud: &nbsp </span><% for (let buildingH of nonResidential.buildingHas) { %> <%=
-                buildingH %> <% } %>
+                <span> Binoda mavjud: &nbsp </span><% for (let buildingH of
+                nonResidential.buildingHas) { %> <%= buildingH %> <% } %>
               </li>
             </ul>
             <div class="mb-4 fs-4">
               <span class="me-3">E'lon muallifi:</span>
-              <a href="/author/products/<%= nonResidential.userId._id %>"><%= nonResidential.userId.username %></a>
+              <a href="/author/products/<%= nonResidential.userId._id %>"
+                ><%= nonResidential.userId.username %></a
+              >
             </div>
             <h3>Tavsif:</h3>
             <p class="fs-4 pb-5 ps-3 pt-2 border"><%= nonResidential.extraInfo %></p>
@@ -101,6 +103,72 @@
     </div>
   </div>
 </section>
+<section class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button
+        class="accordion-button fs-3"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
+      >
+        Komment qoldirish
+      </button>
+    </h2>
+    <div
+      id="collapseOne"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingOne"
+      data-bs-parent="#accordionExample"
+    >
+      <form id="myComment">
+        <div class="accordion-body">
+          <textarea
+            name="commentBody"
+            id="commentBody"
+            rows="5"
+            class="w-100 fs-3"
+            maxlength="500"
+          ></textarea>
+        </div>
+        <input type="hidden" name="productType" value="nonResidential" />
+        <input type="hidden" name="productId" value="<%= nonResidential._id%>" />
+        <button class="btn btn-primary m-3 fs-4 px-3">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+<% if(nonResidential.comments.length > 0) { %><% for (let com of nonResidential.comments) { %>
+<section class="userComments">
+  <div class="mb-4 d-flex user_comment">
+    <img
+      class="me-4 rounded-circle"
+      src="<% if(com.userId.photo) { %>  /<%= com.userId.photo %> <% } else { %> /image/commentUser.png <% } %>"
+      style="width: 40px; height: 40px"
+      ;
+      alt=""
+    />
+    <div>
+      <h4 class="mt-0 text-success"><%= com.userId.username %></h4>
+      <p class="fs-4"><%= com.comment %></p>
+      <% if(admin || com.userId._id.toString() == user._id.toString()) { %>
+      <div class="d-flex align-items-center">
+        <form class="deleteComment">
+          <input type="hidden" value="<%= com._id%>" />
+          <input type="hidden" value="nonResidential" />
+          <input type="hidden" value="<%= nonResidential._id%>" />
+          <button>
+            <i class="fa-solid fa-trash text-danger fs-4"></i>
+          </button>
+        </form>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+<% } %> <% } %>
 <section class="cards container-lg" id="cards">
   <div class="top-products d-flex justify-content-between">
     <h2>O'xshash e'lonlar</h2>

@@ -40,6 +40,12 @@ const motoSchema = new Schema(
       ref: 'User',
       required: true,
     },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
+      },
+    ],
     rentOrSell: String,
     views: {
       type: Number,

@@ -48,6 +48,12 @@ const lapTopSchema = new Schema(
       ref: 'User',
       required: true,
     },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
+      },
+    ],
     views: {
       type: Number,
       default: 0,

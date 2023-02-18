@@ -466,6 +466,9 @@ input:-webkit-autofill:active {
   margin: auto;
 }
 
+.userComments button {
+  background: #eee;
+}
 /* media queries  */
 
 @media (max-width: 991px) {

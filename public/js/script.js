@@ -66,6 +66,61 @@ myFavBtn.forEach(elem =>
     }
   }),
 );
+const myCommentBtn = document.querySelectorAll('#myComment');
+
+myCommentBtn.forEach(elem => {
+  elem.addEventListener('submit', async e => {
+    try {
+      e.preventDefault();
+      const comment = e.target.firstElementChild.firstElementChild.value;
+      const productType = e.target.firstElementChild.nextElementSibling.value;
+      const productId = e.target.lastElementChild.previousElementSibling.value;
+      const res = await fetch(`/user/addComment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ comment, productType, productId }),
+      });
+
+      const data = await res.json();
+      if (data.msg === 'empty body') {
+        return showAlert('error', `Komment yozilmadi!`);
+      }
+      if (res.status == 400) {
+        e.target.firstElementChild.firstElementChild.value = '';
+        return showAlert('error', `Sizda ushbu e'longa komment qoldirilgan`);
+      }
+      if (res.ok) {
+        showAlert('success', "Komment muvaffaqqiyatli qo'shildi!");
+        location.assign(`/products/${productId}?productType=${productType}`);
+      }
+    } catch (err) {
+      showAlert('error', 'Xatolik');
+    }
+  });
+});
+
+const deleteCommentBtn = document.querySelectorAll('.deleteComment');
+
+deleteCommentBtn.forEach(elem => {
+  elem.addEventListener('submit', async e => {
+    e.preventDefault();
+    const commentId = e.target.firstElementChild.value;
+    const prodId = e.target.lastElementChild.previousElementSibling.value;
+    const productType = e.target.firstElementChild.nextElementSibling.value;
+    const res = await fetch(`/user/deleteComment`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ commentId, prodId, productType }),
+    });
+    if (res.ok) {
+      e.target.parentElement.parentElement.parentElement.remove();
+    }
+  });
+});
 
 const myDelFavBtn = document.querySelectorAll('#deleteFav');
 myDelFavBtn.forEach(elem => {
@@ -90,19 +145,3 @@ myDelFavBtn.forEach(elem => {
     }
   });
 });
-
-/* Image upload */
-function previewBeforeUpload(id) {
-  document.querySelector('#' + id).addEventListener('change', function (e) {
-    if (e.target.files.length == 0) {
-      return;
-    }
-    let file = e.target.files[0];
-    let url = URL.createObjectURL(file);
-    document.querySelector('#' + id + '-preview img').src = url;
-  });
-}
-
-previewBeforeUpload('file-1');
-previewBeforeUpload('file-2');
-previewBeforeUpload('file-3');
