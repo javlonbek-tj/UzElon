@@ -75,6 +75,16 @@ section {
   width: 50rem;
 }
 
+#nav_carousel .carousel-inner {
+  height: 35rem;
+}
+#nav_carousel .carousel-item {
+  height: 100%;
+}
+#nav_carousel .carousel-inner img {
+  background: cover;
+}
+
 .mobile__footer {
   display: none;
 }
