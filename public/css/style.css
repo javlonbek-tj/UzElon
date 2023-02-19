@@ -156,7 +156,7 @@ h3 {
 
 .filter {
   max-width: 900px;
-  margin-top: 8rem;
+  margin-top: 5rem;
 }
 .filter_items {
   display: grid;
@@ -512,7 +512,10 @@ input:-webkit-autofill:active {
     display: none;
   }
   .mbs {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+  }
+  .mbb {
+    margin-bottom: 40px;
   }
   .mobile__footer {
     display: block;
