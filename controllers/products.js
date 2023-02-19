@@ -57,7 +57,7 @@ const getOneProduct = async (req, res, next) => {
         })
         .lean();
       formatProd(flat);
-      const allFlat = await General.find({ category: 'estate' }).lean();
+      const allFlat = await General.find({ category: 'estate', _id: { $ne: prodId } }).lean();
       const prods = formatProd(allFlat);
       return res.render('products/home-details/product-flat', {
         pageTitle: 'Kvartira oldi-sotdisi',
