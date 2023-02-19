@@ -20,7 +20,7 @@ const AppError = require('../utils/appError');
 const getAddProduct = (req, res, next) => {
   try {
     res.render('user/add-product', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
     });
   } catch (err) {
     next(new AppError(err, 500));
@@ -29,7 +29,7 @@ const getAddProduct = (req, res, next) => {
 const getFlatCategory = (req, res, next) => {
   try {
     res.render('estate/flat', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         rooms: '',
@@ -58,7 +58,7 @@ const getFlatCategory = (req, res, next) => {
 const getHouseCategory = (req, res, next) => {
   try {
     res.render('estate/house', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         applianceName: '',
@@ -81,7 +81,7 @@ const getHouseCategory = (req, res, next) => {
 const getLandCategory = (req, res, next) => {
   try {
     res.render('estate/land', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         area: '',
@@ -103,7 +103,7 @@ const getLandCategory = (req, res, next) => {
 const getNonResidentialCategory = (req, res, next) => {
   try {
     res.render('estate/nonResidential', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         rooms: '',
@@ -126,7 +126,7 @@ const getNonResidentialCategory = (req, res, next) => {
 const getCarCategory = (req, res, next) => {
   try {
     res.render('cars/car', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         model: '',
@@ -151,7 +151,7 @@ const getCarCategory = (req, res, next) => {
 const getTrackCategory = (req, res, next) => {
   try {
     res.render('cars/track', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         model: '',
@@ -175,7 +175,7 @@ const getTrackCategory = (req, res, next) => {
 const getMotoCategory = (req, res, next) => {
   try {
     res.render('cars/moto', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         model: '',
@@ -196,7 +196,7 @@ const getMotoCategory = (req, res, next) => {
 const getConstructionCategory = (req, res, next) => {
   try {
     res.render('jobs/construction', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         serviceType: '',
@@ -218,7 +218,7 @@ const getConstructionCategory = (req, res, next) => {
 const getServiceCategory = (req, res, next) => {
   try {
     res.render('jobs/service', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         gender: '',
@@ -240,7 +240,7 @@ const getServiceCategory = (req, res, next) => {
 const getVacancyCategory = (req, res, next) => {
   try {
     res.render('jobs/vacancy', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         gender: '',
@@ -262,7 +262,7 @@ const getVacancyCategory = (req, res, next) => {
 const getPhoneCategory = (req, res, next) => {
   try {
     res.render('electronics/phone', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         mark: '',
@@ -285,7 +285,7 @@ const getPhoneCategory = (req, res, next) => {
 const getLapTopCategory = (req, res, next) => {
   try {
     res.render('electronics/lap-top', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         mark: '',
@@ -308,7 +308,7 @@ const getLapTopCategory = (req, res, next) => {
 const getHouseAppliancesCategory = (req, res, next) => {
   try {
     res.render('electronics/houseAppliances', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         applianceName: '',
@@ -329,7 +329,7 @@ const getHouseAppliancesCategory = (req, res, next) => {
 const getAnimalCategory = (req, res, next) => {
   try {
     res.render('electronics/animal', {
-      pageTitle: 'Add product',
+      pageTitle: "E'lon qo'shish",
       product: {
         shortInfo: '',
         animalName: '',
@@ -374,7 +374,7 @@ const postCarAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('cars/car', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           model,
@@ -449,7 +449,7 @@ const postMotoadding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('cars/moto', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           model,
@@ -525,7 +525,7 @@ const postTrackAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('cars/track', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           model,
@@ -597,7 +597,7 @@ const postAnimalAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('electronics/animal', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           animalName,
@@ -659,7 +659,7 @@ const postHouseApp = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('electronics/houseAppliances', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           applianceName,
@@ -723,7 +723,7 @@ const postLapTopAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('electronics/lap-top', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           mark,
@@ -800,7 +800,7 @@ const postPhoneAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('electronics/phone', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           mark,
@@ -885,7 +885,7 @@ const postFlatAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('estate/flat', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           rooms,
@@ -992,7 +992,7 @@ const postHouseAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('estate/house', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           rooms,
@@ -1080,7 +1080,7 @@ const postLandAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('estate/land', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           area,
@@ -1165,7 +1165,7 @@ const postNonResiAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('estate/nonResidential', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           rooms,
@@ -1249,7 +1249,7 @@ const postConstructionAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('jobs/construction', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           serviceType,
@@ -1314,7 +1314,7 @@ const postServiceAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('jobs/service', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           gender,
@@ -1379,7 +1379,7 @@ const postVacancyAdding = async (req, res, next) => {
         deleteImageIfError(images);
       }
       return res.render('jobs/vacancy', {
-        pageTitle: 'Add product',
+        pageTitle: "E'lon qo'shish",
         product: {
           shortInfo,
           gender,
