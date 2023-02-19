@@ -42,8 +42,10 @@ const getOneProduct = async (req, res, next) => {
   try {
     const prodId = req.params.productId;
     let admin = null;
-    if (req.user.role === 'admin') {
-      admin = true;
+    if (req.user) {
+      if (req.user.role === 'admin') {
+        admin = true;
+      }
     }
     const { productType } = req.query;
     if (productType == 'flat') {
