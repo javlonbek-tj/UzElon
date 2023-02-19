@@ -14,6 +14,7 @@
               aria-current="true"
               aria-label="Slide 1"
             ></button>
+            <% if(land.imageUrl.length == 3) { %>
             <button
               type="button"
               data-bs-target="#carouselExampleIndicators"
@@ -26,6 +27,7 @@
               data-bs-slide-to="2"
               aria-label="Slide 3"
             ></button>
+            <% } %>
           </div>
           <% } %>
           <div class="carousel-inner">
