@@ -511,6 +511,9 @@ input:-webkit-autofill:active {
   #user_btn {
     display: none;
   }
+  .mbs {
+    margin-bottom: 50px;
+  }
   .mobile__footer {
     display: block;
     position: absolute;
