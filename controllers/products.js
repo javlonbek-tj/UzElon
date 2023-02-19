@@ -441,8 +441,10 @@ const getAuthorProducts = async (req, res, next) => {
     }
     let isMe = null;
     let admin = null;
-    if (req.user.role === 'admin') {
-      admin = true;
+    if (req.user) {
+      if (req.user.role === 'admin') {
+        admin = true;
+      }
     }
     if (req.user) {
       isMe = userId == req.user._id.toString();

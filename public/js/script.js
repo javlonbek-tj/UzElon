@@ -87,6 +87,11 @@ myCommentBtn.forEach(elem => {
       if (data.msg === 'empty body') {
         return showAlert('error', `Komment yozilmadi!`);
       }
+      console.log(res);
+      if (res.status == 401) {
+        e.target.firstElementChild.firstElementChild.value = '';
+        return showAlert('error', `Komment yozilmadi!`);
+      }
       if (res.status == 400) {
         e.target.firstElementChild.firstElementChild.value = '';
         return showAlert('error', `Sizda ushbu e'longa komment qoldirilgan`);

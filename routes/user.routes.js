@@ -42,7 +42,7 @@ router.get('/myFavourite', isAuth, getUserFavourite);
 router.post('/myFavourite', isAuth, postUserFavourite);
 router.post('/deleteFavourite', isAuth, postDeleteFavourite);
 router.get('/messages', isAuth, getUserMessages);
-router.post('/addComment', isAuth, postComment);
+router.post('/addComment', postComment);
 router.post('/deleteComment', isAuth, postDeleteComment);
 router.post(
   '/changeProfile',

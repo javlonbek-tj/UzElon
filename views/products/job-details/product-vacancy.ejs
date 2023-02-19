@@ -134,7 +134,11 @@
         </div>
         <input type="hidden" name="productType" value="vacancy" />
         <input type="hidden" name="productId" value="<%= vacancy._id%>" />
+        <% if(user) {%>
         <button class="btn btn-primary m-3 fs-4 px-3">Submit</button>
+        <% } else { %>
+        <a href="/login" class="btn btn-primary m-3 fs-4 px-3">Submit</a>
+        <% } %>
       </form>
     </div>
   </div>
@@ -152,7 +156,7 @@
     <div>
       <h4 class="mt-0 text-success"><%= com.userId.username %></h4>
       <p class="fs-4"><%= com.comment %></p>
-      <% if(admin || com.userId._id.toString() == user._id.toString()) { %>
+      <% if(admin || user) {%> <% if(com.userId._id.toString() == user._id.toString()) { %>
       <div class="d-flex align-items-center">
         <form class="deleteComment">
           <input type="hidden" value="<%= com._id%>" />
@@ -163,7 +167,7 @@
           </button>
         </form>
       </div>
-      <% } %>
+      <% } %> <% } %>
     </div>
   </div>
 </section>
