@@ -20,7 +20,7 @@ const { logout } = require('./auth');
 
 const getHomePage = async (req, res, next) => {
   try {
-    const topProds = await General.find({ top: { $ne: false } }).lean();
+    const topProds = await (await General.find({ top: { $ne: false } }).lean()).reverse();
     if (topProds.length > 0) {
       formatProd(topProds);
     }
@@ -400,7 +400,7 @@ const getAllProducts = async (req, res, next) => {
         isOverLimit: null,
       });
     }
-    const limit = 12;
+    const limit = 15;
     const page = parseInt(req.query.page) || 1;
     const total = await General.countDocuments();
     let isOverLimit = null;
