@@ -120,6 +120,7 @@ const isAuth = async (req, res, next) => {
 
       // THERE IS A LOGGED IN USER
       res.locals.user = currentUser;
+      req.user = currentUser;
       return next();
     } catch (err) {
       return next();

@@ -16,7 +16,6 @@ const Animal = require('../models/electronics/animal.model');
 const filtering = require('../utils/filtering');
 const AppError = require('../utils/appError');
 const formatProd = require('../utils/formatProd');
-const { logout } = require('./auth');
 
 const getHomePage = async (req, res, next) => {
   try {
