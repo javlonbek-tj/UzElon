@@ -48,6 +48,12 @@ app.use(compression());
 
 app.use(isAuth);
 
+// Set global user
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  next();
+});
+
 app.use(
   upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }, { name: 'picture' }]),
 );
