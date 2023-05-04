@@ -50,46 +50,8 @@
 <section class="cards container-lg" id="cards">
   <% if(prods.length <= 0) { %>
   <h1 class="text-center">E'lon topilmadi</h1>
-  <% } else { %> <% if(prods.length > 4) { %>
-  <div class="box-container">
-    <% for (let product of prods) { %>
-    <div class="box">
-      <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
-        ><img src="/<%= product.imageUrl %>" alt=""
-      /></a>
-      <div class="content p-3">
-        <div class="info pb-1 mb-3">
-          <h4 href="#"><%= product.shortInfo %></h4>
-          <p class="text-muted fs-5"><%= product.createdAt %></p>
-        </div>
-        <% if(product.price) { %>
-        <h3 class="text-center"><%= product.price %> <%= (product.dollar) ? '$' : "so'm"%></h3>
-        <% } else { %>
-        <h3 class="text-center"><%= product.address %></h3>
-        <% } %>
-      </div>
-      <% if(product.price) { %>
-      <div class="card_footer d-flex justify-content-between px-5 pt-2 align-items-center">
-        <p class="me-5 text-secondary fs-5"><%= product.address %></p>
-        <form id="myFav">
-          <input type="hidden" value="<%= product._id%>" id="prodId" />
-          <button class="bg-white"><i class="fa-regular fa-heart fs-4" id="my_fav"></i></button>
-        </form>
-      </div>
-      <% } else {%>
-      <div class="d-flex justify-content-between px-5 pt-2 align-items-center">
-        <p class="fs-5 text-white">.</p>
-        <form id="myFav">
-          <input type="hidden" value="<%= product._id%>" id="prodId" />
-          <button class="bg-white"><i class="fa-regular fa-heart fs-4" id="my_fav"></i></button>
-        </form>
-      </div>
-      <% } %>
-    </div>
-    <% } %>
-  </div>
   <% } else { %>
-  <div class="box_container">
+  <div class="<%= (prods.length > 4) ? 'box-container' : 'box_container' %>">
     <% for (let product of prods) { %>
     <div class="box mb-5">
       <a href="/products/<%= product._id %>?productType=<%= product.productType %>"
@@ -126,7 +88,7 @@
     </div>
     <% } %>
   </div>
-  <% } %> <% } %>
+  <% } %>
 </section>
 <% if(isOverLimit) { %>
 <div class="pagination d-flex justify-content-center fs-4 mt-5">

@@ -1,7 +1,14 @@
+const AppError = require('../utils/appError');
+
 const get404 = (req, res, next) => {
   res.status(404).render('404', {
     pageTitle: 'Sahifa topilmadi',
   });
+};
+
+const handleLargeFileSize = () => {
+  const message = 'Rasm hajmi 2 mb dan oshmasligi kerak!';
+  return new AppError(message, 400);
 };
 
 const sendErrorDev = (error, req, res) => {
@@ -36,7 +43,12 @@ const globalError = (error, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(error, req, res);
   } else if (process.env.NODE_ENV === 'production') {
-    sendErrorProd(error, req, res);
+    let err = { ...error };
+    err.message = error.message;
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      err = handleLargeFileSize();
+    }
+    sendErrorProd(err, req, res);
   }
 };
 

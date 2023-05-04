@@ -351,6 +351,7 @@ const postCarAdding = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     const images = req.files;
+    console.log(images);
     let imageError = null;
     if (!images.image1 && !images.image2 && !images.image3) {
       imageError = true;

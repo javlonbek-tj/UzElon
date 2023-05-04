@@ -39,7 +39,7 @@
   <div class="top-products d-flex justify-content-between">
     <h2>Top e'lonlar</h2>
   </div>
-  <div class="box-container">
+  <div class="<%= (topProds.length > 4) ? 'box-container' : 'box_container' %>"">
     <% for (let product of topProds) { %>
     <div class="box">
       <a href="/products/<%= product._id %>?productType=<%= product.productType %>"><img src="/<%= product.imageUrl %>" alt="" /></a>
@@ -91,7 +91,7 @@
     <h2>Yangi e'lonlar</h2>
     <a href="/products" class="h4 fst-italic">Barcha e'lonlar<i class="fa-solid fa-arrow-right ms-2"></i></a>
   </div>
-  <div class="box-container">
+  <div class="<%= (prods.length > 4) ? 'box-container' : 'box_container' %>"">
     <% for (let product of prods) { %>
     <div class="box">
       <a href="/products/<%= product._id %>?productType=<%= product.productType %>"><img src="/<%= product.imageUrl %>" alt="" /></a>
