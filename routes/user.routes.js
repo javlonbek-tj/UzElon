@@ -258,7 +258,6 @@ router.post(
     check('age').not().isEmpty().isInt(),
     check('address').not().isEmpty(),
     check('extraInfo').not().isEmpty(),
-    check('price').not().isEmpty().isInt(),
     check('phoneNumber').not().isEmpty().isLength(12),
   ],
   postEditService,
