@@ -242,7 +242,6 @@ router.post(
     check('workTime').not().isEmpty(),
     check('address').not().isEmpty(),
     check('extraInfo').not().isEmpty(),
-    check('price').not().isEmpty().isInt(),
     check('phoneNumber').not().isEmpty().isLength(12),
   ],
   postEditConstruction,
