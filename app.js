@@ -71,6 +71,8 @@ app.use(globalError);
 const DB = process.env.MONGO_URI;
 const port = process.env.PORT || 5000;
 
+mongoose.set('strictQuery', false);
+
 mongoose
   .connect(DB)
   .then(() => {
