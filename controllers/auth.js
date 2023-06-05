@@ -6,7 +6,7 @@ const AppError = require('../utils/appError');
 
 const createSendToken = (user, req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+    expiresIn: parseInt(process.env.JWT_EXPIRES_IN),
   });
 
   res.cookie('jwt', token, {
