@@ -28,8 +28,6 @@ const sendErrorProd = (error, req, res) => {
     });
   }
   // B) Programming or other unknown error
-  // 1) Log error
-  console.log(error);
   // 2) Send generic message
   res.status(error.statusCode).render('error', {
     pageTitle: 'Xatolik!',
