@@ -20,15 +20,6 @@ const sendErrorDev = (error, req, res) => {
 };
 
 const sendErrorProd = (error, req, res) => {
-  // A) Operational, trusted error: send message to client
-  if (error.isOperational) {
-    return res.status(error.statusCode).render('error', {
-      pageTitle: 'Xatolik!',
-      msg: error.message,
-    });
-  }
-  // B) Programming or other unknown error
-  // 2) Send generic message
   res.status(error.statusCode).render('error', {
     pageTitle: 'Xatolik!',
     msg: "Xatolik sodir bo'ldi. Iltimos qaytadan urinib ko'ring",

@@ -30,10 +30,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // MIDDLEWARES
 
-/* if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-} */
-
 // Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
