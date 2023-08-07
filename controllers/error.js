@@ -1,4 +1,4 @@
-const AppError = require('../utils/appError');
+const logger = require('../utils/logger');
 
 const get404 = (req, res, next) => {
   res.status(404).render('404', {
@@ -8,7 +8,10 @@ const get404 = (req, res, next) => {
 
 const handleLargeFileSize = () => {
   const message = 'Rasm hajmi 2 mb dan oshmasligi kerak!';
-  return new AppError(message, 400);
+  res.status(error.statusCode).render('error', {
+    pageTitle: 'Xatolik!',
+    msg: message,
+  });
 };
 
 const sendErrorDev = (error, req, res) => {
@@ -20,6 +23,7 @@ const sendErrorDev = (error, req, res) => {
 };
 
 const sendErrorProd = (error, req, res) => {
+  logger.error(error);
   res.status(error.statusCode).render('error', {
     pageTitle: 'Xatolik!',
     msg: "Xatolik sodir bo'ldi. Iltimos qaytadan urinib ko'ring",

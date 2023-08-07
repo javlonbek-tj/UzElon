@@ -1,4 +1,3 @@
-const AppError = require('../utils/appError');
 const General = require('../models/general.model');
 
 const postMakeProductTop = async (req, res, next) => {
@@ -9,7 +8,7 @@ const postMakeProductTop = async (req, res, next) => {
     await product.save();
     res.redirect('/');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -21,7 +20,7 @@ const postMakeProductBottom = async (req, res, next) => {
     await product.save();
     res.redirect('/');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 

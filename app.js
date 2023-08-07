@@ -64,6 +64,8 @@ app.use(authRoutes);
 app.use(get404);
 app.use(globalError);
 
+module.exports = app;
+
 const DB = process.env.MONGO_URI;
 const port = process.env.PORT || 5000;
 

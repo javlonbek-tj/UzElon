@@ -14,7 +14,6 @@ const LapTop = require('../models/electronics/lap-top.model');
 const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
 const filtering = require('../utils/filtering');
-const AppError = require('../utils/appError');
 const formatProd = require('../utils/formatProd');
 
 const getHomePage = async (req, res, next) => {
@@ -33,7 +32,7 @@ const getHomePage = async (req, res, next) => {
       topProds,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -368,7 +367,7 @@ const getOneProduct = async (req, res, next) => {
       return next(new AppError("Ushbu e'lon topilmadi. Iltimos qaytadan urinib ko'ring.", 400));
     }
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -428,7 +427,7 @@ const getAllProducts = async (req, res, next) => {
       isOverLimit,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -457,7 +456,7 @@ const getAuthorProducts = async (req, res, next) => {
       admin,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 

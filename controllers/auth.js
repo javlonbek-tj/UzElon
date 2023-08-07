@@ -2,7 +2,6 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const { validationResult } = require('express-validator');
-const AppError = require('../utils/appError');
 
 const createSendToken = (user, req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -30,7 +29,7 @@ const getSignUp = (req, res, next) => {
       validationErrors: [],
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -60,7 +59,7 @@ const postSignUp = async (req, res, next) => {
     createSendToken(savedUser, req, res);
     res.redirect('/');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 const getLogin = (req, res, next) => {
@@ -77,7 +76,7 @@ const getLogin = (req, res, next) => {
       validationErrors: [],
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -98,7 +97,7 @@ const postLogin = async (req, res, next) => {
     createSendToken(user, req, res);
     res.redirect('/');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -134,7 +133,7 @@ const logout = (req, res, next) => {
     res.clearCookie('jwt');
     res.redirect('/');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 

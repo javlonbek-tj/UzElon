@@ -13,7 +13,6 @@ const Phone = require('../models/electronics/phone.model');
 const LapTop = require('../models/electronics/lap-top.model');
 const HouseAppliances = require('../models/electronics/houseAppliances.model');
 const Animal = require('../models/electronics/animal.model');
-const AppError = require('../utils/appError');
 const Comments = require('../models/comment.model');
 const { validationResult } = require('express-validator');
 const {
@@ -38,7 +37,7 @@ const getUserProducts = async (req, res, next) => {
       admin: null,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -147,7 +146,7 @@ const postDeleteProduct = async (req, res, next) => {
     }
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -412,7 +411,7 @@ const getEditProduct = async (req, res, next) => {
       });
     }
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -488,7 +487,7 @@ const postEditCar = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -550,7 +549,7 @@ const postEditMoto = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -623,7 +622,7 @@ const postEditTrack = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -672,7 +671,7 @@ const postEditAnimal = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -733,7 +732,7 @@ const postEditHouseApp = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -798,7 +797,7 @@ const postEditLapTop = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -865,7 +864,7 @@ const postEditPhone = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -958,7 +957,7 @@ const postEditFlat = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 const postEditHouse = async (req, res, next) => {
@@ -1034,7 +1033,7 @@ const postEditHouse = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 const postEditLand = async (req, res, next) => {
@@ -1104,7 +1103,7 @@ const postEditLand = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1178,7 +1177,7 @@ const postEditNonResidential = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1241,7 +1240,7 @@ const postEditConstruction = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1305,7 +1304,7 @@ const postEditService = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1369,7 +1368,7 @@ const postEditVacancy = async (req, res, next) => {
       await oldGeneral.save();
     res.redirect('/user/products');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1387,7 +1386,7 @@ const getUserProfile = async (req, res, next) => {
       admin,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1406,7 +1405,7 @@ const getUserChangeProfile = async (req, res, next) => {
       hasError: null,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1443,7 +1442,7 @@ const postUserChangeProfile = async (req, res, next) => {
     await req.user.save();
     res.redirect('/user/profile');
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1464,7 +1463,7 @@ const getUserMessages = async (req, res, next) => {
       pageTitle: 'Mening xabarlarim',
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1486,7 +1485,7 @@ const postUserFavourite = async (req, res, next) => {
       success: true,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1503,7 +1502,7 @@ const getUserFavourite = async (req, res, next) => {
       prods,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1515,7 +1514,7 @@ const postDeleteFavourite = async (req, res, next) => {
       success: true,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 const postComment = async (req, res, next) => {
@@ -1590,7 +1589,7 @@ const postComment = async (req, res, next) => {
       success: true,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
@@ -1649,7 +1648,7 @@ const postDeleteComment = async (req, res, next) => {
       success: true,
     });
   } catch (err) {
-    next(new AppError(err, 500));
+    next(err);
   }
 };
 
