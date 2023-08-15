@@ -55,11 +55,11 @@ app.use(
 );
 
 // ROUTES
-app.use(productsRoutes);
-app.use(addProductRoutes);
-app.use('/user', userRoutes);
-app.use('/admin', adminRoutes);
-app.use(authRoutes);
+app.use('/uzelon', productsRoutes);
+app.use('/uzelon', addProductRoutes);
+app.use('/uzelon', '/user', userRoutes);
+app.use('uzelon', '/admin', adminRoutes);
+app.use('uzelon', authRoutes);
 
 app.use(get404);
 app.use(globalError);
