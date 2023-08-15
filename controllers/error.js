@@ -8,7 +8,7 @@ const get404 = (req, res, next) => {
 
 const handleLargeFileSize = () => {
   const message = 'Rasm hajmi 2 mb dan oshmasligi kerak!';
-  res.status(error.statusCode).render('error', {
+  res.status(400).render('error', {
     pageTitle: 'Xatolik!',
     msg: message,
   });
@@ -16,7 +16,7 @@ const handleLargeFileSize = () => {
 
 const sendErrorDev = (error, req, res) => {
   console.log(error);
-  return res.status(error.statusCode).render('error', {
+  return res.render('error', {
     pageTitle: 'Xatolik!',
     msg: error.message,
   });
@@ -24,7 +24,7 @@ const sendErrorDev = (error, req, res) => {
 
 const sendErrorProd = (error, req, res) => {
   logger.error(error);
-  res.status(error.statusCode).render('error', {
+  res.status(500).render('error', {
     pageTitle: 'Xatolik!',
     msg: "Xatolik sodir bo'ldi. Iltimos qaytadan urinib ko'ring",
   });

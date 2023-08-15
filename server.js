@@ -1,14 +1,14 @@
-const http = require( 'http');
-const app = require( './app');
+const http = require('http');
+const app = require('./app');
 const mongoConnect = require('./config/mongo');
-const logger = require( './config/logger');
+const logger = require('./config/logger');
 
 process.on('uncaughtException', err => {
   logger.error('Uncaught Exception:', err);
   process.exit(1);
 });
 
-const { config } = require( 'dotenv';
+const { config } = require('dotenv');
 config();
 
 const PORT = process.env.PORT || 5000;
@@ -16,9 +16,9 @@ const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
 
 async function startServer() {
-    await mongoConnect();
+  await mongoConnect();
 
-    server.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });
 }
