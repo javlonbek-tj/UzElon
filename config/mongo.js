@@ -14,6 +14,8 @@ mongoose.connection.on('error', err => {
   logger.error('Error in connection to database:', err);
 });
 
+mongoose.set('strictQuery', false);
+
 function mongoConnect() {
   try {
     mongoose.connect(MONGO_URI);
