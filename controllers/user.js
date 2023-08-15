@@ -17,7 +17,6 @@ const Comments = require('../models/comment.model');
 const { validationResult } = require('express-validator');
 const {
   deleteFile,
-  deleteFiles,
   getImageUrl,
   deleteImageIfError,
   deleteImage,

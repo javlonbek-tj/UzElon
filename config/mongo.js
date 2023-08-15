@@ -18,7 +18,7 @@ function mongoConnect() {
   try {
     mongoose.connect(MONGO_URI);
   } catch (err) {
-    throw new Error('Error in connection to database');
+    logger.error('Error in connection to database:', err);
   }
 }
 module.exports = mongoConnect;
