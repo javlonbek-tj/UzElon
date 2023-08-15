@@ -65,21 +65,3 @@ app.use(get404);
 app.use(globalError);
 
 module.exports = app;
-
-const DB = process.env.MONGO_URI;
-const port = process.env.PORT || 5000;
-
-mongoose.set('strictQuery', false);
-
-mongoose
-  .connect(DB)
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`App running on ${port}...`);
-    });
-
-    console.log('DB connection succesfully');
-  })
-  .catch(err => {
-    console.log(err);
-  });

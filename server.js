@@ -1,7 +1,7 @@
 const http = require('http');
 const app = require('./app');
 const mongoConnect = require('./config/mongo');
-const logger = require('./config/logger');
+const logger = require('./utils/logger');
 
 process.on('uncaughtException', err => {
   logger.error('Uncaught Exception:', err);
